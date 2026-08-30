@@ -169,6 +169,12 @@ itself once real reviews are present.
 2. Replace the placeholder reviews in `src/lib/reviews.ts`.
 3. Confirm the coordinates in `site.ts` against the Google Business Profile. They
    are currently derived from the FM 529 and Fry Road intersection.
+4. The phone number is taken from the shop's own door placard, `(281) 656-8048`.
+   The Google listing shows `(346) 544-2451`, and that entry was flagged as
+   updated by others rather than by the owner. Whichever is current should be
+   the same in both places, since a mismatch between the site and the listing
+   costs local ranking. It lives in one constant in `site.ts` and propagates to
+   every surface including the LocalBusiness schema.
 4. Ask the owner for photos of the shop and of the products on a plain
    background. Everything on the site today is cropped out of the printed menu,
    which is why product shots carry the menu's orange page behind them.

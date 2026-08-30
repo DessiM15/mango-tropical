@@ -42,8 +42,13 @@ export const site = {
   // TODO: point NEXT_PUBLIC_SITE_URL at the real domain once it is registered.
   // mangotropicalhtx.com was confirmed available and matches their handle.
   url: resolveSiteUrl(),
-  phone: "(346) 544-2451",
-  phoneHref: "tel:+13465442451",
+  // Taken from the shop's own door placard, which is the most authoritative
+  // source available. The Google listing shows (346) 544-2451, and that entry
+  // was flagged as "updated by others" rather than by the owner. If Google is
+  // the current one, change it here and it propagates everywhere, including the
+  // LocalBusiness schema.
+  phone: "(281) 656-8048",
+  phoneHref: "tel:+12816568048",
   address: {
     street: "20400 FM 529, Suite 100",
     city: "Cypress",
