@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
 import { copy } from "@/lib/copy";
 import { findCategory, type Text } from "@/lib/menu";
 import type { Locale } from "@/lib/i18n";
@@ -35,10 +34,10 @@ export function FlavorShowcase({ locale }: { locale: Locale }) {
   const current = groups.find((g) => g.id === active) ?? groups[0];
 
   return (
-    <section className="relative overflow-hidden bg-ocean-100 pb-20 pt-20 sm:pb-28 sm:pt-24" aria-labelledby="flavors-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ink)" />
-
-      <div className="mx-auto max-w-5xl px-4 pt-8 sm:px-6 lg:px-8">
+    /* One of the three sections that carry no decoration at all. After four
+       full-bleed colour panels the page needs somewhere to rest. */
+    <section className="relative bg-sand-100 pb-24 pt-24 sm:pb-28 sm:pt-28" aria-labelledby="flavors-heading">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           es={copy.headings.flavors.es}
           en={copy.headings.flavors.en}

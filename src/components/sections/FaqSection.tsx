@@ -1,7 +1,5 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { TornEdge } from "@/components/Dividers";
-import { Flora } from "@/components/Flora";
 import { copy } from "@/lib/copy";
 import type { Locale } from "@/lib/i18n";
 
@@ -11,22 +9,14 @@ import type { Locale } from "@/lib/i18n";
  */
 export function FaqSection({ locale }: { locale: Locale }) {
   return (
-    <section className="relative overflow-hidden bg-sand-100 pb-20 pt-20 sm:pb-28 sm:pt-24" aria-labelledby="faq-heading">
-      <TornEdge className="absolute inset-x-0 top-0 h-10 sm:h-14" fill="var(--color-ocean-700)" flip />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 opacity-70"
-        style={{ backgroundImage: "url(/scene/wet-sand-tile.webp)", backgroundSize: "cover" }}
-      />
-      <Flora name="hibiscus" className="right-[-4%] top-[6%] w-32 opacity-70 sm:w-48" />
-      <Flora name="flowers" className="bottom-[-6%] left-[-6%] w-36 opacity-70 sm:w-52" />
-
+    <section className="relative bg-sand-50 pb-24 pt-24 sm:pb-28 sm:pt-28" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           es={copy.headings.faq.es}
           en={copy.headings.faq.en}
+          single={copy.headings.faq[locale]}
+          singleColor="var(--color-chamoy-500)"
           titleId="faq-heading"
-          tone="fruit"
         />
 
         <div className="mt-12 space-y-4">

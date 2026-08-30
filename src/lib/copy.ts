@@ -263,6 +263,7 @@ export const copy = {
   },
   footer: {
     hours: { en: "Hours", es: "Horario" },
+    allHours: { en: "See the full week", es: "Ver la semana completa" },
     follow: { en: "Follow us", es: "Síguenos" },
     find: { en: "Find us", es: "Encuéntranos" },
     explore: { en: "Explore", es: "Explora" },

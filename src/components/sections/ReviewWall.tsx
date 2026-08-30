@@ -1,7 +1,5 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
-import { Flora } from "@/components/Flora";
 import { JsonLd } from "@/components/JsonLd";
 import { copy } from "@/lib/copy";
 import { aggregate, reviews } from "@/lib/reviews";
@@ -52,18 +50,14 @@ export function ReviewWall({ locale }: { locale: Locale }) {
       : null;
 
   return (
-    <section className="relative overflow-hidden bg-magenta-400 py-20 sm:py-28" aria-labelledby="reviews-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ocean-100)" />
-      <Flora name="palms" className="left-[-6%] top-[8%] w-40 opacity-80 sm:w-56" />
-      <Flora name="flowers" className="bottom-[-6%] right-[-4%] w-40 opacity-85 sm:w-56" flip />
-
-      <div className="relative mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8">
+    <section className="relative bg-lime-400 py-24 sm:py-28" aria-labelledby="reviews-heading">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           es={copy.headings.reviews.es}
           en={copy.headings.reviews.en}
+          single={copy.headings.reviews[locale]}
+          singleColor="var(--color-sand-50)"
           titleId="reviews-heading"
-          tone="nieve"
-          onDark
         >
           {aggregate ? (
             <p className="mt-6 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 shadow-card">

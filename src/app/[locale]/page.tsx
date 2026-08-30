@@ -57,8 +57,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <CategoryRow locale={locale} />
       <FeaturePanels locale={locale} />
       <FlavorShowcase locale={locale} />
-      <ReviewWall locale={locale} />
       <StoryStrip locale={locale} />
+      <ReviewWall locale={locale} />
       <FaqSection locale={locale} />
       <VisitSection locale={locale} />
       <JsonLd data={faqSchema} />
