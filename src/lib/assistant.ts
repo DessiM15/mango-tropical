@@ -81,7 +81,7 @@ function buildEntries(): Entry[] {
             ...tokens(category.shortName.en),
           ],
           answer: (locale) => ({
-            text: `${item.name[locale]} — ${priceLine(item, locale)}. ${item.description[locale]}`,
+            text: `${item.name[locale]}: ${priceLine(item, locale)}. ${item.description[locale]}`,
             link: {
               href: locale === "en" ? `/menu/${category.slug}` : `/es/menu/${category.slug}`,
               label: category.shortName[locale],

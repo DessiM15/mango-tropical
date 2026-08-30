@@ -87,8 +87,8 @@ export const menu: MenuCategory[] = [
             slug: "pepinada-tropical",
             name: { en: "Pepinada Tropical", es: "Pepinada Tropical" },
             description: {
-              en: "Cool cucumber and lime nieve loaded with crisp cucumber, chamoy and chile. The one that wakes your whole mouth up.",
-              es: "Nieve fresca de pepino y limón cargada de pepino crujiente, chamoy y chile. La que despierta todo el paladar.",
+              en: "Cucumber and lime nieve loaded with crisp cucumber, chamoy and chile powder.",
+              es: "Nieve de pepino y limón cargada de pepino crujiente, chamoy y chile en polvo.",
             },
             image: "/menu/pepinada-tropical.webp",
             prices: [{ label: oz(16), amount: 8.5 }],
@@ -97,8 +97,8 @@ export const menu: MenuCategory[] = [
             slug: "sandia-tropical",
             name: { en: "Sandía Tropical", es: "Sandía Tropical" },
             description: {
-              en: "Watermelon nieve packed with fresh watermelon, chamoy, chile and a tamarindo stick. Summer in a cup, year round.",
-              es: "Nieve de sandía con sandía fresca, chamoy, chile y tamarindo. Verano en un vaso, todo el año.",
+              en: "Watermelon nieve packed with fresh watermelon, chamoy, chile and a tamarindo stick.",
+              es: "Nieve de sandía con sandía fresca, chamoy, chile y un tamarindo.",
             },
             image: "/menu/sandia-tropical.webp",
             prices: [{ label: oz(16), amount: 8.5 }],
@@ -120,8 +120,8 @@ export const menu: MenuCategory[] = [
             slug: "fresas-con-crema",
             name: { en: "Fresas con Crema", es: "Fresas con Crema" },
             description: {
-              en: "Strawberries and sweet cream, piled high with whipped cream and a whole strawberry on top. No chile, no chamoy, no argument.",
-              es: "Fresas con crema dulce, coronadas con crema batida y una fresa entera. Sin chile, sin chamoy, sin discusión.",
+              en: "Strawberries and sweet cream, piled high with whipped cream and a whole strawberry on top. No chile and no chamoy on this one.",
+              es: "Fresas con crema dulce, coronadas con crema batida y una fresa entera. Esta va sin chile y sin chamoy.",
             },
             image: "/menu/fresas-con-crema.webp",
             prices: [
@@ -143,8 +143,8 @@ export const menu: MenuCategory[] = [
             slug: "banana-split",
             name: { en: "Banana Split", es: "Banana Split" },
             description: {
-              en: "Three scoops of nieve down a split banana with whipped cream, sprinkles and a cherry. Built to share, usually isn't.",
-              es: "Tres bolas de nieve sobre un plátano abierto, con crema batida, chispas y una cereza. Hecho para compartir, casi nunca se comparte.",
+              en: "Three scoops of nieve down a split banana with whipped cream, sprinkles and a cherry.",
+              es: "Tres bolas de nieve sobre un plátano abierto, con crema batida, chispas y una cereza.",
             },
             image: "/menu/banana-split.webp",
             prices: [{ label: flat, amount: 9.5 }],
@@ -200,8 +200,8 @@ export const menu: MenuCategory[] = [
             slug: "nieve-vaso",
             name: { en: "Nieve de Garrafa", es: "Nieve de Garrafa" },
             description: {
-              en: "Pick any of the twelve flavors. Mix two in the same cup if you cannot decide, nobody here will stop you.",
-              es: "Escoge cualquiera de los doce sabores. Mezcla dos en el mismo vaso si no te decides, aquí nadie te va a detener.",
+              en: "Any of the twelve flavors, in four sizes. Two flavors can go in the same cup.",
+              es: "Cualquiera de los doce sabores, en cuatro tamaños. Puedes llevar dos sabores en el mismo vaso.",
             },
             image: "/menu/nieve-mango.webp",
             prices: [
@@ -215,7 +215,7 @@ export const menu: MenuCategory[] = [
             slug: "waffle-cone",
             name: { en: "Waffle Cone", es: "Cono de Waffle" },
             description: {
-              en: "Two scoops in a fresh waffle cone. Sprinkles are free, judgment is not included.",
+              en: "Two scoops in a fresh waffle cone. Sprinkles are free.",
               es: "Dos bolas en un cono de waffle recién hecho. Las chispas van gratis.",
             },
             image: "/menu/waffle-cone.webp",
@@ -281,8 +281,8 @@ export const menu: MenuCategory[] = [
             slug: "conchi-nieve",
             name: { en: "Conchi Nieve", es: "Conchi Nieve" },
             description: {
-              en: "A fresh concha split and stuffed with nieve, whipped cream, strawberries and caramel. The best idea on the menu.",
-              es: "Una concha abierta y rellena de nieve, crema batida, fresas y caramelo. La mejor idea del menú.",
+              en: "A fresh concha split and stuffed with nieve, whipped cream, strawberries and caramel.",
+              es: "Una concha abierta y rellena de nieve, crema batida, fresas y caramelo.",
             },
             image: "/menu/conchi-nieve.webp",
             prices: [{ label: flat, amount: 7.5 }],
@@ -344,8 +344,8 @@ export const menu: MenuCategory[] = [
             slug: "raspa",
             name: { en: "Raspa", es: "Raspa" },
             description: {
-              en: "Pick a flavor, pick a size, pick your free topping. Then come back tomorrow and pick a different one.",
-              es: "Escoge sabor, tamaño y tu topping gratis. Mañana regresas y escoges otro.",
+              en: "Shaved ice in any of the eighteen flavors, in four sizes, with one topping included.",
+              es: "Raspa de cualquiera de los dieciocho sabores, en cuatro tamaños, con un topping incluido.",
             },
             image: "/menu/raspas-trio.webp",
             prices: [
@@ -374,8 +374,8 @@ export const menu: MenuCategory[] = [
             slug: "raspa-natural",
             name: { en: "Raspa Natural", es: "Raspa Natural" },
             description: {
-              en: "The upgrade. Real tamarindo, guayaba or piña, blended fresh. The chamoyada is the one to beat.",
-              es: "El upgrade. Tamarindo, guayaba o piña de verdad, hechos frescos. La chamoyada es la que hay que vencer.",
+              en: "Made with real fruit blended fresh rather than syrup. Tamarindo, guayaba, piña or chamoyada.",
+              es: "Hechas con fruta de verdad licuada al momento, no con jarabe. Tamarindo, guayaba, piña o chamoyada.",
             },
             prices: [
               { label: { en: "Small, 12 oz", es: "Chica, 12 oz" }, amount: 6.25 },
@@ -426,8 +426,8 @@ export const menu: MenuCategory[] = [
             slug: "elote-en-vaso",
             name: { en: "Elote en Vaso", es: "Elote en Vaso" },
             description: {
-              en: "Sweet corn, crema, queso fresco, chile, chamoy and a wedge of lime. The classic, done right.",
-              es: "Elote dulce, crema, queso fresco, chile, chamoy y un limón. El clásico, bien hecho.",
+              en: "Sweet corn in a cup with crema, queso fresco, chile, chamoy and a wedge of lime.",
+              es: "Elote dulce en vaso con crema, queso fresco, chile, chamoy y un limón.",
             },
             image: "/menu/elote-en-vaso.webp",
             prices: [{ label: flat, amount: 6.75 }],
@@ -436,8 +436,8 @@ export const menu: MenuCategory[] = [
             slug: "salchipapas",
             name: { en: "Salchipapas", es: "Salchipapas" },
             description: {
-              en: "Fries and sausage under crema, cheese, mustard and a whole jalapeño for whoever is brave.",
-              es: "Papas con salchicha bajo crema, queso, mostaza y un jalapeño entero para el valiente.",
+              en: "Fries and sliced sausage under crema, cheese and mustard, with a whole jalapeño on the side.",
+              es: "Papas con salchicha en rodajas bajo crema, queso y mostaza, con un jalapeño entero aparte.",
             },
             image: "/menu/salchipapas.webp",
             prices: [{ label: flat, amount: 6.75 }],
@@ -446,8 +446,8 @@ export const menu: MenuCategory[] = [
             slug: "chili-cheese-fries",
             name: { en: "Chili Cheese Fries", es: "Papas con Chili y Queso" },
             description: {
-              en: "Hot fries buried under chili and nacho cheese. Exactly what it says.",
-              es: "Papas calientes bajo chili y queso nacho. Exactamente lo que dice.",
+              en: "Hot fries under a full pour of chili and nacho cheese.",
+              es: "Papas calientes bajo una buena porción de chili y queso nacho.",
             },
             image: "/menu/chili-cheese-fries.webp",
             prices: [{ label: flat, amount: 6.75 }],
@@ -456,8 +456,8 @@ export const menu: MenuCategory[] = [
             slug: "loaded-nachos",
             name: { en: "Loaded Nachos", es: "Nachos Preparados" },
             description: {
-              en: "Chips, nacho cheese, chili and as many jalapeños as the tray will hold.",
-              es: "Totopos, queso nacho, chili y todos los jalapeños que aguante la charola.",
+              en: "Tortilla chips with nacho cheese, chili and jalapeños.",
+              es: "Totopos con queso nacho, chili y jalapeños.",
             },
             image: "/menu/loaded-nachos.webp",
             prices: [{ label: flat, amount: 6.75 }],
@@ -466,8 +466,8 @@ export const menu: MenuCategory[] = [
             slug: "nachos",
             name: { en: "Nachos", es: "Nachos" },
             description: {
-              en: "Chips and nacho cheese. Nothing else, nothing missing.",
-              es: "Totopos y queso nacho. Nada más, nada de menos.",
+              en: "Tortilla chips with warm nacho cheese.",
+              es: "Totopos con queso nacho caliente.",
             },
             prices: [{ label: { en: "Cheese only", es: "Solo queso" }, amount: 5.75 }],
           },
@@ -494,8 +494,8 @@ export const menu: MenuCategory[] = [
             slug: "carnival-funnel-cake",
             name: { en: "Carnival Funnel Cake", es: "Funnel Cake Carnival" },
             description: {
-              en: "Funnel cake with nieve on top. The fairground version, indoors, with air conditioning.",
-              es: "Funnel cake con nieve encima. La versión de feria, bajo techo y con aire acondicionado.",
+              en: "Funnel cake with a scoop of nieve on top, powdered sugar over both.",
+              es: "Funnel cake con una bola de nieve encima y azúcar glas sobre las dos.",
             },
             seasonal: true,
             prices: [{ label: { en: "Includes ice cream", es: "Incluye nieve" }, amount: 11.5 }],
@@ -569,8 +569,8 @@ export const menu: MenuCategory[] = [
             slug: "rusa-preparada",
             name: { en: "Rusa Preparada", es: "Rusa Preparada" },
             description: {
-              en: "Squirt, lime, salt and chamoy on the rim. The Mexican answer to a hot afternoon.",
-              es: "Squirt, limón, sal y chamoy en el borde. La respuesta mexicana a una tarde de calor.",
+              en: "Squirt served over ice with lime and salt, and chamoy around the rim.",
+              es: "Squirt con hielo, limón y sal, con chamoy en el borde.",
             },
             prices: [{ label: flat, amount: 7.5 }],
           },
