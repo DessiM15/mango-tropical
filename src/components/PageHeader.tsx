@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { Reveal } from "./Reveal";
+import { Splash } from "./Splash";
 import { Flora } from "./Flora";
 import { WoodSign, type HeadingTone } from "./WoodSign";
 
@@ -11,12 +13,19 @@ export function PageHeader({
   en,
   tone = "garrafa",
   body,
+  feature,
+  featureAlt,
+  splash = "var(--color-mango-400)",
   children,
 }: {
   es: string;
   en: string;
   tone?: HeadingTone;
   body?: string;
+  /** Large product image, shown beside the title on category pages. */
+  feature?: string;
+  featureAlt?: string;
+  splash?: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -38,8 +47,12 @@ export function PageHeader({
       <Flora name="banana-leaves" className="left-[-6%] top-[8%] w-36 sm:w-52" />
       <Flora name="plumeria-cluster" className="right-[-4%] top-[2%] w-40 sm:w-60" />
 
-      <div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
-        <Reveal className="flex flex-col items-center">
+      <div
+        className={`relative mx-auto grid items-center gap-10 px-4 sm:px-6 lg:px-8 ${
+          feature ? "max-w-6xl lg:grid-cols-[1.1fr_0.9fr]" : "max-w-4xl"
+        }`}
+      >
+        <Reveal className={`flex flex-col ${feature ? "items-center text-center lg:items-start lg:text-left" : "items-center text-center"}`}>
           <WoodSign as="h1" primary={es} secondary={en} tone={tone} size="lg" tilt={-1.2} />
           {body ? (
             <p className="mt-7 max-w-2xl font-body text-lg leading-relaxed text-sand-50 [text-shadow:0_2px_0_rgb(42_18_6_/_0.45)] sm:text-xl">
@@ -48,6 +61,23 @@ export function PageHeader({
           ) : null}
           {children}
         </Reveal>
+
+        {feature ? (
+          <Reveal from="right" className="relative mx-auto w-[80%] max-w-sm lg:w-full lg:max-w-md">
+            <div className="relative aspect-[5/4]">
+              <Splash color={splash} variant={2} className="absolute inset-[-10%] h-[120%] w-[120%] opacity-70 drift-slow" />
+              <div aria-hidden="true" className="absolute inset-x-[18%] bottom-[6%] h-5 rounded-[50%] bg-ink/30 blur-xl" />
+              <Image
+                src={feature}
+                alt={featureAlt ?? ""}
+                fill
+                priority
+                sizes="(max-width: 1024px) 80vw, 34vw"
+                className="bob object-contain drop-shadow-[0_16px_20px_rgb(42_18_6_/_0.38)]"
+              />
+            </div>
+          </Reveal>
+        ) : null}
       </div>
     </section>
   );

@@ -31,6 +31,8 @@ export type MenuCategory = {
   name: Text;
   /** The printed menu's own section header, used on the category row. */
   shortName: Text;
+  /** Large hero image for the category page. A cutout where one exists. */
+  feature: string;
   /** Short line used on cards and in navigation. */
   kicker: Text;
   /** Long copy that opens the category landing page. Written for search. */
@@ -50,6 +52,7 @@ export const menu: MenuCategory[] = [
     slug: "mangonadas",
     name: { en: "Mangonadas & Fruit Snacks", es: "Mangonadas y Antojitos con Fruta" },
     shortName: { en: "Fruit Snacks", es: "Antojitos con Fruta" },
+    feature: "/menu/cut-mangonada.webp",
     kicker: { en: "Chamoy, chile and fresh fruit", es: "Chamoy, chile y fruta fresca" },
     intro: {
       en: "This is the section people drive across Cypress for. Fresh fruit, house nieve, a heavy pour of chamoy and a tamarindo stick standing straight up out of the cup. Sweet, sour, salty and spicy all fighting for the same spoonful, exactly the way it should be.",
@@ -154,6 +157,7 @@ export const menu: MenuCategory[] = [
     slug: "nieves-de-garrafa",
     name: { en: "Nieves de Garrafa", es: "Nieves de Garrafa" },
     shortName: { en: "Ice Cream", es: "Nieves de Garrafa" },
+    feature: "/menu/cut-conchi.webp",
     kicker: { en: "Churned by hand, 100% natural", es: "Batidas a mano, 100% naturales" },
     intro: {
       en: "Nieve de garrafa is made the old way, churned by hand in a metal drum packed with ice and salt until it turns silky. No powders, no bases, no shortcuts. Twelve flavors, four sizes, and a waffle cone if you want one.",
@@ -291,6 +295,7 @@ export const menu: MenuCategory[] = [
     slug: "raspas",
     name: { en: "Raspas & Snowballs", es: "Raspas y Snowballs" },
     shortName: { en: "Snowballs", es: "Raspas" },
+    feature: "/menu/cut-raspa.webp",
     kicker: { en: "Eighteen flavors, one free topping", es: "Dieciocho sabores, un topping gratis" },
     intro: {
       en: "Shaved so fine it disappears on your tongue, then soaked in flavor all the way to the bottom of the cup. Eighteen flavors on the regular raspas and every size includes one topping. If you want the real thing, order a Raspa Natural made from actual fruit.",
@@ -386,6 +391,7 @@ export const menu: MenuCategory[] = [
     slug: "antojitos",
     name: { en: "Elotes, Fries & Nachos", es: "Elotes, Papas y Nachos" },
     shortName: { en: "Food Snacks", es: "Antojitos de Comida" },
+    feature: "/menu/cut-chorreado.webp",
     kicker: { en: "The savory side", es: "El lado salado" },
     intro: {
       en: "Nobody comes in for just dessert. Elote in a cup drowned in crema, cheese and chile. Elote chorreado built on a bed of Hot Cheetos. Fries under chili and cheese. Order something salty first and you will enjoy the nieve twice as much.",
@@ -502,6 +508,7 @@ export const menu: MenuCategory[] = [
     slug: "bebidas",
     name: { en: "Floats & Drinks", es: "Flotantes y Bebidas" },
     shortName: { en: "Drinks", es: "Bebidas" },
+    feature: "/menu/sticker-float.webp",
     kicker: { en: "Aguas frescas and ice cream floats", es: "Aguas frescas y helados flotantes" },
     intro: {
       en: "Aguas frescas made fresh daily in limón, horchata and jamaica. Ice cream floats built with a full scoop of nieve. Agua mineral preparada and rusas if you want something with a kick of lime and salt.",

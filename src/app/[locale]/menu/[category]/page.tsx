@@ -24,6 +24,15 @@ const CATEGORY_TONE: Record<string, HeadingTone> = {
   lime: "comida",
 };
 
+/** Splash colour behind the category's feature image. */
+const CATEGORY_SPLASH: Record<string, string> = {
+  orange: "var(--color-mango-400)",
+  yellow: "var(--color-sunset-300)",
+  magenta: "var(--color-magenta-300)",
+  blue: "var(--color-ocean-300)",
+  lime: "var(--color-lime-400)",
+};
+
 export function generateStaticParams() {
   return locales.flatMap((locale) => menu.map((category) => ({ locale, category: category.slug })));
 }
@@ -121,6 +130,9 @@ export default async function CategoryPage({
         en={category.shortName.en}
         tone={CATEGORY_TONE[category.accent]}
         body={category.intro[locale]}
+        feature={category.feature}
+        featureAlt={category.name[locale]}
+        splash={CATEGORY_SPLASH[category.accent]}
       >
         <nav aria-label="Breadcrumb" className="mt-6 order-first">
           <ol className="flex items-center gap-2 font-body text-sm font-bold text-sand-50/90">

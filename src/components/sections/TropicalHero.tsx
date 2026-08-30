@@ -172,21 +172,26 @@ export function TropicalHero({ locale }: { locale: Locale }) {
             so matting them removes the cup along with the background. */}
         <motion.div
           style={reduced ? undefined : { y: cupY }}
-          className="relative mx-auto w-[78%] max-w-sm lg:w-full lg:max-w-md"
+          className="relative mx-auto w-[88%] max-w-md lg:w-full lg:max-w-lg"
         >
-          <div className="relative aspect-square">
+          <div className="relative aspect-[5/4]">
             <Splash
               color="var(--color-mango-400)"
               variant={1}
-              className="absolute inset-[-14%] h-[128%] w-[128%] opacity-90 drift-slow"
+              className="absolute inset-[-10%] h-[120%] w-[120%] opacity-75 drift-slow"
+            />
+            {/* Sits on the sand rather than on top of the page. */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-[16%] bottom-[4%] h-6 rounded-[50%] bg-ink/35 blur-xl"
             />
             <Image
-              src="/menu/sticker-mangonada.webp"
+              src="/menu/cut-mangonada.webp"
               alt={copy.hero.cupAlt[locale]}
               fill
               priority
-              sizes="(max-width: 1024px) 78vw, 34vw"
-              className="bob rounded-full object-cover shadow-float ring-[6px] ring-white/85"
+              sizes="(max-width: 1024px) 82vw, 38vw"
+              className="bob object-contain drop-shadow-[0_18px_22px_rgb(42_18_6_/_0.4)]"
             />
           </div>
         </motion.div>
