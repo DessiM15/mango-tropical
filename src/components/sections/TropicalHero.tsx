@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { SurfWash } from "@/components/SurfWash";
 import { WoodSign } from "@/components/WoodSign";
 import { MagneticButton } from "@/components/MagneticButton";
 import { OpenStatus } from "@/components/OpenStatus";
@@ -36,6 +37,10 @@ function useNarrow() {
  * The surf lane is a real row rather than an overlay. Absolutely positioning
  * the character put him straight through the buttons on any viewport shorter
  * than the one it was tuned on; as a row he cannot reach the copy at all.
+ *
+ * He and his board are two images, not one (see `SurfWash` for the water). The
+ * single sprite could only ever be slid and turned as one piece, which is what
+ * made him read as a sticker on the wall rather than as someone riding.
  */
 export function TropicalHero({ locale }: { locale: Locale }) {
   const ref = useRef<HTMLElement>(null);
@@ -55,7 +60,14 @@ export function TropicalHero({ locale }: { locale: Locale }) {
   const crestX = useTransform(smooth, [0, 1], ["0vw", "18vw"]);
   const surferX = useTransform(smooth, [0, 1], ["0vw", "118vw"]);
   const surferY = useTransform(smooth, [0, 1], [0, narrow ? -90 : -26]);
-  const surferTilt = useTransform(smooth, [0, 0.5, 1], [-3, 2, -4]);
+
+  // The board and the rider are separate images, so they can be posed against
+  // each other. The board takes the wave's tilt; he leans back across it, which
+  // is the whole difference between someone riding and a sticker being slid.
+  const boardTilt = useTransform(smooth, [0, 0.5, 1], [-4, 3, -6.5]);
+  const riderLean = useTransform(smooth, [0, 0.5, 1], [2.5, -1.5, 3.5]);
+  const spray = useTransform(smooth, [0, 0.12, 0.78, 1], [0, 0.85, 1, 0.35]);
+  const sprayLift = useTransform(smooth, [0, 1], [0.78, 1.18]);
 
   const still = !!reduced;
 
@@ -181,10 +193,14 @@ export function TropicalHero({ locale }: { locale: Locale }) {
         </motion.div>
       </motion.div>
 
-      {/* ---- the wave, and the one thing riding it ---- */}
+      {/* ---- the wave, and the one thing riding it ----
+          The lane shrinks rather than holding its height. The copy above it
+          cannot shrink below its own content, so a fixed lane pushed its own
+          bottom past the section on a short viewport and took the board with
+          it. Shrinking, it always ends exactly where the section does. */}
       <div
         aria-hidden="true"
-        className="relative z-20 h-[34%] min-h-[11rem] shrink-0 sm:h-[32%] lg:h-[38%]"
+        className="relative z-20 h-[36%] min-h-[11rem] shrink sm:h-[34%] lg:h-[40%]"
       >
         <motion.div
           style={still ? undefined : { x: crestX }}
@@ -210,25 +226,42 @@ export function TropicalHero({ locale }: { locale: Locale }) {
           />
         </motion.div>
 
+        {/* The rig: board, the water it is cutting, and the rider on top. The
+            box carries the art's own aspect ratio, so everything inside can be
+            placed in the art's pixel coordinates and stay registered. */}
         <motion.div
-          style={
-            still
-              ? undefined
-              : narrow
-                ? { y: surferY }
-                : { x: surferX, y: surferY, rotate: surferTilt }
-          }
-          className="absolute bottom-[24%] left-[-5%] h-[74%] sm:bottom-[18%] sm:left-[1%] sm:h-[80%] lg:h-[78%]"
+          style={still ? undefined : narrow ? { y: surferY } : { x: surferX, y: surferY }}
+          className="absolute bottom-[28%] left-[-6%] aspect-[971/809] h-[74%] sm:bottom-[24%] sm:left-[0%] sm:h-[80%] lg:bottom-[26%] lg:h-[70%]"
         >
-          <Image
-            src="/brand/mango-surfer.webp"
-            alt=""
-            width={971}
-            height={809}
-            priority
-            sizes="(max-width: 640px) 55vw, 30vw"
-            className="h-full w-auto max-w-none drop-shadow-[0_14px_18px_rgb(42_18_6_/_0.45)]"
-          />
+          <motion.div
+            style={still ? undefined : { rotate: boardTilt }}
+            className="absolute inset-0 origin-[50%_88%]"
+          >
+            <Image
+              src="/brand/surfboard.webp"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 640px) 55vw, 30vw"
+              className="object-contain drop-shadow-[0_12px_14px_rgb(42_18_6_/_0.45)]"
+            />
+
+            <SurfWash spray={spray} lift={sprayLift} still={still} />
+
+            <motion.div
+              style={still ? undefined : { rotate: riderLean }}
+              className="absolute inset-0 origin-[51%_85.5%]"
+            >
+              <Image
+                src="/brand/mango-rider.webp"
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 640px) 55vw, 30vw"
+                className="object-contain drop-shadow-[0_10px_14px_rgb(42_18_6_/_0.35)]"
+              />
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
