@@ -22,7 +22,7 @@ type Props = {
   className?: string;
   /** A degree or two of tilt, the way the plaques sit on the printed pages. */
   tilt?: number;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   children?: ReactNode;
 };
 
@@ -30,6 +30,9 @@ const SIZES = {
   sm: "text-[clamp(1.15rem,3vw,1.9rem)]",
   md: "text-[clamp(1.6rem,4.4vw,3rem)]",
   lg: "text-[clamp(2rem,6vw,4.25rem)]",
+  /* Hero only. The gap between this and `md` is the point: flat, evenly sized
+     headings were a large part of why the page read cheap. */
+  xl: "text-[clamp(2.2rem,5.6vw,4.9rem)]",
 };
 
 /**

@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { alternateHref, path, type Locale } from "@/lib/i18n";
+import { path, type Locale } from "@/lib/i18n";
 import { copy } from "@/lib/copy";
 import { site } from "@/lib/site";
 import { OpenStatus } from "./OpenStatus";
+import { LocaleToggle } from "./LocaleToggle";
 
 export function SiteHeader({
   locale,
@@ -57,22 +58,21 @@ export function SiteHeader({
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <Link
             href={(path(locale, "home"))}
-            className="flex shrink-0 items-center gap-2.5"
+            className="flex shrink-0 items-center"
             aria-label={site.name}
           >
+            {/* The badge already says Mango Tropical, so setting the name
+                beside it in type was saying it twice. */}
             <Image
-              src="/logo.webp"
+              src="/brand/logo-lockup.webp"
               alt=""
-              width={206}
-              height={206}
+              width={1720}
+              height={1472}
               priority
-              className="h-11 w-11 rounded-full sm:h-12 sm:w-12"
+              className={`w-auto drop-shadow-[0_2px_3px_rgb(42_18_6_/_0.55)] drop-shadow-[0_6px_16px_rgb(42_18_6_/_0.4)] transition-[height] duration-300 ease-[var(--ease-out-soft)] ${
+                scrolled ? "h-14 sm:h-16" : "h-16 sm:h-[5.75rem]"
+              }`}
             />
-            <span className="display hidden text-xl leading-none text-sand-50 [text-shadow:2px_2px_0_var(--color-ink)] sm:block sm:text-2xl">
-              Mango
-              <br />
-              Tropical
-            </span>
           </Link>
 
           <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Main">
@@ -96,17 +96,7 @@ export function SiteHeader({
           </nav>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-3">
-            {/* Prefetch is off because this is the one link that crosses into
-                the other language tree, and prefetching it makes the router ask
-                for an RSC payload under the wrong tree. Clicking still works. */}
-            <Link
-              href={alternateHref(pathname, locale)}
-              hrefLang={locale === "en" ? "es" : "en"}
-              prefetch={false}
-              className="rounded-full bg-mango-400 px-3 py-1.5 font-label text-sm font-extrabold uppercase not-italic text-ink shadow-card transition-transform hover:-translate-y-0.5 sm:px-4 sm:text-base"
-            >
-              {copy.nav.switchTo[locale]}
-            </Link>
+            <LocaleToggle locale={locale} />
 
             <a
               href={site.phoneHref}

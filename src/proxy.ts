@@ -15,6 +15,21 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // First visit to the English root from a Spanish-preferring browser goes to
+  // the Spanish tree. The cookie is written by the ES/EN toggle, so a visitor
+  // who has picked a language is never sent somewhere else again.
+  if (pathname === "/" && !request.cookies.has("mt_locale")) {
+    const preferred = (request.headers.get("accept-language") ?? "")
+      .split(",")[0]
+      .trim()
+      .toLowerCase();
+    if (preferred.startsWith("es")) {
+      const response = NextResponse.redirect(new URL(`/es${search}`, request.url));
+      response.cookies.set("mt_locale", "es", { path: "/", maxAge: 31536000, sameSite: "lax" });
+      return response;
+    }
+  }
+
   const isSpanish = pathname === "/es" || pathname.startsWith("/es/");
   const locale: Locale = isSpanish ? "es" : "en";
   const rest = isSpanish ? pathname.slice(3) : pathname;

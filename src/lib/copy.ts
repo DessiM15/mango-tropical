@@ -22,8 +22,8 @@ export const copy = {
     signMain: { en: "NIEVES DE GARRAFA", es: "NIEVES DE GARRAFA" },
     signSub: { en: "100% NATURALES", es: "100% NATURALES" },
     cupAlt: {
-      en: "A Mangonada Tropical: mango nieve with fresh mango, chamoy and chile",
-      es: "Una Mangonada Tropical: nieve de mango con mango fresco, chamoy y chile",
+      en: "Mango nieve de garrafa in a Mango Tropical cup, drizzled with chamoy and chile",
+      es: "Nieve de garrafa de mango en un vaso Mango Tropical, con chamoy y chile",
     },
     line1: { en: "MANGONADA", es: "ES TEMPORADA" },
     line2: { en: "SEASON", es: "DE MANGONADA" },
