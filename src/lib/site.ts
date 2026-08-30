@@ -4,6 +4,34 @@
  * for character, so nothing here should be reworded for style.
  */
 
+/** Registered and waiting on the client. Used whenever the env var is unusable. */
+const FALLBACK_URL = "https://mangotropicalhtx.com";
+
+/**
+ * Resolves the production origin.
+ *
+ * An environment variable that exists but is blank is the common case on a
+ * hosting dashboard, and `??` does not catch it: an empty string is neither
+ * null nor undefined, so it flows through and `new URL("")` throws during
+ * prerender. Anything that is not a parseable absolute URL falls back.
+ */
+function resolveSiteUrl(): string {
+  const candidates = [process.env.NEXT_PUBLIC_SITE_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL];
+
+  for (const raw of candidates) {
+    const value = raw?.trim();
+    if (!value) continue;
+    const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    try {
+      return new URL(withProtocol).origin;
+    } catch {
+      // Not a usable URL, try the next candidate.
+    }
+  }
+
+  return FALLBACK_URL;
+}
+
 export const site = {
   name: "Mango Tropical",
   legalName: "Mango Tropical",
@@ -11,9 +39,9 @@ export const site = {
     en: "Authentic nieves de garrafa, mangonadas and raspas in Cypress, Texas.",
     es: "Auténticas nieves de garrafa, mangonadas y raspas en Cypress, Texas.",
   },
-  // TODO: replace once the client registers the domain. mangotropicalhtx.com
-  // was confirmed available and matches their Instagram handle and hashtag.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mangotropicalhtx.com",
+  // TODO: point NEXT_PUBLIC_SITE_URL at the real domain once it is registered.
+  // mangotropicalhtx.com was confirmed available and matches their handle.
+  url: resolveSiteUrl(),
   phone: "(346) 544-2451",
   phoneHref: "tel:+13465442451",
   address: {

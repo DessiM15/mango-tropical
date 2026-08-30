@@ -10,7 +10,7 @@ import { FlavorShowcase } from "@/components/sections/FlavorShowcase";
 import { VisitSection } from "@/components/sections/VisitSection";
 import { copy } from "@/lib/copy";
 import { isLocale, locales, path, type Locale } from "@/lib/i18n";
-import { site } from "@/lib/site";
+import { mapsUrl, site } from "@/lib/site";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -132,8 +132,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <MagneticButton href={path(locale, "menu")} variant="solid">
               {copy.menuSection.viewAll[locale]}
             </MagneticButton>
-            <MagneticButton href={path(locale, "build")} variant="cream">
-              {copy.build.cta[locale]}
+            <MagneticButton href={mapsUrl} variant="cream" external>
+              {copy.visit.directions[locale]}
             </MagneticButton>
           </div>
         </div>

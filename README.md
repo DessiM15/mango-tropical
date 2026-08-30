@@ -4,7 +4,7 @@ Marketing site for Mango Tropical, a nieveria and antojitos shop at FM 529 and
 Fry Road in Cypress, Texas.
 
 Built with Next.js 16 (App Router), TypeScript and Tailwind CSS v4. Fully
-static: all 22 pages prerender at build time.
+static: all 20 pages prerender at build time.
 
 ## Running it
 
@@ -25,7 +25,6 @@ own URL words so both trees compete for their own searches.
 | Home | `/` | `/es` |
 | Menu | `/menu` | `/es/menu` |
 | Category | `/menu/mangonadas` | `/es/menu/mangonadas` |
-| Build your own | `/build-your-own` | `/es/arma-la-tuya` |
 | Our story | `/our-story` | `/es/nosotros` |
 | Visit | `/visit` | `/es/visita` |
 
@@ -45,7 +44,6 @@ Everything writable is data, not markup.
 | `src/lib/menu.ts` | Every category, item, price and flavor, in both languages |
 | `src/lib/copy.ts` | Every interface string, in both languages |
 | `src/lib/reviews.ts` | The Google reviews wall |
-| `src/lib/builder.ts` | Build Your Own options and pricing |
 
 Prices in `menu.ts` are transcribed from the printed in-store menu. Hours in
 `site.ts` drive the open/closed badge, the footer, the visit page and the
@@ -74,7 +72,7 @@ each page first so the scroll reveals fire.
 
 ```bash
 npm run dev
-node scripts/shoot.mjs / /menu /build-your-own /es
+node scripts/shoot.mjs / /menu /our-story /es
 ```
 
 Screenshots land in `.shots/`. It drives the Chrome already installed on the
@@ -100,13 +98,11 @@ itself once real reviews are present.
 ## Before launch
 
 1. Register the domain and set `NEXT_PUBLIC_SITE_URL` (see `.env.example`).
+   Leave it unset rather than blank: a blank value is treated as unset and the
+   fallback origin is used, but a wrong value would be published everywhere.
 2. Replace the placeholder reviews in `src/lib/reviews.ts`.
 3. Confirm the coordinates in `site.ts` against the Google Business Profile. They
    are currently derived from the FM 529 and Fry Road intersection.
-4. Swap in real footage for the hero. `FilledHeadline` already accepts
-   `fill="video"` with `videoSrc` and `posterSrc`, which knocks the letters out
-   of a plate laid over the video. Until then the headline is filled with the
-   menu's own watercolor ocean art.
-5. Ask the owner for interior and exterior photos. The mascot statue and the
-   painted hibiscus counter are the shop's most distinctive assets and the site
-   currently has none of them.
+4. Ask the owner for photos of the shop and of the products on a plain
+   background. Everything on the site today is cropped out of the printed menu,
+   which is why product shots carry the menu's orange page behind them.

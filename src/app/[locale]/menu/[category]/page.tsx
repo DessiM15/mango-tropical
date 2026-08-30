@@ -212,11 +212,11 @@ export default async function CategoryPage({
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <MagneticButton href={path(locale, "build")} variant="solid">
-              {copy.build.cta[locale]}
-            </MagneticButton>
-            <MagneticButton href={mapsUrl} variant="cream" external>
+            <MagneticButton href={mapsUrl} variant="solid" external>
               {copy.visit.directions[locale]}
+            </MagneticButton>
+            <MagneticButton href={site.phoneHref} variant="cream">
+              {copy.visit.callUs[locale]}
             </MagneticButton>
           </div>
 

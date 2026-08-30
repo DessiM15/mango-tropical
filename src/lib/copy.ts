@@ -7,7 +7,6 @@ import type { Locale } from "./i18n";
 export const copy = {
   nav: {
     menu: { en: "Menu", es: "Menú" },
-    build: { en: "Build Your Own", es: "Arma la Tuya" },
     about: { en: "Our Story", es: "Nosotros" },
     visit: { en: "Visit", es: "Visítanos" },
     call: { en: "Call", es: "Llamar" },
@@ -51,7 +50,6 @@ export const copy = {
   // titles every one of its sections.
   headings: {
     favorites: { es: "NUESTROS FAVORITOS", en: "OUR FAVORITES" },
-    build: { es: "ARMA LA TUYA", en: "BUILD YOUR OWN" },
     flavors: { es: "TODOS LOS SABORES", en: "EVERY FLAVOR" },
     reviews: { es: "LO QUE DICEN", en: "WHAT THEY SAY" },
     about: { es: "SOBRE NOSOTROS", en: "OUR STORY" },
@@ -82,36 +80,6 @@ export const copy = {
       en: "Prices are the ones printed on the in store menu and may change.",
       es: "Los precios son los del menú impreso en la tienda y pueden cambiar.",
     },
-  },
-  build: {
-    kicker: { en: "Build your own", es: "Arma la tuya" },
-    title: { en: "MAKE IT YOURS", es: "HAZLA TUYA" },
-    body: {
-      en: "Go wild. We will not judge. Pick your size, your nieve, your fruit and how much chamoy you can handle, then show the counter what you came for.",
-      es: "Vuélvete loco. Aquí nadie juzga. Escoge tamaño, nieve, fruta y cuánto chamoy aguantas, y luego enséñale al mostrador a qué viniste.",
-    },
-    cta: { en: "Start building", es: "Empezar a armar" },
-    steps: {
-      size: { en: "Size", es: "Tamaño" },
-      base: { en: "Nieve base", es: "Base de nieve" },
-      fruit: { en: "Fruit", es: "Fruta" },
-      chamoy: { en: "Chamoy level", es: "Nivel de chamoy" },
-      toppings: { en: "Toppings", es: "Toppings" },
-    },
-    total: { en: "Total", es: "Total" },
-    yourCreation: { en: "YOUR CREATION", es: "TU CREACIÓN" },
-    empty: { en: "Nothing picked yet", es: "Todavía no escoges nada" },
-    showCounter: { en: "Show this at the counter", es: "Enseña esto en el mostrador" },
-    copyLink: { en: "Copy link", es: "Copiar enlace" },
-    copied: { en: "Link copied", es: "Enlace copiado" },
-    startOver: { en: "Start over", es: "Empezar de nuevo" },
-    callToOrder: { en: "Call to order", es: "Llamar para ordenar" },
-    counterNote: {
-      en: "This is not an online order. Bring this screen to the counter or call it in.",
-      es: "Esto no es un pedido en línea. Trae esta pantalla al mostrador o llama por teléfono.",
-    },
-    noToppings: { en: "No toppings", es: "Sin toppings" },
-    includedFree: { en: "included", es: "incluido" },
   },
   reviews: {
     kicker: { en: "What Cypress says", es: "Lo que dice Cypress" },

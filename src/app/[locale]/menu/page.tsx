@@ -10,7 +10,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { copy } from "@/lib/copy";
 import { menu, money, TOPPING_PRICE, toppings } from "@/lib/menu";
 import { alternateHref, isLocale, locales, path, type Locale } from "@/lib/i18n";
-import { site } from "@/lib/site";
+import { mapsUrl, site } from "@/lib/site";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -198,9 +198,12 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
             {copy.menuSection.priceNote[locale]}
           </p>
 
-          <div className="mt-10 flex justify-center">
-            <MagneticButton href={path(locale, "build")} variant="solid">
-              {copy.build.cta[locale]}
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <MagneticButton href={mapsUrl} variant="solid" external>
+              {copy.visit.directions[locale]}
+            </MagneticButton>
+            <MagneticButton href={site.phoneHref} variant="cream">
+              {copy.visit.callUs[locale]}
             </MagneticButton>
           </div>
         </div>

@@ -85,7 +85,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             <ul className="mt-4 space-y-2 font-body text-[15px]">
               {[
                 { href: path(locale, "menu"), label: copy.nav.menu[locale] },
-                { href: path(locale, "build"), label: copy.nav.build[locale] },
                 { href: path(locale, "about"), label: copy.nav.about[locale] },
                 { href: path(locale, "visit"), label: copy.nav.visit[locale] },
               ].map((link) => (

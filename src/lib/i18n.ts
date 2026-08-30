@@ -14,7 +14,6 @@ export function isLocale(value: string): value is Locale {
 export const routes = {
   home: { route: "", en: "", es: "" },
   menu: { route: "menu", en: "menu", es: "menu" },
-  build: { route: "build", en: "build-your-own", es: "arma-la-tuya" },
   about: { route: "about", en: "our-story", es: "nosotros" },
   visit: { route: "visit", en: "visit", es: "visita" },
 } as const;
