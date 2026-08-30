@@ -12,17 +12,16 @@ import { path, type Locale } from "@/lib/i18n";
 import { mapsUrl, site } from "@/lib/site";
 
 /**
- * Loose fruit around the cup. Each piece carries its own depth so the group
- * separates on scroll instead of moving as one flat sheet, and its own delay so
- * the bobbing never falls into step.
+ * Loose fruit at the cup's base. Each piece keeps a small independent depth so
+ * the group separates slightly on scroll rather than sliding as one flat sheet.
  */
 const SCATTER = [
-  { src: "/scene/fruit-mango-1.webp", className: "bottom-[1%] left-[-2%] w-[24%]", depth: 26, rotate: -12, delay: 0 },
-  { src: "/scene/fruit-mango-2.webp", className: "bottom-[-1%] right-[8%] w-[22%]", depth: 20, rotate: 7, delay: 0.7 },
-  { src: "/scene/fruit-citrus-3.webp", className: "bottom-[3%] right-[-4%] w-[17%]", depth: 32, rotate: 14, delay: 1.4 },
-  { src: "/scene/fruit-citrus-4.webp", className: "bottom-[8%] left-[16%] w-[14%]", depth: 22, rotate: -8, delay: 2.1 },
-  { src: "/scene/fruit-strawberry-1.webp", className: "bottom-[2%] left-[34%] w-[12%]", depth: 18, rotate: 10, delay: 1 },
-  { src: "/scene/tamarindo-sticks-1.webp", className: "bottom-[6%] left-[-12%] w-[26%]", depth: 24, rotate: -4, delay: 0.4 },
+  { src: "/scene/fruit-mango-1.webp", className: "bottom-[1%] left-[-2%] w-[24%]", depth: 26, rotate: -12 },
+  { src: "/scene/fruit-mango-2.webp", className: "bottom-[-1%] right-[8%] w-[22%]", depth: 20, rotate: 7 },
+  { src: "/scene/fruit-citrus-3.webp", className: "bottom-[3%] right-[-4%] w-[17%]", depth: 32, rotate: 14 },
+  { src: "/scene/fruit-citrus-4.webp", className: "bottom-[8%] left-[16%] w-[14%]", depth: 22, rotate: -8 },
+  { src: "/scene/fruit-strawberry-1.webp", className: "bottom-[2%] left-[34%] w-[12%]", depth: 18, rotate: 10 },
+  { src: "/scene/tamarindo-sticks-1.webp", className: "bottom-[6%] left-[-12%] w-[26%]", depth: 24, rotate: -4 },
 ];
 
 export function TropicalHero({ locale }: { locale: Locale }) {
@@ -164,7 +163,6 @@ function ScatterPiece({
   className,
   depth,
   rotate,
-  delay,
   progress,
   reduced,
 }: (typeof SCATTER)[number] & { progress: ReturnType<typeof useSpring>; reduced: boolean }) {
