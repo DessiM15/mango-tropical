@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
 import { ItemCard } from "@/components/MenuCard";
 import { Reveal } from "@/components/Reveal";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { VisitSection } from "@/components/sections/VisitSection";
@@ -140,17 +140,14 @@ export default async function CategoryPage({
       </PageHeader>
 
       <div className="relative bg-sand-50 pb-20 pt-16 sm:pb-28">
-        <ChamoyDrip
-          className="absolute inset-x-0 top-0 h-14 -translate-y-full sm:h-20"
-          fill="var(--color-sunset-500)"
-        />
+        <TornEdge className="absolute inset-x-0 top-0 h-10 -translate-y-full sm:h-14" fill="var(--color-sunset-500)" flip />
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           {category.sections.map((section) => (
             <section key={section.slug} className="pb-14 last:pb-0">
               {category.sections.length > 1 ? (
                 <Reveal>
-                  <h2 className="display border-b-[4px] border-ink pb-3 text-[clamp(1.75rem,5vw,3rem)] text-ink">
+                  <h2 className="display pb-3 text-[clamp(1.75rem,5vw,3rem)] text-ink">
                     {section.title[locale]}
                   </h2>
                 </Reveal>
@@ -166,7 +163,7 @@ export default async function CategoryPage({
                       {section.flavors.map((flavor) => (
                         <li
                           key={flavor.en}
-                          className="rounded-full border-2 border-ink bg-sand-50 px-3 py-1 font-body text-sm font-bold text-ink"
+                          className="rounded-full bg-sand-50 px-3 py-1 font-body text-sm font-bold text-ink"
                         >
                           {flavor[locale]}
                         </li>
@@ -190,7 +187,7 @@ export default async function CategoryPage({
           ))}
 
           <Reveal>
-            <div className="rounded-3xl border-[4px] border-ink bg-mango-400 p-6 shadow-[6px_8px_0_0_var(--color-ink)] sm:p-8">
+            <div className="rounded-3xl bg-mango-400 p-6 shadow-card sm:p-8">
               <h2 className="display text-3xl text-ink sm:text-4xl">
                 {copy.menuSection.toppingsTitle[locale]}
               </h2>
@@ -201,7 +198,7 @@ export default async function CategoryPage({
                 {toppings.map((topping) => (
                   <li
                     key={topping.en}
-                    className="rounded-full border-2 border-ink bg-sand-50 px-3.5 py-1.5 font-body text-sm font-bold text-ink"
+                    className="rounded-full bg-sand-50 px-3.5 py-1.5 font-body text-sm font-bold text-ink"
                   >
                     {topping[locale]}
                   </li>
@@ -232,9 +229,9 @@ export default async function CategoryPage({
                 <li key={other.slug}>
                   <Link
                     href={path(locale, "menu", other.slug)}
-                    className="group flex h-full flex-col overflow-hidden rounded-3xl border-[3px] border-ink bg-white shadow-[5px_6px_0_0_var(--color-ink)] transition-transform hover:-translate-y-1.5"
+                    className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card transition-transform hover:-translate-y-1.5"
                   >
-                    <div className="relative aspect-[4/3] border-b-[3px] border-ink">
+                    <div className="relative aspect-[4/3]">
                       <Image
                         src={other.image}
                         alt={other.name[locale]}

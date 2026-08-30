@@ -52,13 +52,14 @@ export function Favorites({ locale }: { locale: Locale }) {
     <section className="relative overflow-hidden py-16 sm:py-24" aria-labelledby="favorites-heading">
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         <Image
-          src="/art/water-turquoise.webp"
+          src="/art/water-deep.webp"
           alt=""
           fill
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-ocean-300/45 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-ocean-400/55 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ocean-300/45 via-transparent to-ocean-600/40" />
       </div>
 
       <Flora name="banana-leaves" className="left-[-6%] top-[-6%] w-40 opacity-90 sm:w-60" />
@@ -88,9 +89,9 @@ export function Favorites({ locale }: { locale: Locale }) {
               >
                 <Link
                   href={path(locale, "menu", category.slug)}
-                  className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border-[4px] border-ink bg-sand-50 shadow-[7px_9px_0_0_var(--color-ink)] transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-2 hover:rotate-[-1deg]"
+                  className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-card transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-2 hover:rotate-[-1deg]"
                 >
-                  <div className="relative aspect-[5/4] overflow-hidden border-b-[4px] border-ink">
+                  <div className="relative aspect-[5/4] overflow-hidden">
                     <Image
                       src={item.image ?? category.image}
                       alt={item.name[locale]}
@@ -117,7 +118,7 @@ export function Favorites({ locale }: { locale: Locale }) {
             onClick={() => nudge(-1)}
             disabled={atStart}
             aria-label={copy.favorites.previous[locale]}
-            className="absolute left-[-0.5rem] top-[38%] hidden h-12 w-12 items-center justify-center rounded-full border-[3px] border-ink bg-sand-50 shadow-[3px_4px_0_0_var(--color-ink)] transition disabled:opacity-35 sm:flex lg:left-[-1.5rem]"
+            className="absolute left-[-0.5rem] top-[38%] hidden h-12 w-12 items-center justify-center rounded-full bg-white shadow-card transition disabled:opacity-35 sm:flex lg:left-[-1.5rem]"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5 stroke-ink" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M15 5l-7 7 7 7" />
@@ -128,7 +129,7 @@ export function Favorites({ locale }: { locale: Locale }) {
             onClick={() => nudge(1)}
             disabled={atEnd}
             aria-label={copy.favorites.next[locale]}
-            className="absolute right-[-0.5rem] top-[38%] hidden h-12 w-12 items-center justify-center rounded-full border-[3px] border-ink bg-sand-50 shadow-[3px_4px_0_0_var(--color-ink)] transition disabled:opacity-35 sm:flex lg:right-[-1.5rem]"
+            className="absolute right-[-0.5rem] top-[38%] hidden h-12 w-12 items-center justify-center rounded-full bg-white shadow-card transition disabled:opacity-35 sm:flex lg:right-[-1.5rem]"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5 stroke-ink" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M9 5l7 7-7 7" />

@@ -27,13 +27,18 @@ export function CategoryRow({ locale }: { locale: Locale }) {
 
   return (
     <section
-      className="relative overflow-hidden bg-sand-100 py-14 sm:py-20"
+      className="relative overflow-hidden bg-sand-100 py-16 sm:py-24"
       aria-labelledby="categories-heading"
     >
       <div
         aria-hidden="true"
         className="absolute inset-0 opacity-60"
         style={{ backgroundImage: "url(/art/sand-shore.webp)", backgroundSize: "auto 260px" }}
+      />
+      {/* Wet sand where the water above meets the beach. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,var(--color-ocean-400),transparent)] opacity-45"
       />
       <Flora name="leaves-wide" className="left-[-7%] top-[-8%] w-40 opacity-70 sm:w-56" flip />
       <Flora name="plumeria-cluster" className="bottom-[-12%] right-[-5%] w-36 opacity-70 sm:w-52" />
@@ -71,7 +76,7 @@ export function CategoryRow({ locale }: { locale: Locale }) {
                     width={520}
                     height={520}
                     sizes="(max-width: 640px) 42vw, 11rem"
-                    className="absolute inset-[11%] h-[78%] w-[78%] rounded-full border-[3px] border-ink object-cover shadow-[4px_5px_0_0_var(--color-ink)] transition-transform duration-500 ease-[var(--ease-pop)] group-hover:-translate-y-1.5 group-hover:scale-105"
+                    className="absolute inset-[11%] h-[78%] w-[78%] rounded-full object-cover shadow-card transition-transform duration-500 ease-[var(--ease-pop)] group-hover:-translate-y-1.5 group-hover:scale-105"
                   />
                 </span>
 

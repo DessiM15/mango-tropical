@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { FlavorShowcase } from "@/components/sections/FlavorShowcase";
@@ -75,10 +75,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       />
 
       <div className="relative bg-sand-50 pb-20 pt-16 sm:pb-28">
-        <ChamoyDrip
-          className="absolute inset-x-0 top-0 h-14 -translate-y-full sm:h-20"
-          fill="var(--color-sunset-500)"
-        />
+        <TornEdge className="absolute inset-x-0 top-0 h-10 -translate-y-full sm:h-14" fill="var(--color-sunset-500)" flip />
 
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {copy.about.body.map((paragraph, index) => (
@@ -100,7 +97,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               {tiles.map((tile) => (
                 <div
                   key={tile.src}
-                  className="relative aspect-square overflow-hidden rounded-[1.75rem] border-[4px] border-ink shadow-[6px_8px_0_0_var(--color-ink)]"
+                  className="relative aspect-square overflow-hidden rounded-[1.75rem] shadow-card"
                   style={{ transform: `rotate(${tile.tilt})` }}
                 >
                   <Image
@@ -119,7 +116,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <h2 className="display text-3xl text-ink sm:text-4xl">
               {copy.about.factsTitle[locale]}
             </h2>
-            <dl className="mt-6 divide-y-2 divide-dashed divide-ink/20 rounded-3xl border-[3px] border-ink bg-white px-6 shadow-[5px_6px_0_0_var(--color-ink)]">
+            <dl className="mt-6 divide-y-2 divide-dashed divide-ink/20 rounded-3xl bg-white px-6 shadow-card">
               {copy.about.facts.map((fact) => (
                 <div key={fact.label.en} className="py-5 sm:flex sm:gap-8">
                   <dt className="label-type shrink-0 text-lg text-chamoy-500 sm:w-48">

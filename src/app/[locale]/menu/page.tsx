@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
 import { ItemCard } from "@/components/MenuCard";
 import { Reveal } from "@/components/Reveal";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { copy } from "@/lib/copy";
@@ -97,7 +97,7 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
             <Link
               key={category.slug}
               href={`#${category.slug}`}
-              className="rounded-full border-[3px] border-ink bg-sand-50 px-4 py-2 font-label text-sm font-extrabold not-italic uppercase tracking-wide text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 sm:text-base"
+              className="rounded-full bg-sand-50 px-4 py-2 font-label text-sm font-extrabold not-italic uppercase tracking-wide text-ink shadow-card transition-transform hover:-translate-y-0.5 sm:text-base"
             >
               {category.name[locale]}
             </Link>
@@ -106,13 +106,13 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
       </PageHeader>
 
       <div className="relative bg-sand-50 pb-20 pt-16 sm:pb-28">
-        <ChamoyDrip className="absolute inset-x-0 top-0 h-14 -translate-y-full sm:h-20" fill="var(--color-sunset-500)" />
+        <TornEdge className="absolute inset-x-0 top-0 h-10 -translate-y-full sm:h-14" fill="var(--color-sunset-500)" flip />
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           {menu.map((category) => (
             <section key={category.slug} id={category.slug} className="scroll-mt-28 pb-16 last:pb-0">
               <Reveal>
-                <div className="flex flex-wrap items-end justify-between gap-4 border-b-[4px] border-ink pb-4">
+                <div className="flex flex-wrap items-end justify-between gap-4 pb-4">
                   <div>
                     <h2 className="display text-[clamp(2rem,5.5vw,3.5rem)] text-ink">
                       {category.name[locale]}
@@ -146,7 +146,7 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
                           {section.flavors.map((flavor) => (
                             <li
                               key={flavor.en}
-                              className="rounded-full border-2 border-ink bg-sand-50 px-3 py-1 font-body text-sm font-bold text-ink"
+                              className="rounded-full bg-sand-50 px-3 py-1 font-body text-sm font-bold text-ink"
                             >
                               {flavor[locale]}
                             </li>
@@ -174,7 +174,7 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
           ))}
 
           <Reveal>
-            <div className="mt-6 rounded-3xl border-[4px] border-ink bg-mango-400 p-6 shadow-[6px_8px_0_0_var(--color-ink)] sm:p-8">
+            <div className="mt-6 rounded-3xl bg-mango-400 p-6 shadow-card sm:p-8">
               <h2 className="display text-3xl text-ink sm:text-4xl">
                 {copy.menuSection.toppingsTitle[locale]}
               </h2>
@@ -185,7 +185,7 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
                 {toppings.map((topping) => (
                   <li
                     key={topping.en}
-                    className="rounded-full border-2 border-ink bg-sand-50 px-3.5 py-1.5 font-body text-sm font-bold text-ink"
+                    className="rounded-full bg-sand-50 px-3.5 py-1.5 font-body text-sm font-bold text-ink"
                   >
                     {topping[locale]}
                   </li>

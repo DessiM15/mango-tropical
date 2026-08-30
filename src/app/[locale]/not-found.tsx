@@ -30,13 +30,13 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href={path("en", "menu")}
-            className="rounded-full border-[3px] border-ink bg-chamoy-400 px-7 py-3.5 font-label text-lg font-extrabold not-italic uppercase text-white shadow-[4px_5px_0_0_var(--color-ink)]"
+            className="rounded-full bg-chamoy-400 px-7 py-3.5 font-label text-lg font-extrabold not-italic uppercase text-white shadow-card"
           >
             {copy.notFound.cta.en}
           </Link>
           <Link
             href={path("es", "menu")}
-            className="rounded-full border-[3px] border-ink bg-sand-50 px-7 py-3.5 font-label text-lg font-extrabold not-italic uppercase text-ink shadow-[4px_5px_0_0_var(--color-ink)]"
+            className="rounded-full bg-sand-50 px-7 py-3.5 font-label text-lg font-extrabold not-italic uppercase text-ink shadow-card"
           >
             {copy.notFound.cta.es}
           </Link>

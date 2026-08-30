@@ -27,7 +27,7 @@ export function VisitSection({ locale }: { locale: Locale }) {
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2">
           <Reveal from="left">
-            <div className="h-full rounded-[2rem] border-[4px] border-ink bg-sand-50 p-6 shadow-[8px_10px_0_0_var(--color-ink)] sm:p-8">
+            <div className="h-full rounded-[2rem] bg-white p-6 shadow-card sm:p-8">
               <OpenStatus locale={locale} className="text-ink" />
 
               <h3 className="display mt-6 text-2xl text-ink">{copy.visit.addressTitle[locale]}</h3>
@@ -74,7 +74,7 @@ export function VisitSection({ locale }: { locale: Locale }) {
           </Reveal>
 
           <Reveal from="right">
-            <div className="h-full min-h-[26rem] overflow-hidden rounded-[2rem] border-[4px] border-ink shadow-[8px_10px_0_0_var(--color-ink)]">
+            <div className="h-full min-h-[26rem] overflow-hidden rounded-[2rem] shadow-card">
               <iframe
                 title={copy.visit.mapTitle[locale]}
                 src={`https://maps.google.com/maps?q=${mapsEmbedQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}

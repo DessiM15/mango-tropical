@@ -65,7 +65,7 @@ export function Flora({
           alt=""
           priority={priority}
           sizes="(max-width: 640px) 45vw, 28vw"
-          className="h-auto w-full drop-shadow-[0_8px_14px_rgb(42_18_6_/_0.2)]"
+          className="h-auto w-full drop-shadow-[0_14px_20px_rgb(42_18_6_/_0.24)]"
         />
       </div>
     </div>

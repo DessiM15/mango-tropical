@@ -71,9 +71,9 @@ export function TropicalHero({ locale }: { locale: Locale }) {
 
       {/* Shoreline. Sand fades in first, then the wave breaks along the very
           bottom edge, so the water never cuts across the headline. */}
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-[30%] min-h-[13rem]">
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-[36%] min-h-[15rem]">
         <div
-          className="absolute inset-x-0 top-0 h-2/5"
+          className="absolute inset-x-0 top-0 h-1/2"
           style={{
             backgroundImage: "url(/art/sand-shore.webp)",
             backgroundSize: "auto 100%",
@@ -82,18 +82,33 @@ export function TropicalHero({ locale }: { locale: Locale }) {
             WebkitMaskImage: "linear-gradient(to bottom, transparent, black 70%)",
           }}
         />
+        {/* The plate is a rectangular crop, so its top edge is masked off and
+            the foam is layered over the join. Otherwise the water reads as a
+            blue band ruled across the page. */}
         <motion.div
           style={reduced ? undefined : { y: waterY }}
-          className="absolute inset-x-0 bottom-0 top-[28%]"
+          className="absolute inset-x-0 bottom-0 top-[22%]"
         >
-          <Image
-            src="/art/wave-crest.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-top"
+          <div
+            className="absolute inset-0"
+            style={{
+              maskImage: "linear-gradient(to bottom, transparent 0%, black 34%)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 34%)",
+            }}
+          >
+            <Image src="/art/wave-crest.webp" alt="" fill sizes="100vw" className="object-cover object-top" />
+          </div>
+          <div
+            className="wave-shift absolute inset-x-0 top-0 h-24 opacity-80"
+            style={{
+              backgroundImage: "url(/art/wave-crest.webp)",
+              backgroundSize: "1200px 100%",
+              backgroundRepeat: "repeat-x",
+              maskImage: "linear-gradient(to bottom, transparent, black 45%, transparent)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent, black 45%, transparent)",
+            }}
           />
-          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-[linear-gradient(180deg,transparent,var(--color-ocean-400)_92%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-3/4 bg-[linear-gradient(180deg,transparent,var(--color-ocean-400)_88%)]" />
         </motion.div>
       </div>
 
@@ -107,7 +122,7 @@ export function TropicalHero({ locale }: { locale: Locale }) {
         className="relative mx-auto grid min-h-[100svh] max-w-7xl items-center gap-8 px-4 pb-[19rem] pt-28 sm:px-6 sm:pb-[17rem] sm:pt-32 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pb-[15rem] lg:px-8"
       >
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <div className="mb-6 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-full border-[3px] border-ink bg-sand-50 px-5 py-2 shadow-[4px_4px_0_0_var(--color-ink)]">
+          <div className="mb-6 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-full bg-sand-50 px-5 py-2 shadow-card">
             <span className="font-label text-sm font-extrabold uppercase not-italic tracking-wider text-ink sm:text-base">
               {copy.hero.eyebrow[locale]}
             </span>
@@ -147,7 +162,7 @@ export function TropicalHero({ locale }: { locale: Locale }) {
 
           <a
             href={site.phoneHref}
-            className="mt-6 rounded-full border-[3px] border-ink bg-ink/85 px-5 py-2 font-label text-lg font-extrabold not-italic text-mango-300 shadow-[3px_4px_0_0_rgb(42_18_6_/_0.4)] transition-transform hover:-translate-y-0.5"
+            className="mt-6 font-label text-xl font-extrabold not-italic text-white [text-shadow:0_2px_6px_rgb(42_18_6_/_0.55)] underline decoration-mango-300 decoration-[3px] underline-offset-[7px] transition-colors hover:text-mango-300"
           >
             {site.phone}
           </a>
@@ -171,7 +186,7 @@ export function TropicalHero({ locale }: { locale: Locale }) {
               fill
               priority
               sizes="(max-width: 1024px) 78vw, 34vw"
-              className="bob rounded-full border-[6px] border-ink object-cover shadow-[10px_14px_0_0_rgb(42_18_6_/_0.35)] ring-[10px] ring-sand-50"
+              className="bob rounded-full object-cover shadow-float ring-[6px] ring-white/85"
             />
           </div>
         </motion.div>

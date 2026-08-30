@@ -47,7 +47,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-sunset-500/95 shadow-[0_4px_0_0_var(--color-ink)] backdrop-blur-md"
+            ? "bg-sunset-500/95 shadow-soft backdrop-blur-md"
             : "bg-transparent"
         }`}
       >
@@ -63,7 +63,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               width={206}
               height={206}
               priority
-              className="h-11 w-11 rounded-full border-[3px] border-ink sm:h-12 sm:w-12"
+              className="h-11 w-11 rounded-full sm:h-12 sm:w-12"
             />
             <span className="display hidden text-xl leading-none text-sand-50 [text-shadow:2px_2px_0_var(--color-ink)] sm:block sm:text-2xl">
               Mango
@@ -100,14 +100,14 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               href={alternateHref(pathname, locale)}
               hrefLang={locale === "en" ? "es" : "en"}
               prefetch={false}
-              className="rounded-full border-[3px] border-ink bg-mango-400 px-3 py-1.5 font-label text-sm font-extrabold uppercase not-italic text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 sm:px-4 sm:text-base"
+              className="rounded-full bg-mango-400 px-3 py-1.5 font-label text-sm font-extrabold uppercase not-italic text-ink shadow-card transition-transform hover:-translate-y-0.5 sm:px-4 sm:text-base"
             >
               {copy.nav.switchTo[locale]}
             </Link>
 
             <a
               href={site.phoneHref}
-              className="hidden rounded-full border-[3px] border-ink bg-chamoy-400 px-4 py-1.5 font-label text-sm font-extrabold uppercase not-italic text-white shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 sm:inline-block sm:px-5 sm:text-base"
+              className="hidden rounded-full bg-chamoy-400 px-4 py-1.5 font-label text-sm font-extrabold uppercase not-italic text-white shadow-card transition-transform hover:-translate-y-0.5 sm:inline-block sm:px-5 sm:text-base"
             >
               {copy.nav.call[locale]}
             </a>
@@ -117,7 +117,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               onClick={() => setOpen((value) => !value)}
               aria-expanded={open}
               aria-controls="mobile-nav"
-              className="flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-ink bg-sand-50 shadow-[3px_3px_0_0_var(--color-ink)] lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-sand-50 shadow-card lg:hidden"
             >
               <span className="sr-only">{open ? copy.nav.close[locale] : copy.nav.open[locale]}</span>
               <span className="relative block h-4 w-5" aria-hidden="true">
@@ -154,11 +154,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </Link>
           ))}
         </nav>
-        <div className="mt-auto space-y-4 border-t-[3px] border-ink bg-ink/10 px-6 py-8">
+        <div className="mt-auto space-y-4 bg-ink/10 px-6 py-8">
           <OpenStatus locale={locale} className="text-sand-50" />
           <a
             href={site.phoneHref}
-            className="block rounded-full border-[3px] border-ink bg-chamoy-400 py-4 text-center font-label text-xl font-extrabold uppercase not-italic text-white shadow-[4px_5px_0_0_var(--color-ink)]"
+            className="block rounded-full bg-chamoy-400 py-4 text-center font-label text-xl font-extrabold uppercase not-italic text-white shadow-card"
           >
             {site.phone}
           </a>

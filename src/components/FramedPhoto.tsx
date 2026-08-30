@@ -24,7 +24,7 @@ export function FramedPhoto({
       className={`wood-sign !rounded-[1.5rem] !p-4 sm:!p-5 ${className}`}
       style={{ transform: `rotate(${tilt}deg)` }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl border-[3px] border-wood-700">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
         <Image
           src={src}
           alt={alt}

@@ -29,9 +29,9 @@ export function CategoryCard({
   return (
     <Link
       href={path(locale, "menu", category.slug)}
-      className="group relative flex flex-col overflow-hidden rounded-[2rem] border-[4px] border-ink bg-sand-50 shadow-[8px_10px_0_0_var(--color-ink)] transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-2 hover:rotate-[-1deg] focus-visible:-translate-y-2"
+      className="group relative flex flex-col overflow-hidden rounded-[2rem] bg-white shadow-card transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-2 hover:rotate-[-1deg] focus-visible:-translate-y-2"
     >
-      <div className="relative aspect-[4/3] overflow-hidden border-b-[4px] border-ink">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={category.image}
           alt={category.name[locale]}
@@ -41,7 +41,7 @@ export function CategoryCard({
           className="object-cover transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:scale-[1.06]"
         />
         <span
-          className={`label-type absolute left-4 top-4 rounded-full border-[3px] border-ink px-3.5 py-1 text-sm shadow-[3px_3px_0_0_var(--color-ink)] ${ACCENTS[category.accent]}`}
+          className={`label-type absolute left-4 top-4 rounded-full  px-3.5 py-1 text-sm shadow-card ${ACCENTS[category.accent]}`}
         >
           {category.kicker[locale]}
         </span>
@@ -68,9 +68,9 @@ export function CategoryCard({
 /** A single priced item. Used on the menu page and every category page. */
 export function ItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
   return (
-    <article className="group relative flex gap-4 rounded-3xl border-[3px] border-ink bg-sand-50 p-4 shadow-[5px_6px_0_0_var(--color-ink)] transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-1.5 hover:rotate-[-0.6deg] sm:gap-5 sm:p-5">
+    <article className="group relative flex gap-4 rounded-3xl bg-white p-4 shadow-card transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-1.5 hover:rotate-[-0.6deg] sm:gap-5 sm:p-5">
       {item.image ? (
-        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-[3px] border-ink sm:h-32 sm:w-32">
+        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl sm:h-32 sm:w-32">
           <Image
             src={item.image}
             alt={item.name[locale]}
@@ -85,7 +85,7 @@ export function ItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="label-type text-xl text-ink sm:text-2xl">{item.name[locale]}</h3>
           {item.seasonal ? (
-            <span className="rounded-full border-2 border-ink bg-mango-300 px-2.5 py-0.5 font-body text-xs font-extrabold uppercase tracking-wide text-ink">
+            <span className="rounded-full bg-mango-300 px-2.5 py-0.5 font-body text-xs font-extrabold uppercase tracking-wide text-ink">
               {copy.menuSection.seasonal[locale]}
             </span>
           ) : null}
@@ -99,7 +99,7 @@ export function ItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
           {item.prices.map((price) => (
             <li
               key={price.label[locale]}
-              className="flex items-baseline gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1"
+              className="flex items-baseline gap-1.5 rounded-full bg-white px-3 py-1"
             >
               <span className="font-body text-xs font-bold uppercase tracking-wide text-ink-soft">
                 {price.label[locale]}

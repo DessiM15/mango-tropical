@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { Flora } from "@/components/Flora";
 import { copy } from "@/lib/copy";
 import { aggregate, hasRealReviews, reviews } from "@/lib/reviews";
@@ -34,7 +34,7 @@ function Stars({ rating }: { rating: number }) {
 export function ReviewWall({ locale }: { locale: Locale }) {
   return (
     <section className="relative overflow-hidden bg-magenta-400 py-20 sm:py-28" aria-labelledby="reviews-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ocean-100)" />
+      <TornEdge className="absolute inset-x-0 top-0 h-10 sm:h-14" fill="var(--color-ocean-100)" flip />
       <Flora name="leaves-wide" className="left-[-6%] top-[8%] w-40 opacity-80 sm:w-56" flip />
       <Flora name="plumeria-cluster" className="bottom-[-6%] right-[-4%] w-40 opacity-85 sm:w-56" />
 
@@ -47,7 +47,7 @@ export function ReviewWall({ locale }: { locale: Locale }) {
           onDark
         >
           {aggregate ? (
-            <p className="mt-5 flex items-center gap-3 rounded-full border-[3px] border-ink bg-sand-50 px-5 py-2 shadow-[4px_5px_0_0_var(--color-ink)]">
+            <p className="mt-5 flex items-center gap-3 rounded-full bg-sand-50 px-5 py-2 shadow-card">
               <Stars rating={Math.round(aggregate.rating)} />
               <span className="font-label text-lg font-extrabold not-italic text-ink">
                 {aggregate.rating.toFixed(1)} ({aggregate.count})
@@ -67,7 +67,7 @@ export function ReviewWall({ locale }: { locale: Locale }) {
             <li key={`${review.author}-${index}`} className="h-full">
               <Reveal delay={index * 0.06} from="scale" className="h-full">
                 <div
-                  className="flex h-full flex-col rounded-[1.75rem] border-[4px] border-ink bg-sand-50 p-6 shadow-[7px_9px_0_0_var(--color-ink)] transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-1.5 hover:!rotate-0"
+                  className="flex h-full flex-col rounded-[1.75rem] bg-white p-6 shadow-card transition-transform duration-300 ease-[var(--ease-pop)] hover:-translate-y-1.5 hover:!rotate-0"
                   style={{ transform: `rotate(${TILTS[index % TILTS.length]})` }}
                 >
                   <Stars rating={review.rating} />
@@ -76,7 +76,7 @@ export function ReviewWall({ locale }: { locale: Locale }) {
                   </blockquote>
                   <footer className="mt-5 flex items-center gap-3 border-t-2 border-dashed border-ink/25 pt-4">
                     <span
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-[3px] border-ink bg-mango-400 font-label text-lg font-extrabold not-italic text-ink"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mango-400 font-label text-lg font-extrabold not-italic text-ink"
                       aria-hidden="true"
                     >
                       {review.author.charAt(0)}
@@ -94,7 +94,7 @@ export function ReviewWall({ locale }: { locale: Locale }) {
             href={mapsUrl}
             target="_blank"
             rel="noreferrer noopener"
-            className="rounded-full border-[3px] border-ink bg-sand-50 px-7 py-3.5 font-label text-lg font-extrabold not-italic uppercase tracking-wide text-ink shadow-[4px_5px_0_0_var(--color-ink)] transition-transform hover:-translate-y-1 sm:text-xl"
+            className="rounded-full bg-sand-50 px-7 py-3.5 font-label text-lg font-extrabold not-italic uppercase tracking-wide text-ink shadow-card transition-transform hover:-translate-y-1 sm:text-xl"
           >
             {copy.reviews.readAll[locale]}
           </a>

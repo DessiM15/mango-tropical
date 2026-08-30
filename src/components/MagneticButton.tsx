@@ -19,7 +19,7 @@ const variants = {
 };
 
 /**
- * A chunky sticker-style button that leans a few pixels toward the cursor.
+ * A solid pill that leans a few pixels toward the cursor.
  * The lean is pointer-only and is dropped entirely for reduced motion.
  */
 export function MagneticButton({
@@ -43,10 +43,10 @@ export function MagneticButton({
 
   const classes = [
     "group relative inline-flex items-center justify-center gap-2",
-    "rounded-full border-[3px] px-7 py-3.5 sm:px-9 sm:py-4",
-    "font-label text-lg sm:text-xl not-italic font-extrabold uppercase tracking-wide",
-    "shadow-[4px_5px_0_0_var(--color-ink)] transition-colors duration-200",
-    "active:translate-y-[2px] active:shadow-[2px_3px_0_0_var(--color-ink)]",
+    "rounded-full px-7 py-3.5 sm:px-9 sm:py-4",
+    "font-label text-base sm:text-lg not-italic font-extrabold uppercase tracking-wide",
+    "shadow-soft transition-[background-color,box-shadow] duration-200 hover:shadow-lift",
+    "active:translate-y-[1px]",
     variants[variant],
     className,
   ].join(" ");

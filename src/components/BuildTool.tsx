@@ -40,15 +40,15 @@ function Chip({
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className={`flex items-center gap-2 rounded-full border-[3px] border-ink px-4 py-2.5 font-label text-base font-extrabold not-italic transition-all duration-200 ${
+      className={`flex items-center gap-2 rounded-full  px-4 py-2.5 font-label text-base font-extrabold not-italic transition-all duration-200 ${
         selected
-          ? "-translate-y-0.5 bg-ink text-mango-300 shadow-[4px_5px_0_0_var(--color-chamoy-400)]"
-          : "bg-sand-50 text-ink shadow-[3px_3px_0_0_var(--color-ink)] hover:-translate-y-0.5"
+          ? "-translate-y-0.5 bg-ink text-mango-300 shadow-lift"
+          : "bg-sand-50 text-ink shadow-card hover:-translate-y-0.5"
       }`}
     >
       {option.color ? (
         <span
-          className="h-4 w-4 shrink-0 rounded-full border-2 border-ink"
+          className="h-4 w-4 shrink-0 rounded-full"
           style={{ background: option.color }}
           aria-hidden="true"
         />
@@ -131,7 +131,7 @@ export function BuildTool({ locale }: { locale: Locale }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-start lg:gap-10">
-      <div className="space-y-6 rounded-[2rem] border-[4px] border-ink bg-sand-50 p-6 shadow-[8px_10px_0_0_var(--color-ink)] sm:p-8">
+      <div className="space-y-6 rounded-[2rem] bg-white p-6 shadow-card sm:p-8">
         <Step index={1} title={copy.build.steps.size[locale]}>
           {SIZES.map((option) => (
             <Chip
@@ -196,8 +196,8 @@ export function BuildTool({ locale }: { locale: Locale }) {
       </div>
 
       <div className="lg:sticky lg:top-28">
-        <div className="overflow-hidden rounded-[2rem] border-[4px] border-ink bg-white shadow-[8px_10px_0_0_var(--color-ink)]">
-          <div className="relative border-b-[4px] border-ink bg-ocean-100 px-6 py-7">
+        <div className="overflow-hidden rounded-[2rem] bg-white shadow-card">
+          <div className="relative bg-ocean-100 px-6 py-7">
             <div className="mx-auto h-64 w-48">
               <CupPreview build={build} />
             </div>
@@ -232,13 +232,13 @@ export function BuildTool({ locale }: { locale: Locale }) {
               <button
                 type="button"
                 onClick={share}
-                className="w-full rounded-full border-[3px] border-ink bg-chamoy-400 px-5 py-3 font-label text-base font-extrabold not-italic uppercase tracking-wide text-white shadow-[4px_5px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                className="w-full rounded-full bg-chamoy-400 px-5 py-3 font-label text-base font-extrabold not-italic uppercase tracking-wide text-white shadow-card transition-transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 {copied ? copy.build.copied[locale] : copy.build.copyLink[locale]}
               </button>
               <a
                 href={site.phoneHref}
-                className="block w-full rounded-full border-[3px] border-ink bg-sand-50 px-5 py-3 text-center font-label text-base font-extrabold not-italic uppercase tracking-wide text-ink shadow-[4px_5px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5"
+                className="block w-full rounded-full bg-sand-50 px-5 py-3 text-center font-label text-base font-extrabold not-italic uppercase tracking-wide text-ink shadow-card transition-transform hover:-translate-y-0.5"
               >
                 {copy.build.callToOrder[locale]}
               </a>

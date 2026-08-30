@@ -32,11 +32,11 @@ export function FaqSection({ locale }: { locale: Locale }) {
         <div className="mt-12 space-y-4">
           {copy.faq.items.map((item, index) => (
             <Reveal key={item.q.en} delay={index * 0.05}>
-              <details className="group rounded-3xl border-[3px] border-ink bg-sand-50 shadow-[5px_6px_0_0_var(--color-ink)] transition-shadow open:shadow-[7px_9px_0_0_var(--color-ink)]">
+              <details className="group rounded-3xl bg-white shadow-card transition-shadow open:shadow-card">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6 [&::-webkit-details-marker]:hidden">
                   <h3 className="label-type text-lg text-ink sm:text-xl">{item.q[locale]}</h3>
                   <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-[3px] border-ink bg-mango-400 transition-transform duration-300 group-open:rotate-45"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-mango-400 transition-transform duration-300 group-open:rotate-45"
                     aria-hidden="true"
                   >
                     <svg viewBox="0 0 20 20" className="h-4 w-4 stroke-ink" strokeWidth="3" strokeLinecap="round">

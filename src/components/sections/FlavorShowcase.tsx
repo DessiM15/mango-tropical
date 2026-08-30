@@ -73,10 +73,10 @@ export function FlavorShowcase({ locale }: { locale: Locale }) {
                 aria-selected={selected}
                 aria-controls={`flavor-panel-${group.id}`}
                 onClick={() => setActive(group.id)}
-                className={`rounded-full border-[3px] border-ink px-5 py-2.5 font-label text-base font-extrabold not-italic uppercase tracking-wide transition-all duration-200 sm:text-lg ${
+                className={`rounded-full  px-5 py-2.5 font-label text-base font-extrabold not-italic uppercase tracking-wide transition-all duration-200 sm:text-lg ${
                   selected
-                    ? `${group.tone} shadow-[4px_5px_0_0_var(--color-ink)] -translate-y-0.5`
-                    : "bg-sand-50 text-ink shadow-[2px_3px_0_0_var(--color-ink)] hover:-translate-y-0.5"
+                    ? `${group.tone} shadow-card -translate-y-0.5`
+                    : "bg-sand-50 text-ink shadow-card hover:-translate-y-0.5"
                 }`}
               >
                 {group.label}
@@ -106,7 +106,7 @@ export function FlavorShowcase({ locale }: { locale: Locale }) {
                   initial={reduced ? false : { opacity: 0, scale: 0.86 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: reduced ? 0 : index * 0.028, duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-                  className={`rounded-full border-[3px] border-ink px-5 py-2.5 font-label text-base shadow-[4px_5px_0_0_var(--color-ink)] transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg] sm:text-lg ${current.tone}`}
+                  className={`rounded-full  px-5 py-2.5 font-label text-base shadow-card transition-transform duration-200 hover:-translate-y-1 hover:rotate-[-2deg] sm:text-lg ${current.tone}`}
                 >
                   {flavor[locale]}
                 </motion.li>

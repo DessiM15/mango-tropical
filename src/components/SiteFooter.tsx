@@ -64,7 +64,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 alt=""
                 width={206}
                 height={206}
-                className="h-16 w-16 rounded-full border-[3px] border-ink shadow-[3px_3px_0_0_var(--color-ink)]"
+                className="h-16 w-16 rounded-full shadow-card"
               />
               <span className="display text-2xl leading-none text-ink">
                 Mango
@@ -106,7 +106,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={social.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-ink bg-sand-50 shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 hover:bg-mango-300"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-sand-50 shadow-card transition-transform hover:-translate-y-0.5 hover:bg-mango-300"
                 >
                   <svg viewBox="0 0 24 24" className="h-5 w-5 fill-ink" aria-hidden="true">
                     <path d={social.path} />
@@ -168,7 +168,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      <div className="relative border-t-[4px] border-ink bg-magenta-400 py-3.5">
+      <div className="relative bg-magenta-400 py-3.5">
         <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 text-center font-body text-[13px] text-white sm:flex-row sm:justify-between sm:px-6 sm:text-left lg:px-8">
           <p>
             &copy; {new Date().getFullYear()} {site.legalName}. {copy.footer.rights[locale]}

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
 import { BuildTool } from "@/components/BuildTool";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { JsonLd } from "@/components/JsonLd";
 import { VisitSection } from "@/components/sections/VisitSection";
 import { copy } from "@/lib/copy";
@@ -77,16 +77,13 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
       />
 
       <div className="relative bg-mango-400 pb-20 pt-16 sm:pb-28">
-        <ChamoyDrip
-          className="absolute inset-x-0 top-0 h-14 -translate-y-full sm:h-20"
-          fill="var(--color-sunset-500)"
-        />
+        <TornEdge className="absolute inset-x-0 top-0 h-10 -translate-y-full sm:h-14" fill="var(--color-sunset-500)" flip />
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* The tool reads the shared build out of the query string, which
               needs a boundary so the rest of the page still prerenders. */}
           <Suspense
             fallback={
-              <div className="h-[42rem] rounded-[2rem] border-[4px] border-ink bg-sand-50 shadow-[8px_10px_0_0_var(--color-ink)]" />
+              <div className="h-[42rem] rounded-[2rem] bg-sand-50 shadow-card" />
             }
           >
             <BuildTool locale={locale} />

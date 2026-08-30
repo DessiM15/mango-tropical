@@ -2,7 +2,7 @@ import Image from "next/image";
 import { MagneticButton } from "@/components/MagneticButton";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { Flora } from "@/components/Flora";
 import { copy } from "@/lib/copy";
 import { path, type Locale } from "@/lib/i18n";
@@ -18,7 +18,7 @@ export function BuildPromo({ locale }: { locale: Locale }) {
 
   return (
     <section className="relative overflow-hidden bg-mango-400 py-20 sm:py-28" aria-labelledby="build-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ocean-300)" />
+      <TornEdge className="absolute inset-x-0 top-0 h-10 sm:h-14" fill="var(--color-ocean-300)" flip />
 
       <Flora name="banana-leaves" className="left-[-7%] top-[10%] w-40 opacity-80 sm:w-56" />
       <Flora name="hibiscus-yellow" className="bottom-[-4%] right-[-4%] w-36 opacity-90 sm:w-52" />
@@ -39,7 +39,7 @@ export function BuildPromo({ locale }: { locale: Locale }) {
               {steps.map((step, index) => (
                 <li
                   key={step}
-                  className="flex items-center gap-2 rounded-full border-[3px] border-ink bg-sand-50 px-4 py-2 shadow-[3px_3px_0_0_var(--color-ink)]"
+                  className="flex items-center gap-2 rounded-full bg-sand-50 px-4 py-2 shadow-card"
                 >
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink font-body text-xs font-black text-mango-300">
                     {index + 1}
@@ -62,10 +62,10 @@ export function BuildPromo({ locale }: { locale: Locale }) {
         <Reveal from="right" className="relative">
           <div className="relative mx-auto aspect-square w-full max-w-md">
             <div
-              className="absolute inset-0 rotate-[-6deg] rounded-[2.5rem] border-[4px] border-ink bg-sunset-400 shadow-[10px_12px_0_0_var(--color-ink)]"
+              className="absolute inset-0 rotate-[-6deg] rounded-[2.5rem] bg-sunset-400 shadow-card"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 rotate-[3deg] overflow-hidden rounded-[2.5rem] border-[4px] border-ink shadow-[10px_12px_0_0_var(--color-ink)]">
+            <div className="absolute inset-0 rotate-[3deg] overflow-hidden rounded-[2.5rem] shadow-card">
               <Image
                 src="/menu/mangonada-tropical.webp"
                 alt=""
