@@ -85,6 +85,37 @@ Generated imagery is scenery and framing only: sky, water, sand, leaves,
 flowers, loose fruit. None of it is ever presented as a photo of something the
 shop sells. Menu items use the real photography from the printed menu.
 
+## Design concepts
+
+Four directions are live side by side at `/preview/<concept>`, each a complete
+clickable site:
+
+| | Concept | Opens on | Argument |
+| --- | --- | --- | --- |
+| A | `/preview/storefront` | A full-bleed photo of the shop | This is a real place, come here |
+| B | `/preview/beach` | A tropical scene, product on the shoreline | This is what the brand feels like |
+| C | `/preview/menu-first` | A compact banner, then the menu | Here is the food and what it costs |
+| D | `/preview/macro` | One product filling the frame | Look how good this looks |
+
+They are built as one site, not four. `src/lib/concepts.ts` gives each concept a
+hero, a section order and a set of token overrides; `ConceptTheme` scopes those
+to the subtree; `ConceptHome` composes the page. Interior pages render the real
+page components under the concept theme, so the only variable in the comparison
+is the design.
+
+A switcher pinned to the bottom of every preview carries the current path
+across, so the menu page in concept A is one click from the menu page in
+concept D.
+
+Previews sit under their own root layout in `src/app/(preview)/`, are excluded
+from the proxy, carry `noindex, nofollow`, and never appear in the sitemap.
+Deleting `src/app/(preview)/` and `src/lib/concepts.ts` removes them entirely
+once a direction is chosen.
+
+Known limit: interior pages stay light in all four concepts. The macro
+direction's dark ground applies to its home page only, because inverting the
+menu cards for one concept that may be discarded is not worth the churn.
+
 ## Checking your work
 
 `scripts/shoot.mjs` screenshots any set of routes at mobile, tablet and desktop,

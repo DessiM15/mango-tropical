@@ -10,6 +10,11 @@ import { internalSegment, routes, type Locale } from "@/lib/i18n";
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
+  // Design previews sit outside the locale tree and have their own root layout.
+  if (pathname === "/preview" || pathname.startsWith("/preview/")) {
+    return NextResponse.next();
+  }
+
   const isSpanish = pathname === "/es" || pathname.startsWith("/es/");
   const locale: Locale = isSpanish ? "es" : "en";
   const rest = isSpanish ? pathname.slice(3) : pathname;

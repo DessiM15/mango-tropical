@@ -17,13 +17,12 @@ import { mapsUrl, site } from "@/lib/site";
  * the bobbing never falls into step.
  */
 const SCATTER = [
-  { src: "/scene/fruit-mango-1.webp", className: "bottom-[2%] left-[-6%] w-[26%]", depth: 46, rotate: -14, delay: 0 },
-  { src: "/scene/fruit-mango-2.webp", className: "bottom-[-4%] right-[6%] w-[24%]", depth: 30, rotate: 9, delay: 0.7 },
-  { src: "/scene/fruit-citrus-3.webp", className: "bottom-[10%] right-[-8%] w-[19%]", depth: 62, rotate: 16, delay: 1.4 },
-  { src: "/scene/fruit-citrus-4.webp", className: "left-[2%] top-[6%] w-[16%]", depth: 78, rotate: -10, delay: 2.1 },
-  { src: "/scene/fruit-strawberry-1.webp", className: "bottom-[6%] left-[30%] w-[14%]", depth: 24, rotate: 12, delay: 1 },
-  { src: "/scene/fruit-strawberry-7.webp", className: "right-[16%] top-[2%] w-[13%]", depth: 70, rotate: -18, delay: 1.8 },
-  { src: "/scene/tamarindo-sticks-1.webp", className: "bottom-[16%] left-[-14%] w-[30%]", depth: 38, rotate: -6, delay: 0.4 },
+  { src: "/scene/fruit-mango-1.webp", className: "bottom-[1%] left-[-2%] w-[24%]", depth: 26, rotate: -12, delay: 0 },
+  { src: "/scene/fruit-mango-2.webp", className: "bottom-[-1%] right-[8%] w-[22%]", depth: 20, rotate: 7, delay: 0.7 },
+  { src: "/scene/fruit-citrus-3.webp", className: "bottom-[3%] right-[-4%] w-[17%]", depth: 32, rotate: 14, delay: 1.4 },
+  { src: "/scene/fruit-citrus-4.webp", className: "bottom-[8%] left-[16%] w-[14%]", depth: 22, rotate: -8, delay: 2.1 },
+  { src: "/scene/fruit-strawberry-1.webp", className: "bottom-[2%] left-[34%] w-[12%]", depth: 18, rotate: 10, delay: 1 },
+  { src: "/scene/tamarindo-sticks-1.webp", className: "bottom-[6%] left-[-12%] w-[26%]", depth: 24, rotate: -4, delay: 0.4 },
 ];
 
 export function TropicalHero({ locale }: { locale: Locale }) {
@@ -34,7 +33,6 @@ export function TropicalHero({ locale }: { locale: Locale }) {
 
   const skyY = useTransform(smooth, [0, 1], [0, 90]);
   const waterY = useTransform(smooth, [0, 1], [0, -50]);
-  const cupY = useTransform(smooth, [0, 1], [0, -120]);
   const contentY = useTransform(smooth, [0, 1], [0, -45]);
 
   return (
@@ -87,7 +85,7 @@ export function TropicalHero({ locale }: { locale: Locale }) {
 
       <motion.div
         style={reduced ? undefined : { y: contentY }}
-        className="relative mx-auto grid min-h-[100svh] max-w-7xl items-center gap-8 px-4 pb-[17rem] pt-28 sm:px-6 sm:pb-[15rem] sm:pt-32 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6 lg:pb-[13rem] lg:px-8"
+        className="relative mx-auto grid min-h-[100svh] max-w-7xl items-center gap-8 px-4 pb-[15rem] pt-28 sm:px-6 sm:pb-[13rem] sm:pt-32 lg:max-w-7xl lg:grid-cols-[minmax(0,40rem)] lg:pb-[16rem] lg:px-8"
       >
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <div className="mb-6 inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-full bg-white/95 px-5 py-2 shadow-soft">
@@ -136,14 +134,11 @@ export function TropicalHero({ locale }: { locale: Locale }) {
           </a>
         </div>
 
-        <motion.div
-          style={reduced ? undefined : { y: cupY }}
-          className="relative mx-auto w-[92%] max-w-md lg:w-full lg:max-w-lg"
-        >
+        <div className="pointer-events-none relative mx-auto w-[92%] max-w-md self-end lg:absolute lg:bottom-[13%] lg:right-[2%] lg:mx-0 lg:w-[46%] lg:max-w-xl">
           <div className="relative aspect-[5/4]">
             <div
               aria-hidden="true"
-              className="absolute inset-x-[18%] bottom-[6%] h-7 rounded-[50%] bg-ink/40 blur-2xl"
+              className="absolute inset-x-[22%] bottom-[8%] h-5 rounded-[50%] bg-ink/50 blur-lg"
             />
             <Image
               src="/menu/cut-mangonada.webp"
@@ -151,14 +146,14 @@ export function TropicalHero({ locale }: { locale: Locale }) {
               fill
               priority
               sizes="(max-width: 1024px) 88vw, 40vw"
-              className="bob z-10 object-contain drop-shadow-[0_20px_24px_rgb(42_18_6_/_0.45)]"
+              className="z-10 object-contain drop-shadow-[0_10px_14px_rgb(42_18_6_/_0.4)]"
             />
 
             {SCATTER.map((piece) => (
               <ScatterPiece key={piece.src} {...piece} progress={smooth} reduced={!!reduced} />
             ))}
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );
@@ -181,14 +176,18 @@ function ScatterPiece({
       style={reduced ? { rotate } : { y, rotate }}
       className={`pointer-events-none absolute ${className}`}
     >
-      <div className={reduced ? "" : "bob"} style={{ animationDelay: `${delay}s` }}>
+      <div className="relative">
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-[12%] bottom-[-6%] h-2 rounded-[50%] bg-ink/45 blur-[6px]"
+        />
         <Image
           src={src}
           alt=""
           width={300}
           height={300}
           sizes="(max-width: 640px) 22vw, 11vw"
-          className="h-auto w-full drop-shadow-[0_10px_14px_rgb(42_18_6_/_0.4)]"
+          className="relative h-auto w-full drop-shadow-[0_6px_8px_rgb(42_18_6_/_0.35)]"
         />
       </div>
     </motion.div>

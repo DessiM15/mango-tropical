@@ -13,9 +13,11 @@ type Props = {
 };
 
 const variants = {
-  solid: "bg-chamoy-400 text-white border-ink hover:bg-chamoy-500",
-  outline: "bg-transparent text-ink border-ink hover:bg-ink hover:text-sand-50",
-  cream: "bg-sand-50 text-ink border-ink hover:bg-mango-300",
+  solid: "bg-magenta-400 text-white hover:bg-magenta-500",
+  // Used over photographs, so it carries its own border and a dark scrim
+  // rather than relying on whatever it happens to sit on.
+  outline: "border-2 border-white/85 bg-black/30 text-white backdrop-blur-sm hover:bg-white/20",
+  cream: "bg-white text-ink hover:bg-mango-200",
 };
 
 /**

@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { copy } from "@/lib/copy";
 import { htmlLang, isLocale, locales, path, type Locale } from "@/lib/i18n";
 import { addressLine, openingHoursSpecification, site } from "@/lib/site";
-import "../globals.css";
+import "../../globals.css";
 
 // The "latin" subset already covers the accented characters and inverted
 // punctuation Spanish needs, so latin-ext would only add weight. Weights are

@@ -121,6 +121,64 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Concept overrides. Each design direction re-points a small set of tokens;
+   every component reads the tokens rather than knowing which concept is live.
+   --------------------------------------------------------------------------- */
+[data-concept="storefront"] {
+  --heading-ink: var(--color-ink);
+  --heading-accent: var(--color-ocean-500);
+  --page-ground: var(--color-sand-50);
+  --band-warm: #ffffff;
+  --band-cool: var(--color-ocean-100);
+  --band-accent: var(--color-sand-100);
+  --card-radius: 1.25rem;
+  --plaque-display: none;
+}
+
+[data-concept="beach"] {
+  --heading-ink: var(--color-ink);
+  --heading-accent: var(--color-chamoy-500);
+  --page-ground: var(--color-sand-50);
+  --band-warm: var(--color-sand-100);
+  --band-cool: var(--color-ocean-100);
+  --band-accent: var(--color-magenta-400);
+  --card-radius: 1.75rem;
+  --plaque-display: inline-block;
+}
+
+[data-concept="menu-first"] {
+  --heading-ink: var(--color-ink);
+  --heading-accent: var(--color-chamoy-500);
+  --page-ground: var(--color-sand-50);
+  --band-warm: #ffffff;
+  --band-cool: var(--color-sand-100);
+  --band-accent: var(--color-sunset-500);
+  --card-radius: 0.75rem;
+  --plaque-display: none;
+}
+
+/* The macro direction runs dark, so the bright photographed foliage that frames
+   the other concepts reads as a cut-out pasted on. It is dimmed rather than
+   removed, so the framing still reads at the edges. */
+[data-concept="macro"] .reveal img[src*="/scene/palm-fronds"],
+[data-concept="macro"] img[src*="/scene/palm-fronds"],
+[data-concept="macro"] img[src*="/scene/flowers-cluster"],
+[data-concept="macro"] img[src*="/scene/hibiscus-pair"] {
+  filter: brightness(0.55) saturate(0.8);
+}
+
+[data-concept="macro"] {
+  --heading-ink: #fdf8ee;
+  --heading-accent: var(--color-mango-400);
+  --page-ground: #150f0a;
+  --band-warm: #1d1610;
+  --band-cool: #120d09;
+  --band-accent: var(--color-chamoy-500);
+  --card-radius: 1.5rem;
+  --plaque-display: none;
+}
+
 @layer components {
   /* Heavy condensed display type, the poster voice of the whole site. */
   .display {

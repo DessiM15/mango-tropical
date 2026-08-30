@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useConcept } from "./ConceptContext";
 
 export type HeadingTone = "fruit" | "nieve" | "comida" | "garrafa" | "float";
 
@@ -49,6 +52,24 @@ export function WoodSign({
   children,
 }: Props) {
   const colours = TONES[tone];
+  const concept = useConcept();
+
+  // Only the beach direction titles its sections the way the printed menu does.
+  // The others set the same words plainly, because a carved plaque on a clean
+  // photographic page reads as a costume rather than as branding.
+  if (concept !== "beach") {
+    return (
+      <div className={`inline-block ${className}`}>
+        <Tag id={id} className={`display leading-[0.95] ${SIZES[size]}`}>
+          <span className="block text-[var(--heading-ink)]">{primary}</span>
+          {secondary ? (
+            <span className="mt-1 block text-[var(--heading-accent)]">{secondary}</span>
+          ) : null}
+        </Tag>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div
