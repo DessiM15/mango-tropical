@@ -40,8 +40,8 @@ export function CategoryRow({ locale }: { locale: Locale }) {
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,var(--color-ocean-400),transparent)] opacity-45"
       />
-      <Flora name="palms" className="left-[-7%] top-[-8%] w-40 opacity-70 sm:w-56" flip />
-      <Flora name="flowers" className="bottom-[-12%] right-[-5%] w-36 opacity-70 sm:w-52" />
+      <Flora name="palms" className="left-[-7%] top-[-8%] w-40 opacity-70 sm:w-56" />
+      <Flora name="flowers" className="bottom-[-12%] right-[-5%] w-36 opacity-70 sm:w-52" flip />
 
       <h2 id="categories-heading" className="sr-only">
         {locale === "en" ? "Menu categories" : "Categorías del menú"}

@@ -18,8 +18,8 @@ export function FaqSection({ locale }: { locale: Locale }) {
         className="absolute inset-0 -z-10 opacity-70"
         style={{ backgroundImage: "url(/scene/wet-sand-tile.webp)", backgroundSize: "cover" }}
       />
-      <Flora name="flowers" className="right-[-5%] top-[6%] w-36 opacity-70 sm:w-52" />
-      <Flora name="palms" className="bottom-[-4%] left-[-6%] w-36 opacity-70 sm:w-52" flip />
+      <Flora name="hibiscus" className="right-[-4%] top-[6%] w-32 opacity-70 sm:w-48" />
+      <Flora name="flowers" className="bottom-[-6%] left-[-6%] w-36 opacity-70 sm:w-52" />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <SectionHeading

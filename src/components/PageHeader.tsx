@@ -36,7 +36,7 @@ export function PageHeader({
       </div>
 
       <Flora name="palms" className="left-[-6%] top-[8%] w-36 sm:w-52" />
-      <Flora name="flowers" className="right-[-4%] top-[2%] w-40 sm:w-60" />
+      <Flora name="hibiscus" className="right-[-3%] top-[4%] w-36 sm:w-52" />
 
       <div
         className={`relative mx-auto grid items-center gap-10 px-4 sm:px-6 lg:px-8 ${

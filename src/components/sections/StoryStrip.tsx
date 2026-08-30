@@ -19,7 +19,7 @@ export function StoryStrip({ locale }: { locale: Locale }) {
         <div className="absolute inset-0 bg-ocean-700/45 mix-blend-multiply" />
       </div>
 
-      <Flora name="flowers" className="left-[-6%] top-[-4%] w-40 opacity-90 sm:w-56" />
+      <Flora name="palms" className="left-[-6%] top-[-6%] w-40 opacity-90 sm:w-56" />
       <Flora name="hibiscus" className="bottom-[-6%] right-[-3%] w-40 opacity-95 sm:w-60" drift />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">

@@ -31,6 +31,14 @@ type Props = {
 /**
  * A photographed flower or frond cluster, keyed off its green backdrop.
  * Decorative only, so it stays out of the accessibility tree.
+ *
+ * Two of these were generated as corner arrangements, so they carry a straight
+ * cut along two edges. Those cuts have to point off-screen or they show as a
+ * ruled line through the middle of the page:
+ *
+ *   flowers   cut along bottom and left  -> bottom corners, flip on the right
+ *   palms     cut along top and left     -> top corners, flip on the right
+ *   hibiscus  no cut edges               -> anywhere
  */
 export function Flora({
   name,
