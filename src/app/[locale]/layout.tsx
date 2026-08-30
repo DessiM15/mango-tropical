@@ -4,10 +4,11 @@ import { Anton, Grandstander, Nunito } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { JsonLd } from "@/components/JsonLd";
+import { Assistant } from "@/components/Assistant";
 import { copy } from "@/lib/copy";
 import { htmlLang, isLocale, locales, path, type Locale } from "@/lib/i18n";
 import { addressLine, openingHoursSpecification, site } from "@/lib/site";
-import "../../globals.css";
+import "../globals.css";
 
 // The "latin" subset already covers the accented characters and inverted
 // punctuation Spanish needs, so latin-ext would only add weight. Weights are
@@ -171,6 +172,7 @@ export default async function LocaleLayout({
         <SiteHeader locale={locale} />
         <main id="main">{children}</main>
         <SiteFooter locale={locale} />
+        <Assistant locale={locale} />
         <JsonLd data={[localBusiness, website]} />
         <span className="sr-only">{addressLine}</span>
       </body>

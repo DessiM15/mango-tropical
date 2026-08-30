@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
-import { ItemCard } from "@/components/MenuCard";
+import { ItemCard, NameList } from "@/components/MenuCard";
 import { Reveal } from "@/components/Reveal";
 import { TornEdge } from "@/components/Dividers";
 import { JsonLd } from "@/components/JsonLd";
@@ -137,31 +137,16 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
                   ) : null}
 
                   {section.flavors ? (
-                    <Reveal className="mb-6">
-                      <div className="rounded-3xl border-[3px] border-dashed border-ink/40 bg-mango-200/60 p-5">
-                        <p className="font-body text-sm font-extrabold uppercase tracking-wide text-ink-soft">
-                          {copy.menuSection.flavorsTitle[locale]}
-                        </p>
-                        <ul className="mt-3 flex flex-wrap gap-2">
-                          {section.flavors.map((flavor) => (
-                            <li
-                              key={flavor.en}
-                              className="rounded-full bg-sand-50 px-3 py-1 font-body text-sm font-bold text-ink"
-                            >
-                              {flavor[locale]}
-                            </li>
-                          ))}
-                        </ul>
-                        {section.note ? (
-                          <p className="mt-3 font-body text-sm italic text-ink-soft">
-                            {section.note[locale]}
-                          </p>
-                        ) : null}
-                      </div>
+                    <Reveal className="mb-2">
+                      <NameList
+                        title={copy.menuSection.flavorsTitle[locale]}
+                        names={section.flavors.map((flavor) => flavor[locale])}
+                        note={section.note?.[locale]}
+                      />
                     </Reveal>
                   ) : null}
 
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  <div className={`grid gap-x-12 ${section.items.length > 2 ? "sm:grid-cols-2" : ""} divide-y divide-ink/12`}>
                     {section.items.map((item, index) => (
                       <Reveal key={item.slug} delay={index * 0.04}>
                         <ItemCard item={item} locale={locale} />
@@ -181,11 +166,11 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
               <p className="mt-1 font-body text-base font-bold text-ink-soft">
                 {copy.menuSection.toppingsNote[locale]} {money(TOPPING_PRICE)}
               </p>
-              <ul className="mt-4 flex flex-wrap gap-2">
+              <ul className="mt-5 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
                 {toppings.map((topping) => (
                   <li
                     key={topping.en}
-                    className="rounded-full bg-sand-50 px-3.5 py-1.5 font-body text-sm font-bold text-ink"
+                    className="label-type border-b border-ink/20 py-2.5 text-lg text-ink"
                   >
                     {topping[locale]}
                   </li>

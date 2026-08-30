@@ -38,14 +38,10 @@ const SOCIALS = [
 
 export function SiteFooter({
   locale,
-  basePath = "",
 }: {
   locale: Locale;
-  /** Set inside a design preview so navigation stays within that concept. */
-  basePath?: string;
 }) {
   const rows = weekRows(locale);
-  const to = (href: string) => (basePath ? `${basePath}${href === "/" ? "" : href}` || "/" : href);
 
   return (
     <footer className="relative overflow-hidden bg-sand-100 text-ink">
@@ -66,7 +62,7 @@ export function SiteFooter({
       <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4 lg:gap-12">
           <div className="md:col-span-1">
-            <Link href={to(path(locale, "home"))} className="inline-flex items-center gap-3">
+            <Link href={(path(locale, "home"))} className="inline-flex items-center gap-3">
               <Image
                 src="/logo.webp"
                 alt=""
@@ -92,9 +88,9 @@ export function SiteFooter({
             <h2 className="display text-xl text-chamoy-500">{copy.footer.explore[locale]}</h2>
             <ul className="mt-4 space-y-2 font-body text-[15px]">
               {[
-                { href: to(path(locale, "menu")), label: copy.nav.menu[locale] },
-                { href: to(path(locale, "about")), label: copy.nav.about[locale] },
-                { href: to(path(locale, "visit")), label: copy.nav.visit[locale] },
+                { href: (path(locale, "menu")), label: copy.nav.menu[locale] },
+                { href: (path(locale, "about")), label: copy.nav.about[locale] },
+                { href: (path(locale, "visit")), label: copy.nav.visit[locale] },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-chamoy-500 hover:underline">
@@ -129,7 +125,7 @@ export function SiteFooter({
               {menu.map((category) => (
                 <li key={category.slug}>
                   <Link
-                    href={to(path(locale, "menu", category.slug))}
+                    href={(path(locale, "menu", category.slug))}
                     className="hover:text-chamoy-500 hover:underline"
                   >
                     {category.shortName[locale]}

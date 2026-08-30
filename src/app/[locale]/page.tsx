@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TropicalHero } from "@/components/sections/TropicalHero";
 import { CategoryRow } from "@/components/sections/CategoryRow";
-import { Favorites } from "@/components/sections/Favorites";
+import { FeaturePanels } from "@/components/sections/FeaturePanels";
 import { ReviewWall } from "@/components/sections/ReviewWall";
 import { FlavorShowcase } from "@/components/sections/FlavorShowcase";
 import { StoryStrip } from "@/components/sections/StoryStrip";
@@ -55,7 +55,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           then the favourites, then everything else. */}
       <TropicalHero locale={locale} />
       <CategoryRow locale={locale} />
-      <Favorites locale={locale} />
+      <FeaturePanels locale={locale} />
       <FlavorShowcase locale={locale} />
       <ReviewWall locale={locale} />
       <StoryStrip locale={locale} />

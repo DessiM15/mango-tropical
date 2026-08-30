@@ -106,36 +106,29 @@ idea:
 Everything above is dropped under `prefers-reduced-motion`, including the
 opener, the grain and the vignette.
 
-## Design concepts
+## The assistant
 
-Four directions are live side by side at `/preview/<concept>`, each a complete
-clickable site:
+A floating assistant answers from the site's own data. There is no model behind
+it and no network call: `src/lib/assistant.ts` builds a keyword index from
+`menu.ts`, `site.ts` and the FAQ, scores the question against it, and returns
+the best entry. Below a confidence threshold it says it does not know and offers
+the phone number. It cannot invent a price, because every price it can say is
+read straight out of the menu data.
 
-| | Concept | Opens on | Argument |
-| --- | --- | --- | --- |
-| A | `/preview/storefront` | A full-bleed photo of the shop | This is a real place, come here |
-| B | `/preview/beach` | A tropical scene, product on the shoreline | This is what the brand feels like |
-| C | `/preview/menu-first` | A compact banner, then the menu | Here is the food and what it costs |
-| D | `/preview/macro` | One product filling the frame | Look how good this looks |
+Two details worth knowing:
 
-They are built as one site, not four. `src/lib/concepts.ts` gives each concept a
-hero, a section order and a set of token overrides; `ConceptTheme` scopes those
-to the subtree; `ConceptHome` composes the page. Interior pages render the real
-page components under the concept theme, so the only variable in the comparison
-is the design.
+- **Intent is read before the stop list runs.** "How much is a mangonada" and
+  "what is a mangonada" share every word that survives normalisation, so without
+  detecting the price intent the FAQ entry wins both.
+- **Voice is capability-gated, not feature-detected at click time.** Speech
+  recognition is Chrome, Edge and Safari only, needs a microphone permission and
+  needs a secure context, so on plain `localhost` or in Firefox the microphone
+  button never renders. Reading answers aloud uses speech synthesis, which every
+  modern browser has, and is off by default.
 
-A switcher pinned to the bottom of every preview carries the current path
-across, so the menu page in concept A is one click from the menu page in
-concept D.
-
-Previews sit under their own root layout in `src/app/(preview)/`, are excluded
-from the proxy, carry `noindex, nofollow`, and never appear in the sitemap.
-Deleting `src/app/(preview)/` and `src/lib/concepts.ts` removes them entirely
-once a direction is chosen.
-
-Known limit: interior pages stay light in all four concepts. The macro
-direction's dark ground applies to its home page only, because inverting the
-menu cards for one concept that may be discarded is not worth the churn.
+Both speech APIs are built into the browser, so neither costs anything to run.
+In Chrome, recognition sends audio to Google for transcription; the client
+should know that before it ships.
 
 ## Checking your work
 

@@ -11,13 +11,9 @@ import { OpenStatus } from "./OpenStatus";
 
 export function SiteHeader({
   locale,
-  basePath = "",
 }: {
   locale: Locale;
-  /** Set inside a design preview so navigation stays within that concept. */
-  basePath?: string;
 }) {
-  const to = (href: string) => (basePath ? `${basePath}${href === "/" ? "" : href}` || "/" : href);
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,9 +33,9 @@ export function SiteHeader({
   }, [open]);
 
   const links = [
-    { href: to(path(locale, "menu")), label: copy.nav.menu[locale] },
-    { href: to(path(locale, "about")), label: copy.nav.about[locale] },
-    { href: to(path(locale, "visit")), label: copy.nav.visit[locale] },
+    { href: (path(locale, "menu")), label: copy.nav.menu[locale] },
+    { href: (path(locale, "about")), label: copy.nav.about[locale] },
+    { href: (path(locale, "visit")), label: copy.nav.visit[locale] },
   ];
 
   return (
@@ -60,7 +56,7 @@ export function SiteHeader({
       >
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <Link
-            href={to(path(locale, "home"))}
+            href={(path(locale, "home"))}
             className="flex shrink-0 items-center gap-2.5"
             aria-label={site.name}
           >

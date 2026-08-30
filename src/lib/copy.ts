@@ -85,9 +85,10 @@ export const copy = {
     kicker: { en: "What Cypress says", es: "Lo que dice Cypress" },
     title: { en: "THE REVIEWS ARE IN", es: "YA HABLARON" },
     readAll: { en: "Read every review on Google", es: "Lee todas las reseñas en Google" },
-    placeholder: {
-      en: "Real Google reviews are being added here.",
-      es: "Aquí se están agregando reseñas reales de Google.",
+    onGoogle: { en: "reviews on Google", es: "reseñas en Google" },
+    translated: {
+      en: "Translated from Spanish by Google",
+      es: "Traducida del español por Google",
     },
   },
   flavors: {
@@ -229,6 +230,36 @@ export const copy = {
         },
       },
     ],
+  },
+  assistant: {
+    open: { en: "Open the menu assistant", es: "Abrir el asistente" },
+    close: { en: "Close the assistant", es: "Cerrar el asistente" },
+    title: { en: "Ask about the menu", es: "Pregunta por el menú" },
+    subtitle: {
+      en: "Prices, flavors, hours and directions",
+      es: "Precios, sabores, horario y ubicación",
+    },
+    greeting: {
+      en: "Ask me anything on the menu and I will read it straight off it. I only know what is on this site.",
+      es: "Pregúntame lo que sea del menú y te lo leo tal cual. Solo sé lo que está en este sitio.",
+    },
+    examples: [
+      { en: "How much is a mangonada?", es: "¿Cuánto cuesta una mangonada?" },
+      { en: "Are you open now?", es: "¿Están abiertos ahora?" },
+      { en: "What raspa flavors do you have?", es: "¿Qué sabores de raspa tienen?" },
+      { en: "Where are you?", es: "¿Dónde están?" },
+    ],
+    placeholder: { en: "Type your question", es: "Escribe tu pregunta" },
+    inputLabel: { en: "Your question", es: "Tu pregunta" },
+    send: { en: "Send", es: "Enviar" },
+    startVoice: { en: "Ask with your voice", es: "Preguntar con la voz" },
+    stopVoice: { en: "Stop listening", es: "Dejar de escuchar" },
+    readAloud: { en: "Read answers aloud", es: "Leer las respuestas" },
+    disclaimer: { en: "Answers come from this site", es: "Respuestas de este sitio" },
+    unknown: {
+      en: "I could not find that on the site, so I would rather not guess. The shop can tell you:",
+      es: "No encontré eso en el sitio y prefiero no adivinar. En la tienda te pueden decir:",
+    },
   },
   footer: {
     hours: { en: "Hours", es: "Horario" },

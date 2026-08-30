@@ -52,7 +52,7 @@ export function VisitSection({ locale }: { locale: Locale }) {
                 {rows.map((row) => (
                   <div
                     key={row.day}
-                    className="flex justify-between gap-4 border-b border-dashed border-ink/20 pb-1.5 font-body text-[15px] text-ink-soft"
+                    className="flex justify-between gap-4 border-b border-ink/12 pb-1.5 font-body text-[15px] text-ink-soft"
                   >
                     <dt className="font-bold">{row.name}</dt>
                     <dd className="tabular-nums">

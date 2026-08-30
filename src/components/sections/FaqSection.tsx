@@ -44,7 +44,7 @@ export function FaqSection({ locale }: { locale: Locale }) {
                     </svg>
                   </span>
                 </summary>
-                <p className="border-t-2 border-dashed border-ink/25 px-5 pb-5 pt-4 font-body text-[17px] leading-relaxed text-ink-soft sm:px-6 sm:pb-6">
+                <p className="border-t border-ink/12 px-5 pb-5 pt-4 font-body text-[17px] leading-relaxed text-ink-soft sm:px-6 sm:pb-6">
                   {item.a[locale]}
                 </p>
               </details>
