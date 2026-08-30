@@ -50,19 +50,40 @@ Prices in `menu.ts` are transcribed from the printed in-store menu. Hours in
 `openingHoursSpecification` in the LocalBusiness schema, so changing them in one
 place updates all of it.
 
-## Product photography
+## Imagery
 
-The client had no photo library, so all 34 images were extracted from the
-printed menu PDF, which is six flattened 300 DPI scans. `scripts/extract_menu_art.py`
-holds the crop box for every product and regenerates `public/menu` and
-`public/art` from `assets/menu.pdf`:
+Three sources, three scripts. All of them are re-runnable and none of the
+output is hand-edited.
+
+| Script | Reads | Writes |
+| --- | --- | --- |
+| `extract_menu_art.py` | `assets/menu.pdf` | `public/menu/` product shots and category stickers |
+| `cut_products.py` | `assets/menu.pdf` | `public/menu/cut-*.webp`, matted products |
+| `process_generated.py` | `assets/generated/`, `assets/store-front.webp` | `public/scene/` backgrounds, cutouts, fruit pieces |
+| `extract_scene_art.py` | `assets/menu.pdf` | `public/art/wood-plank.webp`, plaque grain |
 
 ```bash
-python3 scripts/extract_menu_art.py    # needs poppler: brew install poppler
+python3 scripts/extract_menu_art.py     # needs poppler: brew install poppler
+python3 scripts/cut_products.py
+python3 scripts/process_generated.py    # needs pillow, numpy, scipy
 ```
 
-Crops are framed to stay clear of the printed name plaques and price tags baked
-into the page. If a crop needs adjusting, change its box in that file and re-run.
+**Product shots** come off the printed menu, which is six flattened 300 DPI
+scans. Crops are framed to stay clear of the name plaques and price tags baked
+into the page. Six products are matted properly; the rest use a circular crop,
+because the cups are clear plastic and a flood fill run from the page border
+goes through the cup wall and takes the cup with it.
+
+**Scene art** is generated tropical photography, delivered on a flat `#00B140`
+green. `process_generated.py` keys it on hue and saturation rather than on
+greenness, because keying on greenness also deletes the palm fronds and the
+limes. Despill runs only in a narrow band inside the matte for the same reason.
+Fruit trays are split into individual pieces so a scatter can be composed one
+piece at a time.
+
+Generated imagery is scenery and framing only: sky, water, sand, leaves,
+flowers, loose fruit. None of it is ever presented as a photo of something the
+shop sells. Menu items use the real photography from the printed menu.
 
 ## Checking your work
 

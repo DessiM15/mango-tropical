@@ -15,19 +15,24 @@ export function StoryStrip({ locale }: { locale: Locale }) {
       aria-labelledby="story-heading"
     >
       <div aria-hidden="true" className="absolute inset-0 -z-20">
-        <Image src="/art/water-deep.webp" alt="" fill sizes="100vw" className="object-cover" />
+        <Image src="/scene/water-surface.webp" alt="" fill sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-ocean-700/45 mix-blend-multiply" />
       </div>
 
-      <Flora name="plumeria-spray" className="left-[-6%] top-[-4%] w-40 opacity-90 sm:w-56" />
-      <Flora name="hibiscus-pair" className="bottom-[-6%] right-[-3%] w-40 opacity-95 sm:w-60" drift />
+      <Flora name="flowers" className="left-[-6%] top-[-4%] w-40 opacity-90 sm:w-56" />
+      <Flora name="hibiscus" className="bottom-[-6%] right-[-3%] w-40 opacity-95 sm:w-60" drift />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
         <Reveal from="left" className="order-2 lg:order-1">
+          {/* The photo is portrait, so the frame is too. A 4:3 crop cut the
+              sign off the top, which is the most recognisable thing on it. */}
           <FramedPhoto
-            src="/art/cover-scene.webp"
+            src="/scene/storefront.webp"
             alt={copy.about.frameAlt[locale]}
             caption={copy.about.frameCaption[locale]}
+            aspect="aspect-[4/5]"
+            position="object-top"
+            className="mx-auto max-w-sm lg:max-w-md"
           />
         </Reveal>
 

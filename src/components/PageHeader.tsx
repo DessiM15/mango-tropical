@@ -31,21 +31,12 @@ export function PageHeader({
   return (
     <section className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40">
       <div aria-hidden="true" className="absolute inset-0 -z-20">
-        <div className="absolute inset-0 bg-[linear-gradient(178deg,var(--color-sunset-300)_0%,var(--color-sunset-400)_45%,var(--color-sunset-500)_100%)]" />
-        <div
-          className="absolute inset-0 opacity-45 mix-blend-multiply"
-          style={{ backgroundImage: "url(/art/paper-orange.webp)", backgroundSize: "520px auto" }}
-        />
-        <div
-          className="absolute inset-y-0 left-0 w-[34%] max-w-[22rem] bg-[url(/art/palms-left.webp)] bg-cover bg-right [mask-image:linear-gradient(to_right,black,transparent)]"
-        />
-        <div
-          className="absolute inset-y-0 right-0 w-[34%] max-w-[22rem] bg-[url(/art/palms-right.webp)] bg-cover bg-left [mask-image:linear-gradient(to_left,black,transparent)]"
-        />
+        <Image src="/scene/sunset-sky.webp" alt="" fill priority sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sunset-600/30 via-sunset-500/20 to-sunset-500/55" />
       </div>
 
-      <Flora name="banana-leaves" className="left-[-6%] top-[8%] w-36 sm:w-52" />
-      <Flora name="plumeria-cluster" className="right-[-4%] top-[2%] w-40 sm:w-60" />
+      <Flora name="palms" className="left-[-6%] top-[8%] w-36 sm:w-52" />
+      <Flora name="flowers" className="right-[-4%] top-[2%] w-40 sm:w-60" />
 
       <div
         className={`relative mx-auto grid items-center gap-10 px-4 sm:px-6 lg:px-8 ${

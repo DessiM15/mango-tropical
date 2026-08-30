@@ -52,7 +52,7 @@ export function Favorites({ locale }: { locale: Locale }) {
     <section className="relative overflow-hidden py-16 sm:py-24" aria-labelledby="favorites-heading">
       <div aria-hidden="true" className="absolute inset-0 -z-20">
         <Image
-          src="/art/water-deep.webp"
+          src="/scene/water-surface.webp"
           alt=""
           fill
           sizes="100vw"
@@ -62,8 +62,8 @@ export function Favorites({ locale }: { locale: Locale }) {
         <div className="absolute inset-0 bg-gradient-to-b from-ocean-300/45 via-transparent to-ocean-600/40" />
       </div>
 
-      <Flora name="banana-leaves" className="left-[-6%] top-[-6%] w-40 opacity-90 sm:w-60" />
-      <Flora name="hibiscus-yellow" className="bottom-[-6%] right-[-4%] w-32 opacity-90 sm:w-48" />
+      <Flora name="palms" className="left-[-6%] top-[-6%] w-40 opacity-90 sm:w-60" />
+      <Flora name="hibiscus" className="bottom-[-6%] right-[-4%] w-32 opacity-90 sm:w-48" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center">

@@ -1,23 +1,17 @@
 import Image, { type StaticImageData } from "next/image";
-import bananaLeaves from "../../public/flora/banana-leaves.webp";
-import hibiscusPair from "../../public/flora/hibiscus-pair.webp";
-import hibiscusYellow from "../../public/flora/hibiscus-yellow.webp";
-import leavesWide from "../../public/flora/leaves-wide.webp";
-import plumeriaCluster from "../../public/flora/plumeria-cluster.webp";
-import plumeriaSpray from "../../public/flora/plumeria-spray.webp";
+import flowers from "../../public/scene/flowers-cluster.webp";
+import palms from "../../public/scene/palm-fronds.webp";
+import hibiscus from "../../public/scene/hibiscus-pair.webp";
 
 /**
  * Imported rather than referenced by path so Next reads each file's real
- * dimensions at build time. These cutouts have six different aspect ratios, and
- * declaring one shared size distorts them and shifts the layout as they load.
+ * dimensions at build time. These have different aspect ratios, and declaring
+ * one shared size distorts them and shifts the layout as they load.
  */
 const ART: Record<string, StaticImageData> = {
-  "banana-leaves": bananaLeaves,
-  "hibiscus-pair": hibiscusPair,
-  "hibiscus-yellow": hibiscusYellow,
-  "leaves-wide": leavesWide,
-  "plumeria-cluster": plumeriaCluster,
-  "plumeria-spray": plumeriaSpray,
+  flowers,
+  palms,
+  hibiscus,
 };
 
 export type FloraName = keyof typeof ART;
@@ -35,8 +29,7 @@ type Props = {
 };
 
 /**
- * A flower or leaf cluster cut out of the printed menu. Every page of the menu
- * is framed with these, so the sections carry the same framing.
+ * A photographed flower or frond cluster, keyed off its green backdrop.
  * Decorative only, so it stays out of the accessibility tree.
  */
 export function Flora({
@@ -64,8 +57,8 @@ export function Flora({
           src={source}
           alt=""
           priority={priority}
-          sizes="(max-width: 640px) 45vw, 28vw"
-          className="h-auto w-full drop-shadow-[0_14px_20px_rgb(42_18_6_/_0.24)]"
+          sizes="(max-width: 640px) 38vw, 22vw"
+          className="h-auto w-full drop-shadow-[0_14px_22px_rgb(42_18_6_/_0.3)]"
         />
       </div>
     </div>

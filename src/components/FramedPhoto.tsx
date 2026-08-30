@@ -11,6 +11,8 @@ export function FramedPhoto({
   tilt = -2,
   className = "",
   priority = false,
+  aspect = "aspect-[4/3]",
+  position = "object-center",
 }: {
   src: string;
   alt: string;
@@ -18,20 +20,23 @@ export function FramedPhoto({
   tilt?: number;
   className?: string;
   priority?: boolean;
+  /** Match the frame to the photo, so a portrait shot is not cropped to a strip. */
+  aspect?: string;
+  position?: string;
 }) {
   return (
     <figure
       className={`wood-sign !rounded-[1.5rem] !p-4 sm:!p-5 ${className}`}
       style={{ transform: `rotate(${tilt}deg)` }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+      <div className={`relative ${aspect} overflow-hidden rounded-xl`}>
         <Image
           src={src}
           alt={alt}
           fill
           priority={priority}
           sizes="(max-width: 1024px) 92vw, 44vw"
-          className="object-cover"
+          className={`object-cover ${position}`}
         />
       </div>
       {caption ? (

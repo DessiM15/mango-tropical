@@ -62,7 +62,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <FaqSection locale={locale} />
       <VisitSection locale={locale} />
       <JsonLd data={faqSchema} />
-      <link rel="preload" as="image" href="/art/ocean-water.webp" />
       <span className="sr-only">{site.tagline[locale]}</span>
     </>
   );

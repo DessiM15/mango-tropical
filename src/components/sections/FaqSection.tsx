@@ -16,10 +16,10 @@ export function FaqSection({ locale }: { locale: Locale }) {
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10 opacity-70"
-        style={{ backgroundImage: "url(/art/sand-shore.webp)", backgroundSize: "auto 280px" }}
+        style={{ backgroundImage: "url(/scene/wet-sand-tile.webp)", backgroundSize: "cover" }}
       />
-      <Flora name="plumeria-cluster" className="right-[-5%] top-[6%] w-36 opacity-70 sm:w-52" />
-      <Flora name="banana-leaves" className="bottom-[-4%] left-[-6%] w-36 opacity-70 sm:w-52" flip />
+      <Flora name="flowers" className="right-[-5%] top-[6%] w-36 opacity-70 sm:w-52" />
+      <Flora name="palms" className="bottom-[-4%] left-[-6%] w-36 opacity-70 sm:w-52" flip />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <SectionHeading

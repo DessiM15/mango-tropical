@@ -50,10 +50,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10 opacity-60"
-        style={{ backgroundImage: "url(/art/sand-shore.webp)", backgroundSize: "auto 300px" }}
+        style={{ backgroundImage: "url(/scene/wet-sand-tile.webp)", backgroundSize: "cover" }}
       />
-      <Flora name="leaves-wide" className="right-[-5%] top-[6%] w-36 opacity-60 sm:w-52" />
-      <Flora name="plumeria-spray" className="bottom-[12%] left-[-6%] w-32 opacity-60 sm:w-44" />
+      <Flora name="palms" className="right-[-5%] top-[6%] w-36 opacity-60 sm:w-52" />
+      <Flora name="flowers" className="bottom-[12%] left-[-6%] w-32 opacity-60 sm:w-44" />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4 lg:gap-12">

@@ -1,16 +1,16 @@
 """
-Second asset pass: the decorative kit the layered layout is built from.
+Wood grain for the section plaques.
 
-The first pass (extract_menu_art.py) pulled product photography. This one pulls
-the scene: flower and leaf clusters as transparent cutouts, plus the watercolor
-water, sand and wave plates that the sections sit on.
-
-Wood plaques and paint splashes are not extracted. Their artwork has text baked
-into it, so they are rebuilt as SVG components instead, which also lets them fit
-any heading at any width.
+This pass once also cut the menu's flower and leaf art and its watercolour
+water, sand and wave bands. Those are all superseded by the photography in
+scripts/process_generated.py, which is dimensional and lit where the menu's
+artwork is flat vector. The cutout machinery is kept because it is the only way
+to get anything off these scans, and the plank is still needed: the plaques are
+drawn in CSS so they can hold any heading at any width, and this supplies their
+grain.
 
 Usage:  python3 scripts/extract_scene_art.py
-Output: public/flora/*.png  and  public/art/*.webp
+Output: public/art/wood-plank.webp
 """
 import shutil
 import subprocess
@@ -29,32 +29,12 @@ OUT_ART = ROOT / "public" / "art"
 
 # Transparent cutouts. Every page frames its artwork with the same flowers and
 # leaves, so these are picked from wherever they sit on the cleanest ground.
-# page, box, flood tolerance, and whether the background is watercolour water. The hibiscus sit on
-# watercolour water whose lighter spray survives a tolerance tuned for flat
-# orange, so those two are cut with a wider one.
-FLORA = {
-    "plumeria-cluster":  (1, 1900,    0, 2550,  420, 34, False),
-    "plumeria-spray":    (1,    0, 2880,  520, 3300, 34, False),
-    "banana-leaves":     (2,    0,    0,  420,  330, 34, False),
-    "hibiscus-pair":     (2, 2320, 2930, 2553, 3300, 40, True),
-    "leaves-wide":       (5, 1950,    0, 2550,  300, 34, False),
-    "hibiscus-yellow":   (1, 2190, 2760, 2550, 3110, 40, True),
-}
+FLORA: dict = {}
 
-# Watercolour plates. These sit behind whole sections, so small imperfections
-# are covered by content.
 PLATES = {
-    "water-deep":      (3,  150, 2470,  900, 3000),
-    "water-turquoise": (1,  500, 2620, 1900, 2900),
-    "wave-crest":      (3,  150, 2280,  850, 2440),
-    "sand-shore":      (6, 1450, 1785, 1985, 1898),
-    # A clean patch of the TOPPINGS plaque, to the right of its lettering and
-    # inside its frame. Used as a low-opacity grain overlay on the CSS-drawn
-    # plank, which is what actually scales to any heading width.
-    "wood-plank":      (6, 2310, 1185, 2352, 1340),
-    # The menu cover's central artwork: the logo on the sunset and palm scene.
-    # Stands in inside the About frame until the owner sends a photo of the shop.
-    "cover-scene":     (1,  170,  260, 2390, 1960),
+    # A clean patch of the TOPPINGS plaque, right of its lettering and inside
+    # its frame. Laid over the CSS-drawn plank at low opacity for grain.
+    "wood-plank": (6, 2310, 1185, 2352, 1340),
 }
 
 KEY = (255, 0, 255)

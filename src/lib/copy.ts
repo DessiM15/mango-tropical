@@ -105,11 +105,9 @@ export const copy = {
   about: {
     kicker: { en: "Our story", es: "Nosotros" },
     more: { en: "More about us", es: "Conócenos más" },
-    // TODO: swap for a photo of the shop once the owner sends one. Until then
-    // the frame holds the menu cover's own artwork rather than a stand-in.
     frameAlt: {
-      en: "Mango Tropical's logo on the tropical sunset artwork from their menu",
-      es: "El logo de Mango Tropical sobre la ilustración tropical de su menú",
+      en: "The Mango Tropical storefront on FM 529 in Cypress, Texas, with the surfing mango sign above the door",
+      es: "La fachada de Mango Tropical en FM 529, Cypress, Texas, con el letrero del mango surfeando sobre la puerta",
     },
     frameCaption: {
       en: "FM 529 at Fry Road, Cypress",

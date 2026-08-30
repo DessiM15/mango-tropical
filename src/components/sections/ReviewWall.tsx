@@ -35,8 +35,8 @@ export function ReviewWall({ locale }: { locale: Locale }) {
   return (
     <section className="relative overflow-hidden bg-magenta-400 py-20 sm:py-28" aria-labelledby="reviews-heading">
       <TornEdge className="absolute inset-x-0 top-0 h-10 sm:h-14" fill="var(--color-ocean-100)" flip />
-      <Flora name="leaves-wide" className="left-[-6%] top-[8%] w-40 opacity-80 sm:w-56" flip />
-      <Flora name="plumeria-cluster" className="bottom-[-6%] right-[-4%] w-40 opacity-85 sm:w-56" />
+      <Flora name="palms" className="left-[-6%] top-[8%] w-40 opacity-80 sm:w-56" flip />
+      <Flora name="flowers" className="bottom-[-6%] right-[-4%] w-40 opacity-85 sm:w-56" />
 
       <div className="mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8">
         <SectionHeading

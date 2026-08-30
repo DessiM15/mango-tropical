@@ -11,7 +11,7 @@ export default function NotFound() {
     <section className="relative flex min-h-[70svh] items-center justify-center overflow-hidden bg-sunset-500 px-4 py-32 text-center">
       <div
         className="absolute inset-0 opacity-50 mix-blend-multiply"
-        style={{ backgroundImage: "url(/art/paper-orange.webp)", backgroundSize: "520px auto" }}
+        style={{ backgroundImage: "url(/scene/wet-sand-tile.webp)", backgroundSize: "cover" }}
         aria-hidden="true"
       />
       <div className="relative">
