@@ -1,49 +1,53 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
+import { WoodSign, type HeadingTone } from "./WoodSign";
 
 type Props = {
-  kicker: string;
-  title: string;
+  /** Spanish line, shown on top, the way the printed menu titles a section. */
+  es: string;
+  /** English line, shown underneath. */
+  en: string;
   body?: string;
   align?: "left" | "center";
-  tone?: "ink" | "light";
-  /** Wired to the section's aria-labelledby. */
+  tone?: HeadingTone;
   titleId?: string;
+  tilt?: number;
+  /** Body copy sits on a dark ground and needs the light treatment. */
+  onDark?: boolean;
   children?: ReactNode;
 };
 
+/**
+ * Every section is titled the way the menu titles one: a wooden plaque holding
+ * the Spanish name over the English, both outlined in heavy black.
+ */
 export function SectionHeading({
-  kicker,
-  title,
+  es,
+  en,
   body,
   align = "center",
-  tone = "ink",
+  tone = "fruit",
   titleId,
+  tilt = -1,
+  onDark = false,
   children,
 }: Props) {
-  const alignment = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
-  const titleColor = tone === "ink" ? "text-ink" : "text-sand-50";
-  const bodyColor = tone === "ink" ? "text-ink-soft" : "text-sand-50/90";
+  const alignment =
+    align === "center" ? "items-center text-center mx-auto" : "items-start text-left";
 
   return (
     <Reveal className={`flex max-w-3xl flex-col ${alignment}`}>
-      <span
-        className={`label-type rounded-full border-[3px] border-ink px-4 py-1 text-sm uppercase tracking-wide shadow-[3px_3px_0_0_var(--color-ink)] sm:text-base ${
-          tone === "ink" ? "bg-mango-400 text-ink" : "bg-sand-50 text-ink"
-        }`}
-      >
-        {kicker}
-      </span>
-      <h2
-        id={titleId}
-        className={`display mt-5 text-[clamp(2.5rem,8vw,5.5rem)] ${titleColor} ${
-          tone === "light" ? "[text-shadow:4px_4px_0_var(--color-ink)]" : ""
-        }`}
-      >
-        {title}
-      </h2>
+      <WoodSign primary={es} secondary={en} tone={tone} id={titleId} tilt={tilt} size="md" />
       {body ? (
-        <p className={`mt-5 font-body text-lg leading-relaxed sm:text-xl ${bodyColor}`}>{body}</p>
+        <p
+          className={`mt-6 font-body text-lg leading-relaxed sm:text-xl ${
+            onDark
+              ? "text-sand-50 [text-shadow:0_2px_0_rgb(42_18_6_/_0.45)]"
+              : "text-ink-soft"
+          }`}
+        >
+          {body}
+        </p>
       ) : null}
       {children}
     </Reveal>

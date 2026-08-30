@@ -2,52 +2,48 @@ import Image from "next/image";
 import { MagneticButton } from "@/components/MagneticButton";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
+import { FramedPhoto } from "@/components/FramedPhoto";
+import { Flora } from "@/components/Flora";
 import { copy } from "@/lib/copy";
 import { path, type Locale } from "@/lib/i18n";
 
+/** Sobre Nosotros, sitting out in the deep water like the mockup. */
 export function StoryStrip({ locale }: { locale: Locale }) {
   return (
-    <section className="relative overflow-hidden bg-ocean-300 pb-20 pt-24 sm:pb-28 sm:pt-32" aria-labelledby="story-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ocean-100)" />
+    <section
+      className="relative overflow-hidden py-20 sm:py-28"
+      aria-labelledby="story-heading"
+    >
+      <div aria-hidden="true" className="absolute inset-0 -z-20">
+        <Image src="/art/water-deep.webp" alt="" fill sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-ocean-700/45 mix-blend-multiply" />
+      </div>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-        <Reveal from="left" className="relative order-2 lg:order-1">
-          <div className="relative mx-auto grid max-w-md grid-cols-2 gap-4">
-            {[
-              { src: "/menu/nieve-mango.webp", tilt: "-4deg" },
-              { src: "/menu/nieve-limon.webp", tilt: "3deg" },
-              { src: "/menu/nieve-fresa.webp", tilt: "2deg" },
-              { src: "/menu/nieve-tamarindo.webp", tilt: "-3deg" },
-            ].map((tile) => (
-              <div
-                key={tile.src}
-                className="relative aspect-square overflow-hidden rounded-[1.75rem] border-[4px] border-ink shadow-[6px_8px_0_0_var(--color-ink)]"
-                style={{ transform: `rotate(${tile.tilt})` }}
-              >
-                <Image
-                  src={tile.src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 1024px) 45vw, 22vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
+      <Flora name="plumeria-spray" className="left-[-6%] top-[-4%] w-40 opacity-90 sm:w-56" />
+      <Flora name="hibiscus-pair" className="bottom-[-6%] right-[-3%] w-40 opacity-95 sm:w-60" drift />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+        <Reveal from="left" className="order-2 lg:order-1">
+          <FramedPhoto
+            src="/art/cover-scene.webp"
+            alt={copy.about.frameAlt[locale]}
+            caption={copy.about.frameCaption[locale]}
+          />
         </Reveal>
 
         <div className="order-1 lg:order-2">
           <SectionHeading
-            kicker={copy.about.kicker[locale]}
-            title={copy.about.title[locale]}
-          titleId="story-heading"
+            es={copy.headings.about.es}
+            en={copy.headings.about.en}
+            titleId="story-heading"
+            tone="garrafa"
             body={copy.about.body[0][locale]}
             align="left"
+            onDark
           />
           <Reveal delay={0.2} className="mt-8">
             <MagneticButton href={path(locale, "about")} variant="cream">
-              {copy.nav.about[locale]}
+              {copy.about.more[locale]}
             </MagneticButton>
           </Reveal>
         </div>

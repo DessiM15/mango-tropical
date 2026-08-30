@@ -51,6 +51,26 @@
   --color-ink: #2a1206;
   --color-ink-soft: #5c3a22;
 
+  /* Wood plaque, sampled off the TOPPINGS sign on the printed menu. */
+  --color-wood-frame: #a96a3e;
+  --color-wood-frame-dark: #7a4a28;
+  --color-plank-light: #f5d3ac;
+  --color-plank: #e8c09c;
+  --color-plank-shade: #d9ae86;
+
+  /* The menu pairs a Spanish heading with an English one underneath, each in
+     its own colour. These are sampled from the printed pages. */
+  --color-head-fruit: #54c0cc;
+  --color-head-fruit-alt: #e43030;
+  --color-head-nieve: #9c4884;
+  --color-head-nieve-alt: #e42484;
+  --color-head-comida: #00a854;
+  --color-head-comida-alt: #a8cc3c;
+  --color-head-garrafa: #f08430;
+  --color-head-garrafa-alt: #fff200;
+  --color-head-float: #0090d8;
+  --color-head-float-alt: #78ccf0;
+
   --font-display: var(--font-anton), "Arial Narrow", sans-serif;
   --font-label: var(--font-grandstander), "Trebuchet MS", sans-serif;
   --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
@@ -125,15 +145,60 @@
       4px 5px 0 6px rgb(42 18 6 / 0.2);
   }
 
-  /* Text outlined the way the logo wordmark is outlined. */
+  /* Text outlined the way the logo wordmark and every menu heading are:
+     a heavy black stroke behind the fill, plus a hard offset shadow. */
   .text-outline {
-    -webkit-text-stroke: 3px var(--color-ink);
+    -webkit-text-stroke: clamp(2px, 0.45vw, 5px) #000;
     paint-order: stroke fill;
+    text-shadow: 0 clamp(3px, 0.5vw, 6px) 0 rgb(0 0 0 / 0.32);
   }
 
   .text-outline-thin {
-    -webkit-text-stroke: 2px var(--color-ink);
+    -webkit-text-stroke: 2px #000;
     paint-order: stroke fill;
+    text-shadow: 0 3px 0 rgb(0 0 0 / 0.28);
+  }
+
+  /* The wood plaque every heading sits on. Drawn rather than sliced so it
+     stretches to any heading at any width, with the menu's own plank scan
+     laid over it at low opacity for grain. */
+  .wood-sign {
+    position: relative;
+    background: linear-gradient(180deg, #b8783f 0%, var(--color-wood-frame) 55%, #8d5730 100%);
+    border-radius: 18px;
+    padding: 0.7rem 1.1rem;
+    box-shadow:
+      inset 0 0 0 3px var(--color-wood-frame-dark),
+      0 8px 0 rgb(42 18 6 / 0.25),
+      0 14px 26px rgb(42 18 6 / 0.22);
+  }
+
+  .wood-sign::before {
+    content: "";
+    position: absolute;
+    inset: 0.7rem 1.1rem;
+    border-radius: 10px;
+    background:
+      linear-gradient(180deg, var(--color-plank-light) 0%, var(--color-plank) 58%, var(--color-plank-shade) 100%);
+    box-shadow: inset 0 0 0 2px rgb(122 74 40 / 0.45);
+  }
+
+  .wood-sign::after {
+    content: "";
+    position: absolute;
+    inset: 0.7rem 1.1rem;
+    border-radius: 10px;
+    background-image: url(/art/wood-plank.webp);
+    background-size: 132px 100%;
+    background-repeat: repeat-x;
+    opacity: 0.16;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .wood-sign > * {
+    position: relative;
+    z-index: 1;
   }
 }
 

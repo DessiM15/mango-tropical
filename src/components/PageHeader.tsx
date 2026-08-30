@@ -1,40 +1,48 @@
 import { Reveal } from "./Reveal";
+import { Flora } from "./Flora";
+import { WoodSign, type HeadingTone } from "./WoodSign";
 
 /**
- * Shared banner for every interior page. Uses the sunset ground and the palm
- * frame so a landing page still reads as part of the same poster.
+ * The banner every interior page opens with: the same sunset, palms and
+ * flowers as the home page, with the title on a plaque.
  */
 export function PageHeader({
-  kicker,
-  title,
+  es,
+  en,
+  tone = "garrafa",
   body,
   children,
 }: {
-  kicker: string;
-  title: string;
+  es: string;
+  en: string;
+  tone?: HeadingTone;
   body?: string;
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-sunset-500 pb-16 pt-32 sm:pb-20 sm:pt-40">
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,var(--color-sunset-400)_0%,var(--color-sunset-500)_100%)]" />
+    <section className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40">
+      <div aria-hidden="true" className="absolute inset-0 -z-20">
+        <div className="absolute inset-0 bg-[linear-gradient(178deg,var(--color-sunset-300)_0%,var(--color-sunset-400)_45%,var(--color-sunset-500)_100%)]" />
         <div
-          className="absolute inset-0 opacity-50 mix-blend-multiply"
+          className="absolute inset-0 opacity-45 mix-blend-multiply"
           style={{ backgroundImage: "url(/art/paper-orange.webp)", backgroundSize: "520px auto" }}
+        />
+        <div
+          className="absolute inset-y-0 left-0 w-[34%] max-w-[22rem] bg-[url(/art/palms-left.webp)] bg-cover bg-right [mask-image:linear-gradient(to_right,black,transparent)]"
+        />
+        <div
+          className="absolute inset-y-0 right-0 w-[34%] max-w-[22rem] bg-[url(/art/palms-right.webp)] bg-cover bg-left [mask-image:linear-gradient(to_left,black,transparent)]"
         />
       </div>
 
-      <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <Flora name="banana-leaves" className="left-[-6%] top-[8%] w-36 sm:w-52" />
+      <Flora name="plumeria-cluster" className="right-[-4%] top-[2%] w-40 sm:w-60" />
+
+      <div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
         <Reveal className="flex flex-col items-center">
-          <span className="label-type rounded-full border-[3px] border-ink bg-mango-400 px-4 py-1 text-sm uppercase tracking-wide text-ink shadow-[3px_3px_0_0_var(--color-ink)] sm:text-base">
-            {kicker}
-          </span>
-          <h1 className="display mt-5 text-[clamp(2.75rem,9vw,6rem)] text-sand-50 [text-shadow:5px_5px_0_var(--color-ink)]">
-            {title}
-          </h1>
+          <WoodSign as="h1" primary={es} secondary={en} tone={tone} size="lg" tilt={-1.2} />
           {body ? (
-            <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-sand-50 [text-shadow:0_2px_0_rgb(42_18_6_/_0.4)] sm:text-xl">
+            <p className="mt-7 max-w-2xl font-body text-lg leading-relaxed text-sand-50 [text-shadow:0_2px_0_rgb(42_18_6_/_0.45)] sm:text-xl">
               {body}
             </p>
           ) : null}

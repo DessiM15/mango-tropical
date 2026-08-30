@@ -1,7 +1,7 @@
 import { MagneticButton } from "@/components/MagneticButton";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
+import { WaveDivider } from "@/components/Dividers";
 import { OpenStatus } from "@/components/OpenStatus";
 import { weekRows } from "@/components/SiteFooter";
 import { copy } from "@/lib/copy";
@@ -13,15 +13,16 @@ export function VisitSection({ locale }: { locale: Locale }) {
 
   return (
     <section className="relative bg-ocean-600 pb-20 pt-24 sm:pb-28 sm:pt-32" aria-labelledby="visit-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ocean-500)" />
+      <WaveDivider className="absolute inset-x-0 top-0 h-14 sm:h-20" back="var(--color-ocean-400)" mid="var(--color-ocean-500)" front="var(--color-ocean-600)" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          kicker={copy.visit.kicker[locale]}
-          title={copy.visit.title[locale]}
+          es={copy.headings.visit.es}
+          en={copy.headings.visit.en}
           titleId="visit-heading"
+          tone="comida"
           body={copy.visit.body[locale]}
-          tone="light"
+          onDark
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2">

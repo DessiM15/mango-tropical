@@ -63,11 +63,20 @@ ART = {
     "ocean-water":  (3,  150, 2470,  800, 3000),
 }
 
-# Circular sticker crops for hero and feature moments.
+# Circular die-cut stickers, one per menu category.
+#
+# Products are not cut out. Their cups are clear plastic, so a flood fill runs
+# straight through them and takes the cup with it, leaving the food floating.
+# A circle keeps the cup intact and matches the brand's own language: the logo
+# is a circular badge and the menu labels everything with die-cut stickers.
 STICKERS = {
     "sticker-mangonada": (2,  130, 1600,  700, 2170),
     "sticker-raspa":     (6, 1640,   90, 2400,  850),
     "sticker-elote":     (5,  190,  470,  740, 1020),
+    "sticker-nieve":     (4, 1830,  830, 2400, 1400),
+    "sticker-chorreado": (5, 1350,  540, 2050, 1240),
+    "sticker-float":     (6,  130, 1400,  800, 2070),
+    "sticker-conchi":    (3,  980, 2380, 1700, 3100),
 }
 
 
@@ -117,7 +126,13 @@ def main() -> None:
         save_webp(page_image(page).crop(tuple(box)), OUT_ART / f"{name}.webp", 82)
     for name, (page, *box) in STICKERS.items():
         crop = page_image(page).crop(tuple(box))
-        circle_mask(crop).save(OUT_MENU / f"{name}.png")
+        sticker = circle_mask(crop)
+        # These are photographs with a round alpha edge. WebP carries the alpha
+        # at a fraction of PNG's size, and 620px covers the largest place any
+        # sticker is drawn at 2x.
+        if sticker.width > 620:
+            sticker = sticker.resize((620, 620), Image.LANCZOS)
+        sticker.save(OUT_MENU / f"{name}.webp", "WEBP", quality=88, method=6)
     # The social card renderer cannot decode WebP, so it gets a JPEG.
     og = page_image(2).crop((95, 1590, 745, 2170)).resize((470, 630), Image.LANCZOS)
     og.save(OUT_ART / "og-product.jpg", "JPEG", quality=88, optimize=True)

@@ -68,8 +68,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   return (
     <>
       <PageHeader
-        kicker={copy.about.kicker[locale]}
-        title={copy.about.title[locale]}
+        es={copy.headings.about.es}
+        en={copy.headings.about.en}
+        tone="garrafa"
         body={site.tagline[locale]}
       />
 

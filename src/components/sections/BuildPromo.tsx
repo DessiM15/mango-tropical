@@ -3,6 +3,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ChamoyDrip } from "@/components/Dividers";
+import { Flora } from "@/components/Flora";
 import { copy } from "@/lib/copy";
 import { path, type Locale } from "@/lib/i18n";
 
@@ -17,14 +18,18 @@ export function BuildPromo({ locale }: { locale: Locale }) {
 
   return (
     <section className="relative overflow-hidden bg-mango-400 py-20 sm:py-28" aria-labelledby="build-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-sand-50)" />
+      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-ocean-300)" />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pt-14 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+      <Flora name="banana-leaves" className="left-[-7%] top-[10%] w-40 opacity-80 sm:w-56" />
+      <Flora name="hibiscus-yellow" className="bottom-[-4%] right-[-4%] w-36 opacity-90 sm:w-52" />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pt-14 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
         <div>
           <SectionHeading
-            kicker={copy.build.kicker[locale]}
-            title={copy.build.title[locale]}
-          titleId="build-heading"
+            es={copy.headings.build.es}
+            en={copy.headings.build.en}
+            titleId="build-heading"
+            tone="comida"
             body={copy.build.body[locale]}
             align="left"
           />

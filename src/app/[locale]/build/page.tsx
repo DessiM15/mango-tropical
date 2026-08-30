@@ -70,8 +70,9 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
   return (
     <>
       <PageHeader
-        kicker={copy.build.kicker[locale]}
-        title={copy.build.title[locale]}
+        es={copy.headings.build.es}
+        en={copy.headings.build.en}
+        tone="comida"
         body={copy.build.body[locale]}
       />
 

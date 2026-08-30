@@ -18,11 +18,19 @@ export const copy = {
   },
   hero: {
     eyebrow: { en: "Cypress, Texas", es: "Cypress, Texas" },
+    // The plaque carries the printed menu's own cover line, word for word.
+    signTop: { en: "LAS AUTENTICAS", es: "LAS AUTÉNTICAS" },
+    signMain: { en: "NIEVES DE GARRAFA", es: "NIEVES DE GARRAFA" },
+    signSub: { en: "100% NATURALES", es: "100% NATURALES" },
+    cupAlt: {
+      en: "A Mangonada Tropical: mango nieve with fresh mango, chamoy and chile",
+      es: "Una Mangonada Tropical: nieve de mango con mango fresco, chamoy y chile",
+    },
     line1: { en: "MANGONADA", es: "ES TEMPORADA" },
     line2: { en: "SEASON", es: "DE MANGONADA" },
     sub: {
-      en: "Nieves de garrafa churned by hand. Raspas shaved to order. Elotes drowned in the good stuff. All natural, all day, on FM 529.",
-      es: "Nieves de garrafa batidas a mano. Raspas al momento. Elotes ahogados en lo bueno. Todo natural, todo el día, en FM 529.",
+      en: "Made with fresh fruit, natural ingredients and a whole lot of love. Churned by hand every day on FM 529 at Fry Road.",
+      es: "Hechas con fruta fresca, ingredientes naturales y mucho amor. Batidas a mano todos los días en FM 529 y Fry Road.",
     },
     primary: { en: "See the menu", es: "Ver el menú" },
     secondary: { en: "Get directions", es: "Cómo llegar" },
@@ -38,6 +46,23 @@ export const copy = {
   marquee: {
     en: "MANGONADA · RASPAS · NIEVE DE GARRAFA · ELOTE CHORREADO · CHAMOYADA · FRESAS CON CREMA · SALCHIPAPAS · AGUAS FRESCAS · TAMARINDO · GUAYABA ·",
     es: "MANGONADA · RASPAS · NIEVE DE GARRAFA · ELOTE CHORREADO · CHAMOYADA · FRESAS CON CREMA · SALCHIPAPAS · AGUAS FRESCAS · TAMARINDO · GUAYABA ·",
+  },
+  // Section titles, Spanish over English, matching how the printed menu
+  // titles every one of its sections.
+  headings: {
+    favorites: { es: "NUESTROS FAVORITOS", en: "OUR FAVORITES" },
+    build: { es: "ARMA LA TUYA", en: "BUILD YOUR OWN" },
+    flavors: { es: "TODOS LOS SABORES", en: "EVERY FLAVOR" },
+    reviews: { es: "LO QUE DICEN", en: "WHAT THEY SAY" },
+    about: { es: "SOBRE NOSOTROS", en: "OUR STORY" },
+    faq: { es: "PREGUNTAS", en: "QUESTIONS" },
+    visit: { es: "VISÍTANOS", en: "COME SEE US" },
+    menu: { es: "NUESTRO MENÚ", en: "OUR MENU" },
+  },
+  favorites: {
+    title: { en: "OUR FAVORITES", es: "NUESTROS FAVORITOS" },
+    previous: { en: "Previous favorites", es: "Favoritos anteriores" },
+    next: { en: "More favorites", es: "Más favoritos" },
   },
   menuSection: {
     kicker: { en: "The menu", es: "El menú" },
@@ -111,6 +136,17 @@ export const copy = {
   },
   about: {
     kicker: { en: "Our story", es: "Nosotros" },
+    more: { en: "More about us", es: "Conócenos más" },
+    // TODO: swap for a photo of the shop once the owner sends one. Until then
+    // the frame holds the menu cover's own artwork rather than a stand-in.
+    frameAlt: {
+      en: "Mango Tropical's logo on the tropical sunset artwork from their menu",
+      es: "El logo de Mango Tropical sobre la ilustración tropical de su menú",
+    },
+    frameCaption: {
+      en: "FM 529 at Fry Road, Cypress",
+      es: "FM 529 y Fry Road, Cypress",
+    },
     title: { en: "A LITTLE PIECE OF THE COAST", es: "UN PEDACITO DE LA COSTA" },
     metaTitle: { en: "Our Story", es: "Nosotros" },
     metaDescription: {
@@ -230,6 +266,7 @@ export const copy = {
   },
   footer: {
     hours: { en: "Hours", es: "Horario" },
+    follow: { en: "Follow us", es: "Síguenos" },
     find: { en: "Find us", es: "Encuéntranos" },
     explore: { en: "Explore", es: "Explora" },
     rights: { en: "All rights reserved.", es: "Todos los derechos reservados." },

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Hero } from "@/components/sections/Hero";
-import { MenuPreview } from "@/components/sections/MenuPreview";
+import { TropicalHero } from "@/components/sections/TropicalHero";
+import { CategoryRow } from "@/components/sections/CategoryRow";
+import { Favorites } from "@/components/sections/Favorites";
 import { BuildPromo } from "@/components/sections/BuildPromo";
 import { ReviewWall } from "@/components/sections/ReviewWall";
 import { FlavorShowcase } from "@/components/sections/FlavorShowcase";
@@ -51,11 +52,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <Hero locale={locale} />
-      <MenuPreview locale={locale} />
+      {/* Ordered the way the printed menu reads: the shop, then what is in it,
+          then the favourites, then everything else. */}
+      <TropicalHero locale={locale} />
+      <CategoryRow locale={locale} />
+      <Favorites locale={locale} />
       <BuildPromo locale={locale} />
-      <ReviewWall locale={locale} />
       <FlavorShowcase locale={locale} />
+      <ReviewWall locale={locale} />
       <StoryStrip locale={locale} />
       <FaqSection locale={locale} />
       <VisitSection locale={locale} />

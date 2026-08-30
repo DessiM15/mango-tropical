@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ChamoyDrip } from "@/components/Dividers";
+import { TornEdge } from "@/components/Dividers";
 import { copy } from "@/lib/copy";
 import { findCategory, type Text } from "@/lib/menu";
 import type { Locale } from "@/lib/i18n";
@@ -49,14 +49,15 @@ export function FlavorShowcase({ locale }: { locale: Locale }) {
   const current = groups.find((g) => g.id === active) ?? groups[0];
 
   return (
-    <section className="relative bg-ocean-100 pb-20 pt-24 sm:pb-28 sm:pt-32" aria-labelledby="flavors-heading">
-      <ChamoyDrip className="absolute inset-x-0 top-0 h-14 sm:h-20" fill="var(--color-magenta-400)" />
+    <section className="relative bg-ocean-100 pb-20 pt-20 sm:pb-28 sm:pt-24" aria-labelledby="flavors-heading">
+      <TornEdge className="absolute inset-x-0 top-0 h-10 sm:h-14" fill="var(--color-ocean-100)" flip />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          kicker={copy.flavors.kicker[locale]}
-          title={copy.flavors.title[locale]}
+          es={copy.headings.flavors.es}
+          en={copy.headings.flavors.en}
           titleId="flavors-heading"
+          tone="float"
           body={copy.flavors.body[locale]}
         />
 

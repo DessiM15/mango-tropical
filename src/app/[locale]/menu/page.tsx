@@ -87,8 +87,9 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <PageHeader
-        kicker={copy.menuSection.kicker[locale]}
-        title={copy.menuPage.title[locale]}
+        es={copy.headings.menu.es}
+        en={copy.headings.menu.en}
+        tone="fruit"
         body={copy.menuSection.body[locale]}
       >
         <nav aria-label={copy.nav.menu[locale]} className="mt-8 flex flex-wrap justify-center gap-2.5">

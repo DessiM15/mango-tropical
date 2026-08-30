@@ -10,9 +10,19 @@ import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { VisitSection } from "@/components/sections/VisitSection";
 import { copy } from "@/lib/copy";
+import type { HeadingTone } from "@/components/WoodSign";
 import { findCategory, menu, money, TOPPING_PRICE, toppings } from "@/lib/menu";
 import { isLocale, locales, path, type Locale } from "@/lib/i18n";
 import { mapsUrl, site } from "@/lib/site";
+
+/** Each category's menu accent mapped to the heading colour pair it uses. */
+const CATEGORY_TONE: Record<string, HeadingTone> = {
+  orange: "garrafa",
+  yellow: "garrafa",
+  magenta: "nieve",
+  blue: "float",
+  lime: "comida",
+};
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => menu.map((category) => ({ locale, category: category.slug })));
@@ -107,8 +117,9 @@ export default async function CategoryPage({
   return (
     <>
       <PageHeader
-        kicker={category.kicker[locale]}
-        title={category.name[locale]}
+        es={category.shortName.es}
+        en={category.shortName.en}
+        tone={CATEGORY_TONE[category.accent]}
         body={category.intro[locale]}
       >
         <nav aria-label="Breadcrumb" className="mt-6 order-first">
