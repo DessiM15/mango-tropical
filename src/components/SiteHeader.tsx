@@ -93,9 +93,13 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </nav>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-3">
+            {/* Prefetch is off because this is the one link that crosses into
+                the other language tree, and prefetching it makes the router ask
+                for an RSC payload under the wrong tree. Clicking still works. */}
             <Link
               href={alternateHref(pathname, locale)}
               hrefLang={locale === "en" ? "es" : "en"}
+              prefetch={false}
               className="rounded-full border-[3px] border-ink bg-mango-400 px-3 py-1.5 font-label text-sm font-extrabold uppercase not-italic text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 sm:px-4 sm:text-base"
             >
               {copy.nav.switchTo[locale]}

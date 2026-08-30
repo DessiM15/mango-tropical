@@ -43,6 +43,7 @@ next-env.d.ts
 
 # local tooling output
 /.shots/
+/.shots-prod/
 /.menu-render/
 
 # Source material kept out of the repo:
