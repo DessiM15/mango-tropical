@@ -65,7 +65,7 @@ export default async function PreviewLayout({
           dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
         />
       </head>
-      <body className="min-h-dvh antialiased">
+      <body className="grain vignette graded min-h-dvh antialiased">
         <ConceptTheme concept={raw}>
           <SiteHeader locale="en" basePath={`/preview/${raw}`} />
           <main id="main" className="pb-24">

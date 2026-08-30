@@ -167,7 +167,7 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
         />
       </head>
-      <body className="min-h-dvh antialiased">
+      <body className="grain vignette graded min-h-dvh antialiased">
         <SiteHeader locale={locale} />
         <main id="main">{children}</main>
         <SiteFooter locale={locale} />

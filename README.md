@@ -85,6 +85,27 @@ Generated imagery is scenery and framing only: sky, water, sand, leaves,
 flowers, loose fruit. None of it is ever presented as a photo of something the
 shop sells. Menu items use the real photography from the printed menu.
 
+## The cinematic pass
+
+The page is treated as a shot rather than a layout, and depth is the organising
+idea:
+
+- **Parallax carries real relative depth.** The sky lags 130px behind the
+  scroll, the water 46, the product runs 58 ahead, and the foliage nearest the
+  lens runs 210 ahead. The spread is what reads as depth; matching speeds read
+  as sliding planes.
+- **There is a focal plane.** The product stays sharp. Everything in front of it
+  is blurred, one stop for the palms and two for the flowers at the very front.
+- **A slow push-in opens the hero**, then scroll takes over as the camera move.
+- **Atmosphere sits over the whole page**: a tiling grain plate, a light
+  vignette, and a golden-hour grade on every photograph so they read as one
+  shoot rather than as a library.
+- **Easing has no overshoot anywhere.** A bounce reads as a page pleased with
+  itself; a long settle reads as something with mass.
+
+Everything above is dropped under `prefers-reduced-motion`, including the
+opener, the grain and the vignette.
+
 ## Design concepts
 
 Four directions are live side by side at `/preview/<concept>`, each a complete
