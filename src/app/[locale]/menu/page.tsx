@@ -2,15 +2,31 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
-import { ItemCard, NameList } from "@/components/MenuCard";
+import { FeatureItem, ItemCard, NameList } from "@/components/MenuCard";
 import { Reveal } from "@/components/Reveal";
-import { TornEdge } from "@/components/Dividers";
 import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { copy } from "@/lib/copy";
 import { menu, money, TOPPING_PRICE, toppings } from "@/lib/menu";
 import { alternateHref, isLocale, locales, path, type Locale } from "@/lib/i18n";
 import { mapsUrl, site } from "@/lib/site";
+
+/**
+ * Each category opens on a full-bleed colour band carrying its two-language
+ * name, the way every page of the printed menu opens on a headline block. The
+ * five bands are the only place on the site that still pairs the languages,
+ * which is exactly what the printed menu does.
+ */
+const BANDS: Record<string, { field: string; feature: string }> = {
+  mangonadas: { field: "bg-sunset-500", feature: "bg-chamoy-500" },
+  "nieves-de-garrafa": { field: "bg-magenta-500", feature: "bg-magenta-600" },
+  raspas: { field: "bg-ocean-600", feature: "bg-ocean-700" },
+  antojitos: { field: "bg-lime-500", feature: "bg-lime-600" },
+  bebidas: { field: "bg-chamoy-500", feature: "bg-chamoy-600" },
+};
+
+/** The three the shop is known for. Everything else is a list row. */
+const SIGNATURES = new Set(["mangonada-tropical", "elote-chorreado", "conchi-nieve"]);
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -89,7 +105,7 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
       <PageHeader
         es={copy.headings.menu.es}
         en={copy.headings.menu.en}
-        tone="fruit"
+        single={copy.headings.menu[locale]}
         body={copy.menuSection.body[locale]}
       >
         <nav aria-label={copy.nav.menu[locale]} className="mt-8 flex flex-wrap justify-center gap-2.5">
@@ -105,59 +121,84 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
         </nav>
       </PageHeader>
 
-      <div className="relative bg-sand-50 pb-20 pt-16 sm:pb-28">
-        <TornEdge className="absolute inset-x-0 top-0 h-10 -translate-y-full sm:h-14" fill="var(--color-sunset-500)" flip />
-
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          {menu.map((category) => (
-            <section key={category.slug} id={category.slug} className="scroll-mt-28 pb-16 last:pb-0">
-              <Reveal>
-                <div className="flex flex-wrap items-end justify-between gap-4 pb-4">
+      <div className="relative bg-sand-50 pb-20">
+        {menu.map((category) => {
+          const band = BANDS[category.slug];
+          return (
+            <section key={category.slug} id={category.slug} className="scroll-mt-24">
+              {/* Full-bleed headline block, not a small heading above a list. */}
+              <div className={`${band.field} px-4 py-14 sm:px-6 sm:py-16 lg:px-8`}>
+                <div className="mx-auto flex max-w-5xl flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <h2 className="display text-[clamp(2rem,5.5vw,3.5rem)] text-ink">
-                      {category.name[locale]}
+                    <h2 className="display text-outline text-[clamp(2.1rem,5.5vw,3.6rem)] leading-[0.95] text-mango-300">
+                      {category.shortName.es}
                     </h2>
-                    <p className="label-type mt-1 text-lg text-chamoy-500">
+                    <p className="label-type mt-2 text-xl text-white sm:text-2xl">
+                      {category.shortName.en}
+                    </p>
+                    <p className="mt-3 max-w-xl font-body text-base text-white/85">
                       {category.kicker[locale]}
                     </p>
                   </div>
                   <Link
                     href={path(locale, "menu", category.slug)}
-                    className="label-type rounded-full bg-ink px-4 py-2 text-sm text-mango-300 transition-colors hover:bg-chamoy-400 hover:text-white"
+                    className="shrink-0 rounded-full bg-white px-5 py-2.5 font-body text-[13px] font-extrabold uppercase tracking-widest text-ink shadow-card transition-transform hover:-translate-y-0.5"
                   >
                     {copy.menuSection.viewCategory[locale]}
                   </Link>
                 </div>
-              </Reveal>
+              </div>
 
-              {category.sections.map((section) => (
-                <div key={section.slug} className="mt-8">
-                  {category.sections.length > 1 ? (
-                    <h3 className="label-type mb-4 text-2xl text-ink-soft">{section.title[locale]}</h3>
-                  ) : null}
+              <div className="mx-auto max-w-5xl px-4 pb-14 pt-10 sm:px-6 lg:px-8">
+                {category.sections.map((section) => {
+                  const signatures = section.items.filter((item) => SIGNATURES.has(item.slug));
+                  const rest = section.items.filter((item) => !SIGNATURES.has(item.slug));
 
-                  {section.flavors ? (
-                    <Reveal className="mb-2">
-                      <NameList
-                        title={copy.menuSection.flavorsTitle[locale]}
-                        names={section.flavors.map((flavor) => flavor[locale])}
-                        note={section.note?.[locale]}
-                      />
-                    </Reveal>
-                  ) : null}
+                  return (
+                    <div key={section.slug} className="mt-8 first:mt-0">
+                      {category.sections.length > 1 ? (
+                        <h3 className="label-type mb-4 text-2xl text-ink-soft">
+                          {section.title[locale]}
+                        </h3>
+                      ) : null}
 
-                  <div className={`grid gap-x-12 ${section.items.length > 2 ? "sm:grid-cols-2" : ""} divide-y divide-ink/12`}>
-                    {section.items.map((item, index) => (
-                      <Reveal key={item.slug} delay={index * 0.04}>
-                        <ItemCard item={item} locale={locale} />
-                      </Reveal>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                      {signatures.map((item, index) => (
+                        <Reveal key={item.slug} className="mb-10">
+                          <FeatureItem
+                            item={item}
+                            locale={locale}
+                            field={band.feature}
+                            flip={index % 2 === 1}
+                          />
+                        </Reveal>
+                      ))}
+
+                      {section.flavors ? (
+                        <Reveal className="mb-2">
+                          <NameList
+                            title={copy.menuSection.flavorsTitle[locale]}
+                            names={section.flavors.map((flavor) => flavor[locale])}
+                            note={section.note?.[locale]}
+                          />
+                        </Reveal>
+                      ) : null}
+
+                      <div className={`grid gap-x-12 ${rest.length > 2 ? "sm:grid-cols-2" : ""} divide-y divide-ink/12`}>
+                        {rest.map((item, index) => (
+                          <Reveal key={item.slug} delay={index * 0.04}>
+                            <ItemCard item={item} locale={locale} />
+                          </Reveal>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </section>
-          ))}
+          );
+        })}
 
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Reveal>
             <div className="mt-6 rounded-3xl bg-mango-400 p-6 shadow-card sm:p-8">
               <h2 className="display text-3xl text-ink sm:text-4xl">

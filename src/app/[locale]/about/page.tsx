@@ -70,7 +70,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <PageHeader
         es={copy.headings.about.es}
         en={copy.headings.about.en}
-        tone="garrafa"
+        single={copy.headings.about[locale]}
         body={site.tagline[locale]}
       />
 

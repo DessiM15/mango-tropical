@@ -11,6 +11,7 @@ import { WoodSign, type HeadingTone } from "./WoodSign";
 export function PageHeader({
   es,
   en,
+  single,
   tone = "garrafa",
   body,
   feature,
@@ -20,6 +21,8 @@ export function PageHeader({
 }: {
   es: string;
   en: string;
+  /** Titles the page in one language instead of on a plaque. */
+  single?: string;
   tone?: HeadingTone;
   body?: string;
   /** Large product image, shown beside the title on category pages. */
@@ -35,8 +38,7 @@ export function PageHeader({
         <div className="absolute inset-0 bg-gradient-to-b from-sunset-600/30 via-sunset-500/20 to-sunset-500/55" />
       </div>
 
-      <Flora name="palms" className="left-[-6%] top-[8%] w-36 sm:w-52" />
-      <Flora name="hibiscus" className="right-[-3%] top-[4%] w-36 sm:w-52" />
+      <Flora name="palms" className="left-[-7%] top-[4%] w-36 sm:w-52" />
 
       <div
         className={`relative mx-auto grid items-center gap-10 px-4 sm:px-6 lg:px-8 ${
@@ -44,7 +46,13 @@ export function PageHeader({
         }`}
       >
         <Reveal className={`flex flex-col ${feature ? "items-center text-center lg:items-start lg:text-left" : "items-center text-center"}`}>
-          <WoodSign as="h1" primary={es} secondary={en} tone={tone} size="lg" tilt={-1.2} />
+          {single ? (
+            <h1 className="display text-outline text-[clamp(2.4rem,6vw,4.5rem)] text-mango-300">
+              {single}
+            </h1>
+          ) : (
+            <WoodSign as="h1" primary={es} secondary={en} tone={tone} size="lg" tilt={-1.2} />
+          )}
           {body ? (
             <p className="mt-7 max-w-2xl font-body text-lg leading-relaxed text-sand-50 [text-shadow:0_2px_0_rgb(42_18_6_/_0.45)] sm:text-xl">
               {body}

@@ -75,13 +75,13 @@ export function ItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
   return (
     <article className="group flex gap-5 py-6">
       {item.image ? (
-        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl sm:h-28 sm:w-28">
+        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-sand-100 sm:h-28 sm:w-28">
           <Image
             src={item.image}
             alt={item.name[locale]}
             fill
             sizes="(max-width: 640px) 96px, 112px"
-            className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-105"
+            className="object-contain object-top p-1 transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:scale-105"
           />
         </div>
       ) : null}
@@ -152,5 +152,73 @@ export function NameList({
       </ul>
       {note ? <p className="mt-4 font-body text-sm italic text-ink-soft">{note}</p> : null}
     </section>
+  );
+}
+
+/**
+ * The three signature items, set at a completely different scale from
+ * everything else on the page.
+ *
+ * Forty rows of name, description and price meant Solo Fries carried the same
+ * weight as the Elote Chorreado. These three are what people come in for, so
+ * they get a band of their own, a poster-scale cutout and room to breathe, and
+ * the rest of the menu can be a tight list underneath.
+ */
+export function FeatureItem({
+  item,
+  locale,
+  field,
+  flip = false,
+}: {
+  item: MenuItem;
+  locale: Locale;
+  /** Solid colour field, taken from the printed menu's palette. */
+  field: string;
+  /** Puts the product on the right, so consecutive features do not repeat. */
+  flip?: boolean;
+}) {
+  return (
+    <article
+      className={`relative grid items-center gap-6 overflow-hidden rounded-[2rem] p-7 sm:gap-10 sm:p-10 lg:grid-cols-2 ${field}`}
+    >
+      {item.image ? (
+        <div className={`relative mx-auto w-full max-w-sm ${flip ? "lg:order-2" : ""}`}>
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-[20%] bottom-[3%] h-6 rounded-[50%] bg-ink/25 blur-xl"
+          />
+          <Image
+            src={item.image}
+            alt={item.name[locale]}
+            width={900}
+            height={900}
+            sizes="(max-width: 1024px) 88vw, 30rem"
+            className="relative h-auto w-full object-contain drop-shadow-[0_20px_26px_rgb(42_18_6/0.38)]"
+          />
+        </div>
+      ) : null}
+
+      <div className={flip ? "lg:order-1" : ""}>
+        <h3 className="display text-[clamp(2rem,4.4vw,3.25rem)] leading-[0.95] text-white [text-shadow:3px_3px_0_rgb(42_18_6/0.35)]">
+          {item.name[locale]}
+        </h3>
+        <p className="mt-4 max-w-md font-body text-lg leading-relaxed text-white/90">
+          {item.description[locale]}
+        </p>
+        <dl className="mt-6 max-w-sm space-y-2">
+          {item.prices.map((price) => (
+            <div key={price.label[locale]} className="flex items-baseline gap-3">
+              <dt className="font-body text-[13px] font-bold uppercase tracking-widest text-white/75">
+                {price.label[locale]}
+              </dt>
+              <span aria-hidden="true" className="min-w-4 flex-1 border-b border-dotted border-white/40" />
+              <dd className="label-type text-2xl tabular-nums text-mango-300">
+                {money(price.amount)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </article>
   );
 }

@@ -59,7 +59,7 @@ export default async function VisitPage({ params }: { params: Promise<{ locale: 
       <PageHeader
         es={copy.headings.visit.es}
         en={copy.headings.visit.en}
-        tone="comida"
+        single={copy.headings.visit[locale]}
         body={copy.visit.body[locale]}
       />
       <VisitSection locale={locale} />
