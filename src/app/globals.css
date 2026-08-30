@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Palette sampled directly from the printed menu, so the site and the in-store
+   menu are the same brand rather than an approximation of it.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-sunset-50: #fff7ea;
+  --color-sunset-100: #fdecd0;
+  --color-sunset-200: #fbdca7;
+  --color-sunset-300: #fbb146;
+  --color-sunset-400: #f69d3d;
+  --color-sunset-500: #e67638;
+  --color-sunset-600: #d25a28;
+  --color-sunset-700: #b04531;
+
+  --color-mango-200: #ffeea8;
+  --color-mango-300: #ffe067;
+  --color-mango-400: #ffc61e;
+  --color-mango-500: #f0ad00;
+
+  --color-ocean-100: #dcf3fb;
+  --color-ocean-200: #a9e2f2;
+  --color-ocean-300: #6dc5d9;
+  --color-ocean-400: #0c9ace;
+  --color-ocean-500: #1180b3;
+  --color-ocean-600: #2c7aa0;
+  --color-ocean-700: #135a85;
+  --color-ocean-800: #0e4058;
+
+  --color-chamoy-400: #fa343b;
+  --color-chamoy-500: #e02a31;
+  --color-chamoy-600: #b91f26;
+
+  --color-magenta-300: #f775b6;
+  --color-magenta-400: #ea278e;
+  --color-magenta-500: #d82182;
+  --color-magenta-600: #a81663;
+
+  --color-lime-400: #8cc63f;
+  --color-lime-500: #6ba82c;
+  --color-lime-600: #10a64a;
+
+  --color-sand-50: #fdf8ee;
+  --color-sand-100: #fbf1de;
+  --color-sand-200: #f1d2a1;
+  --color-wood-400: #dca478;
+  --color-wood-500: #c88950;
+  --color-wood-700: #8a6039;
+
+  --color-ink: #2a1206;
+  --color-ink-soft: #5c3a22;
+
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-label: var(--font-grandstander), "Trebuchet MS", sans-serif;
+  --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* Entrance animations translate content horizontally before it scrolls
+       into view. `clip` absorbs that without creating a scroll container, so
+       position: sticky and fixed keep working. */
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-sand-50);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    overflow-x: clip;
+    /* Keeps the fixed header from covering anchor targets. */
+    scroll-padding-top: 6rem;
+  }
+
+  ::selection {
+    background: var(--color-mango-400);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ocean-800);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Heavy condensed display type, the poster voice of the whole site. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 0.86;
+    text-transform: uppercase;
+  }
+
+  .label-type {
+    font-family: var(--font-label);
+    font-style: italic;
+    font-weight: 800;
+  }
+
+  /* The menu's sticker-label look: heavy outline plus a hard offset shadow. */
+  .sticker {
+    box-shadow:
+      0 0 0 4px #fff,
+      0 0 0 8px var(--color-ink),
+      6px 8px 0 8px rgb(42 18 6 / 0.22);
+  }
+
+  .sticker-sm {
+    box-shadow:
+      0 0 0 3px #fff,
+      0 0 0 6px var(--color-ink),
+      4px 5px 0 6px rgb(42 18 6 / 0.2);
+  }
+
+  /* Text outlined the way the logo wordmark is outlined. */
+  .text-outline {
+    -webkit-text-stroke: 3px var(--color-ink);
+    paint-order: stroke fill;
+  }
+
+  .text-outline-thin {
+    -webkit-text-stroke: 2px var(--color-ink);
+    paint-order: stroke fill;
+  }
+}
+
+@layer components {
+  /* Scroll reveals. The hidden state only exists once JavaScript has confirmed
+     it can run, so the served HTML is readable on its own. */
+  .reveal {
+    transition:
+      opacity 0.65s var(--ease-out-soft),
+      transform 0.65s var(--ease-out-soft);
+  }
+
+  .js .reveal:not(.is-revealed) {
+    opacity: 0;
+  }
+
+  .js .reveal[data-reveal="up"]:not(.is-revealed) {
+    transform: translate3d(0, 2.5rem, 0);
+  }
+
+  .js .reveal[data-reveal="left"]:not(.is-revealed) {
+    transform: translate3d(-2rem, 0, 0);
+  }
+
+  .js .reveal[data-reveal="right"]:not(.is-revealed) {
+    transform: translate3d(2rem, 0, 0);
+  }
+
+  .js .reveal[data-reveal="scale"]:not(.is-revealed) {
+    transform: translate3d(0, 1.5rem, 0) scale(0.94);
+  }
+}
+
+@layer utilities {
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 32s) linear infinite;
+  }
+
+  .drift-slow {
+    animation: drift 14s var(--ease-out-soft) infinite alternate;
+  }
+
+  .bob {
+    animation: bob 5s ease-in-out infinite;
+  }
+
+  .wave-shift {
+    animation: wave-shift 18s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) rotate(-1.5deg);
+  }
+  to {
+    transform: translate3d(1.5rem, -0.75rem, 0) rotate(1.5deg);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -0.9rem, 0);
+  }
+}
+
+@keyframes wave-shift {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -1200px;
+  }
+}
+
+/* Anyone who asks for less motion gets a still page, not a broken one. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js .reveal:not(.is-revealed) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
