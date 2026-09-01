@@ -1,5 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TornEdge } from "@/components/Dividers";
+import { PropScatter } from "@/components/Confetti";
 import { copy } from "@/lib/copy";
 import type { Locale } from "@/lib/i18n";
 
@@ -9,8 +11,20 @@ import type { Locale } from "@/lib/i18n";
  */
 export function FaqSection({ locale }: { locale: Locale }) {
   return (
-    <section className="relative bg-sand-50 pb-24 pt-24 sm:pb-28 sm:pt-28" aria-labelledby="faq-heading">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <section
+      className="paper relative overflow-hidden bg-sand-50 pb-24 pt-28 sm:pb-28 sm:pt-32"
+      aria-labelledby="faq-heading"
+    >
+      <TornEdge className="absolute inset-x-0 top-0 h-10 sm:h-14" fill="var(--color-sand-50)" flip />
+      <PropScatter
+        items={[
+          { name: "chile", x: 4, y: 22, size: 3.4, rotate: -18, motion: "bob", opacity: 0.4 },
+          { name: "star", x: 93, y: 16, size: 3, rotate: 14, motion: "spin", opacity: 0.35 },
+          { name: "mango", x: 94, y: 70, size: 4, rotate: -8, motion: "drift", opacity: 0.35 },
+        ]}
+      />
+
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           es={copy.headings.faq.es}
           en={copy.headings.faq.en}
@@ -22,7 +36,7 @@ export function FaqSection({ locale }: { locale: Locale }) {
         <div className="mt-12 space-y-4">
           {copy.faq.items.map((item, index) => (
             <Reveal key={item.q.en} delay={index * 0.05}>
-              <details className="group rounded-3xl bg-white shadow-card transition-shadow open:shadow-card">
+              <details className="paper-card group transition-shadow">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6 [&::-webkit-details-marker]:hidden">
                   <h3 className="label-type text-lg text-ink sm:text-xl">{item.q[locale]}</h3>
                   <span

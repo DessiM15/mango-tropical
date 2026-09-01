@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { JsonLd } from "@/components/JsonLd";
 import { Assistant } from "@/components/Assistant";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { copy } from "@/lib/copy";
 import { htmlLang, isLocale, locales, path, type Locale } from "@/lib/i18n";
 import { addressLine, openingHoursSpecification, site } from "@/lib/site";
@@ -162,13 +163,20 @@ export default async function LocaleLayout({
       className={`${anton.variable} ${grandstander.variable} ${nunito.variable}`}
     >
       <head>
-        {/* Marks that scripting is available before first paint, which is what
-            gates the scroll reveals. Without it every section stays visible. */}
+        {/* Runs before first paint. It marks that scripting is available,
+            which gates the scroll reveals - without it every section stays
+            visible - and it turns off the browser's scroll restoration, so a
+            refresh opens the page at the top rather than where it was left. */}
         <script
-          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('js','smooth-scroll');" +
+              "if('scrollRestoration' in history)history.scrollRestoration='manual';",
+          }}
         />
       </head>
       <body className="grain vignette graded min-h-dvh antialiased">
+        <ScrollToTop />
         <SiteHeader locale={locale} />
         <main id="main">{children}</main>
         <SiteFooter locale={locale} />

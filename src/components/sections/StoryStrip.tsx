@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MagneticButton } from "@/components/MagneticButton";
 import { Reveal } from "@/components/Reveal";
+import { TornEdge } from "@/components/Dividers";
 import { copy } from "@/lib/copy";
 import { path, type Locale } from "@/lib/i18n";
 
@@ -25,6 +26,10 @@ export function StoryStrip({ locale }: { locale: Locale }) {
           fade would just soften it. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-sunset-700/80 mix-blend-multiply" />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/25" />
+
+      {/* The photograph is torn off the paper above it rather than butted
+          against it, so the band starts as an event. */}
+      <TornEdge className="absolute inset-x-0 top-0 z-10 h-10 sm:h-14" fill="var(--color-sand-100)" flip />
 
       <div className="relative mx-auto flex min-h-[32rem] max-w-3xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6 sm:py-28 lg:min-h-[36rem] lg:px-8">
         <Reveal className="flex flex-col items-center">

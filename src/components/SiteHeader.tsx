@@ -49,6 +49,10 @@ export function SiteHeader({
       </a>
 
       <header
+        /* The viewport is set to cover the notch, so the bar has to pay for
+           the safe area itself. Without this its colour stops below the status
+           bar and the page scrolls through the strip above it. */
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-sunset-500/95 shadow-soft backdrop-blur-md"
