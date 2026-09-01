@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { Splash } from "@/components/Splash";
+import { PropScatter } from "@/components/Confetti";
 import { menu } from "@/lib/menu";
 import { path, type Locale } from "@/lib/i18n";
 
@@ -19,29 +20,29 @@ import { path, type Locale } from "@/lib/i18n";
 const LOOK: Record<string, { art: string; w: number; h: number; accent: string; splash: string }> = {
   mangonadas: {
     art: "/menu/coctel-de-frutas.webp",
-    w: 655,
-    h: 500,
+    w: 1200,
+    h: 826,
     accent: "var(--color-head-fruit)",
     splash: "var(--color-sunset-400)",
   },
   "nieves-de-garrafa": {
     art: "/menu/conchi-nieve.webp",
-    w: 1106,
-    h: 780,
+    w: 1200,
+    h: 887,
     accent: "var(--color-mango-300)",
     splash: "var(--color-magenta-400)",
   },
   raspas: {
     art: "/menu/raspas-trio.webp",
-    w: 812,
-    h: 624,
+    w: 1429,
+    h: 1356,
     accent: "var(--color-magenta-300)",
     splash: "var(--color-ocean-300)",
   },
   antojitos: {
     art: "/menu/elote-chorreado.webp",
-    w: 633,
-    h: 582,
+    w: 1200,
+    h: 748,
     accent: "var(--color-lime-400)",
     splash: "var(--color-mango-400)",
   },
@@ -54,15 +55,34 @@ const LOOK: Record<string, { art: string; w: number; h: number; accent: string; 
   },
 };
 
+/** Ice and fruit drifting in the deep water, well outside the five tiles. */
+const DRIFT = [
+  { name: "mango", x: 3, y: 16, size: 3.6, rotate: -14, motion: "bob", opacity: 0.9 },
+  { name: "star", x: 94, y: 20, size: 2.8, rotate: 12, motion: "spin", opacity: 0.8 },
+  { name: "lime", x: 6, y: 74, size: 3.2, rotate: 20, motion: "drift", opacity: 0.85 },
+  { name: "strawberry", x: 92, y: 70, size: 3.2, rotate: 8, motion: "bob", opacity: 0.85 },
+  { name: "chile", x: 49, y: 91, size: 2.6, rotate: -8, motion: "drift", opacity: 0.7 },
+] as const;
+
 /**
- * The section the mango surfs into. It is the deep water under the sunset, so
- * it carries no botanicals at all: the transition is the only event here.
+ * The section the mango surfs into: the deep water under the sunset.
+ *
+ * The ground is lit from above and screened with a dot pattern, because a flat
+ * navy across the full width of a browser is the single flattest thing this
+ * page can do. The tiles themselves are unchanged - splash, product, two lines
+ * - since that part was already working.
  */
 export function CategoryRow({ locale }: { locale: Locale }) {
   const reduced = useReducedMotion();
 
   return (
-    <section className="relative bg-ocean-800 py-20 sm:py-24" aria-labelledby="categories-heading">
+    <section
+      className="lit halftone relative overflow-hidden bg-ocean-800 py-20 text-ocean-200 sm:py-24"
+      aria-labelledby="categories-heading"
+      style={{ ["--lit-strength" as string]: "0.13", ["--dot-opacity" as string]: "0.16" }}
+    >
+      <PropScatter items={DRIFT.map((item) => ({ ...item }))} />
+
       <h2 id="categories-heading" className="sr-only">
         {locale === "en" ? "Menu categories" : "Categorías del menú"}
       </h2>
@@ -101,7 +121,7 @@ export function CategoryRow({ locale }: { locale: Locale }) {
                 </span>
 
                 <span
-                  className="display mt-5 block text-[clamp(1.05rem,2.6vw,1.45rem)] leading-tight"
+                  className="display mt-5 block text-[clamp(1.05rem,2.6vw,1.45rem)] leading-tight [text-shadow:0_2px_0_rgb(3_28_44/0.55)]"
                   style={{ color: look.accent }}
                 >
                   {category.shortName.es}

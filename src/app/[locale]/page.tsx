@@ -8,6 +8,7 @@ import { FlavorShowcase } from "@/components/sections/FlavorShowcase";
 import { StoryStrip } from "@/components/sections/StoryStrip";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { VisitSection } from "@/components/sections/VisitSection";
+import { Ribbon } from "@/components/Ribbon";
 import { JsonLd } from "@/components/JsonLd";
 import { copy } from "@/lib/copy";
 import { isLocale, locales, path, type Locale } from "@/lib/i18n";
@@ -54,6 +55,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Ordered the way the printed menu reads: the shop, then what is in it,
           then the favourites, then everything else. */}
       <TropicalHero locale={locale} />
+      {/* Pinned across the seam between the sunset and the water, tilted, and
+          overhanging both. It is the only thing on the page that is not
+          parallel to everything else, which is most of why it works. */}
+      <Ribbon text={copy.marquee[locale]} tone="magenta" className="-mt-7 mb-[-2.25rem]" />
       <CategoryRow locale={locale} />
       <FeaturePanels locale={locale} />
       <FlavorShowcase locale={locale} />

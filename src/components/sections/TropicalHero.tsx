@@ -2,7 +2,17 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import { Splash } from "@/components/Splash";
+import { Starburst } from "@/components/Sticker";
+import { Prop } from "@/components/Confetti";
 import { SurfWash } from "@/components/SurfWash";
 import { WoodSign } from "@/components/WoodSign";
 import { MagneticButton } from "@/components/MagneticButton";
@@ -10,6 +20,52 @@ import { OpenStatus } from "@/components/OpenStatus";
 import { copy } from "@/lib/copy";
 import { path, type Locale } from "@/lib/i18n";
 import { mapsUrl, site } from "@/lib/site";
+
+/**
+ * The four the hero rotates through.
+ *
+ * One product in the hero says the shop sells one thing. These are the four
+ * that between them describe the whole menu - a mangonada, a raspa, something
+ * savoury and something with a scoop in it - so a visitor who watches the
+ * hero for fifteen seconds has seen what the place is.
+ *
+ * Each carries its own splash colour, because the splash is what tells you the
+ * product changed: a photograph swapping for another photograph of a cup is
+ * easy to miss, a field of colour changing underneath it is not.
+ */
+const CAST = [
+  {
+    art: "/menu/mangonada-tropical.webp",
+    name: { en: "Mangonada Tropical", es: "Mangonada Tropical" },
+    splash: "var(--color-magenta-400)",
+    orbit: ["mango", "chile", "tamarindo"] as const,
+  },
+  {
+    art: "/menu/raspa-tropical.webp",
+    name: { en: "Raspa Tropical", es: "Raspa Tropical" },
+    splash: "var(--color-ocean-400)",
+    orbit: ["ice", "strawberry", "lime"] as const,
+  },
+  {
+    art: "/menu/elote-chorreado.webp",
+    name: { en: "Elote Chorreado", es: "Elote Chorreado" },
+    splash: "var(--color-lime-500)",
+    orbit: ["corn", "chile", "lime"] as const,
+  },
+  {
+    art: "/menu/conchi-nieve.webp",
+    name: { en: "Conchi Nieve", es: "Conchi Nieve" },
+    splash: "var(--color-chamoy-600)",
+    orbit: ["strawberry", "star", "splat"] as const,
+  },
+];
+
+/** Where the three orbiting ingredients sit, as percentages of the badge. */
+const ORBIT = [
+  { x: -8, y: 20, size: 5.4, rotate: -18 },
+  { x: 80, y: -4, size: 4.6, rotate: 22 },
+  { x: 84, y: 68, size: 5, rotate: -10 },
+];
 
 /** True below the `sm` breakpoint, watched rather than read once. */
 function useNarrow() {
@@ -22,6 +78,22 @@ function useNarrow() {
     return () => query.removeEventListener("change", sync);
   }, []);
   return narrow;
+}
+
+/**
+ * Steps through the cast on a timer, and holds still for anyone who asked for
+ * less motion. The timer restarts from the current index on every step rather
+ * than running free, so a tab that was backgrounded does not come back to a
+ * burst of catch-up swaps.
+ */
+function useRotation(length: number, still: boolean, seconds = 5) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (still) return;
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % length), seconds * 1000);
+    return () => window.clearInterval(id);
+  }, [length, still, seconds]);
+  return index;
 }
 
 /**
@@ -70,6 +142,8 @@ export function TropicalHero({ locale }: { locale: Locale }) {
   const sprayLift = useTransform(smooth, [0, 1], [0.78, 1.18]);
 
   const still = !!reduced;
+  const item = useRotation(CAST.length, still);
+  const current = CAST[item];
 
   return (
     <section
@@ -169,26 +243,103 @@ export function TropicalHero({ locale }: { locale: Locale }) {
           </a>
         </div>
 
-        {/* The focal plane: the only thing in the frame that stays sharp. It is
-            dropped on a phone, where the character carries the lower half and
-            two products would leave no room for either. */}
+        {/* The focal plane: the only thing in the frame that stays sharp.
+            Dropped on a phone, where the character carries the lower half and
+            there is no room for a badge this size beside the copy. */}
         <motion.div
           style={still ? undefined : { y: productY }}
-          className="pointer-events-none relative hidden h-full max-h-[26rem] min-w-0 self-center sm:block lg:max-h-[34rem]"
+          className="pointer-events-none relative hidden h-full max-h-[26rem] min-w-0 items-center self-center sm:flex lg:max-h-[34rem]"
         >
-          <div className="relative mx-auto h-full w-full">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-[24%] bottom-[2%] h-6 rounded-[50%] bg-ink/40 blur-xl"
+          <div className="relative mx-auto aspect-square w-full max-w-[22rem] lg:max-w-[28rem]">
+            {/* The badge behind the product: a slowly turning sunburst, then a
+                thrown splash of the item's own colour on top of it. Neither
+                moves with the product, so the product is what you look at. */}
+            <Starburst
+              className={`absolute inset-[-7%] h-[114%] w-[114%] opacity-70 ${still ? "" : "spin-slow"}`}
+              fill="rgb(255 255 255 / 0.72)"
+              points={24}
             />
-            <Image
-              src="/menu/nieve-mango-chamoy.webp"
-              alt={copy.hero.cupAlt[locale]}
-              fill
-              priority
-              sizes="(max-width: 1024px) 34vw, 32vw"
-              className="z-10 object-contain drop-shadow-[0_18px_22px_rgb(42_18_6_/_0.42)]"
-            />
+
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.div
+                key={`splash-${item}`}
+                initial={still ? false : { opacity: 0, scale: 0.86, rotate: -12 }}
+                animate={{ opacity: 0.92, scale: 1, rotate: 0 }}
+                exit={still ? undefined : { opacity: 0, scale: 1.1, rotate: 10 }}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0"
+              >
+                <Splash
+                  color={current.splash}
+                  variant={item}
+                  className="h-full w-full drop-shadow-[0_18px_26px_rgb(42_18_6_/_0.35)]"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* The three ingredients that belong to whatever is showing. */}
+            {ORBIT.map((slot, index) => (
+              <div
+                key={`${slot.x}-${slot.y}`}
+                className="absolute"
+                style={{ left: `${slot.x}%`, top: `${slot.y}%`, width: `${slot.size}rem` }}
+              >
+                <div className={still ? "" : "bob"} style={{ animationDelay: `${index * 0.8}s` }}>
+                  <AnimatePresence initial={false} mode="wait">
+                    <motion.div
+                      key={`${item}-${index}`}
+                      initial={still ? false : { opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={still ? undefined : { opacity: 0, scale: 0.5 }}
+                      transition={{ duration: 0.4, delay: index * 0.06 }}
+                    >
+                      <Prop
+                        name={current.orbit[index]}
+                        rotate={slot.rotate}
+                        className="h-auto w-full drop-shadow-[0_8px_10px_rgb(42_18_6_/_0.4)]"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            ))}
+
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.div
+                key={`art-${item}`}
+                initial={still ? false : { opacity: 0, y: 26, scale: 0.94 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={still ? undefined : { opacity: 0, y: -22, scale: 0.94 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-[9%]"
+              >
+                <Image
+                  src={current.art}
+                  alt={current.name[locale]}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 34vw, 30vw"
+                  className="object-contain drop-shadow-[0_18px_22px_rgb(42_18_6_/_0.45)]"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* The name, so the swap is legible rather than only decorative. */}
+            <div className="absolute inset-x-0 -bottom-2 flex justify-center">
+              <AnimatePresence initial={false} mode="wait">
+                <motion.span
+                  key={`name-${item}`}
+                  initial={still ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={still ? undefined : { opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35 }}
+                  className="label-type rounded-full bg-white/95 px-4 py-1.5 text-sm text-ink shadow-soft ring-2 ring-ink/80 sm:text-base"
+                  style={{ transform: "rotate(-2deg)" }}
+                >
+                  {current.name[locale]}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
       </motion.div>

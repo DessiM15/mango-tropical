@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
-import { ItemCard, NameList } from "@/components/MenuCard";
+import { ItemCard } from "@/components/MenuCard";
+import { MenuGround } from "@/components/MenuGround";
+import { BrushBanner } from "@/components/BrushBanner";
 import { Reveal } from "@/components/Reveal";
 import { TornEdge } from "@/components/Dividers";
+import { Sticker } from "@/components/Sticker";
 import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { VisitSection } from "@/components/sections/VisitSection";
@@ -22,6 +25,15 @@ const CATEGORY_TONE: Record<string, HeadingTone> = {
   magenta: "nieve",
   blue: "float",
   lime: "comida",
+};
+
+/** The paint the printed page throws behind that section's flavour list. */
+const CATEGORY_SWASH: Record<string, string> = {
+  orange: "var(--color-chamoy-500)",
+  yellow: "var(--color-sunset-600)",
+  magenta: "var(--color-magenta-500)",
+  blue: "var(--color-ocean-600)",
+  lime: "var(--color-lime-600)",
 };
 
 /** Splash colour behind the category's feature image. */
@@ -151,34 +163,54 @@ export default async function CategoryPage({
         </nav>
       </PageHeader>
 
-      <div className="relative bg-sand-50 pb-20 pt-16 sm:pb-28">
+      <MenuGround corners={["tl", "br"]} className="pb-20 pt-16 sm:pb-28">
         <TornEdge className="absolute inset-x-0 top-0 h-10 -translate-y-full sm:h-14" fill="var(--color-sunset-500)" flip />
 
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {category.sections.map((section) => (
-            <section key={section.slug} className="pb-14 last:pb-0">
+            <section key={section.slug} className="pb-16 last:pb-0">
               {category.sections.length > 1 ? (
                 <Reveal>
-                  <h2 className="display pb-3 text-[clamp(1.75rem,5vw,3rem)] text-ink">
+                  <h2 className="display pb-8 text-center text-[clamp(1.75rem,5vw,3rem)] text-ink [text-shadow:0_2px_0_rgb(255_255_255/0.55)]">
                     {section.title[locale]}
                   </h2>
                 </Reveal>
               ) : null}
 
               {section.flavors ? (
-                <Reveal className="mt-6">
-                  <NameList
-                    title={copy.menuSection.flavorsTitle[locale]}
-                    names={section.flavors.map((flavor) => flavor[locale])}
-                    note={section.note?.[locale]}
-                  />
+                <Reveal className="mb-12">
+                  <BrushBanner color={CATEGORY_SWASH[category.accent]}>
+                    <h3 className="display text-center text-[clamp(1.1rem,2.4vw,1.6rem)] text-mango-300">
+                      {copy.menuSection.flavorsTitle[locale]}
+                    </h3>
+                    <ul className="mt-4 grid gap-x-8 text-center sm:grid-cols-2 lg:grid-cols-3">
+                      {section.flavors.map((flavor) => (
+                        <li
+                          key={flavor.en}
+                          className="display py-1 text-[clamp(0.95rem,1.9vw,1.2rem)] text-white"
+                        >
+                          {flavor[locale]}
+                        </li>
+                      ))}
+                    </ul>
+                    {section.note ? (
+                      <p className="mt-4 text-center font-body text-sm font-bold italic text-white/85">
+                        {section.note[locale]}
+                      </p>
+                    ) : null}
+                  </BrushBanner>
                 </Reveal>
               ) : null}
 
-              <div className={`mt-6 grid gap-x-12 ${section.items.length > 2 ? "sm:grid-cols-2" : ""} divide-y divide-ink/12`}>
+              <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 lg:gap-x-8">
                 {section.items.map((item, index) => (
                   <Reveal key={item.slug} delay={index * 0.04}>
-                    <ItemCard item={item} locale={locale} />
+                    <ItemCard
+                      item={item}
+                      locale={locale}
+                      accent={category.accent}
+                      index={index}
+                    />
                   </Reveal>
                 ))}
               </div>
@@ -186,12 +218,18 @@ export default async function CategoryPage({
           ))}
 
           <Reveal>
-            <div className="rounded-3xl bg-mango-400 p-6 shadow-card sm:p-8">
+            <div
+              className="lit halftone relative overflow-hidden rounded-3xl bg-mango-400 p-6 text-sunset-600/60 shadow-card sm:p-8"
+              style={{ ["--lit-strength" as string]: "0.3", ["--dot-opacity" as string]: "0.16" }}
+            >
               <h2 className="display text-3xl text-ink sm:text-4xl">
                 {copy.menuSection.toppingsTitle[locale]}
               </h2>
               <p className="mt-1 font-body text-base font-bold text-ink-soft">
-                {copy.menuSection.toppingsNote[locale]} {money(TOPPING_PRICE)}
+                {copy.menuSection.toppingsNote[locale]}{" "}
+                <Sticker tone="chamoy" tilt={-7} className="ml-1 align-middle text-base">
+                  {money(TOPPING_PRICE)}
+                </Sticker>
               </p>
               <ul className="mt-5 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
                 {toppings.map((topping) => (
@@ -246,7 +284,7 @@ export default async function CategoryPage({
             </ul>
           </Reveal>
         </div>
-      </div>
+      </MenuGround>
 
       <VisitSection locale={locale} />
       <JsonLd data={[menuSectionSchema, breadcrumbs]} />

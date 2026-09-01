@@ -254,6 +254,9 @@ export const copy = {
     send: { en: "Send", es: "Enviar" },
     startVoice: { en: "Ask with your voice", es: "Preguntar con la voz" },
     stopVoice: { en: "Stop listening", es: "Dejar de escuchar" },
+    listening: { en: "Listening", es: "Te escucho" },
+    listeningHint: { en: "Go ahead, ask out loud", es: "Adelante, pregunta en voz alta" },
+    typing: { en: "Looking it up", es: "Buscando" },
     readAloud: { en: "Read answers aloud", es: "Leer las respuestas" },
     disclaimer: { en: "Answers come from this site", es: "Respuestas de este sitio" },
     unknown: {

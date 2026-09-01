@@ -1,61 +1,89 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MenuGround } from "@/components/MenuGround";
+import { Plaque, PrintedPrice } from "@/components/Plaque";
+import { BurstBadge } from "@/components/Sticker";
+import { Reveal } from "@/components/Reveal";
 import { copy } from "@/lib/copy";
-import { money } from "@/lib/menu";
 import { path, type Locale } from "@/lib/i18n";
+import type { MenuCategory } from "@/lib/menu";
 
 /**
- * Four house favourites, each on its own solid colour field.
+ * Four house favourites, laid out the way the printed menu lays out a page.
  *
- * These used to run the same photograph twice, blurred up as a ground and
- * sharp on top. The blur was covering for a soft 300 DPI crop; with the real
- * cutouts there is nothing to cover for, so the ground is a flat field lifted
- * off the printed menu and the product is the only thing in the frame. Four
- * fields in a row is also what stops the page sitting on one continuous
- * orange.
+ * These were four full-bleed panels of flat colour with a product on each.
+ * That is a website's idea of a menu; the menu's own idea is one sheet of
+ * palm-printed paper with the products standing on it at whatever size suits
+ * them, each named on a small wooden plaque with the price underneath. So the
+ * colour fields are gone and the paper is doing the work.
+ *
+ * The sizes and drops are deliberately uneven. Four products at one size on
+ * one baseline is a grid, and a grid is the thing the printed menu never does.
  */
-const PANELS = [
+const PANELS: {
+  slug: string;
+  category: string;
+  accent: MenuCategory["accent"];
+  art: string;
+  scale: number;
+  drop: number;
+  tilt: number;
+  price: number;
+  size: { en: string; es: string };
+  name: { en: string; es: string };
+  note: { en: string; es: string };
+  flash?: { en: string[]; es: string[] };
+}[] = [
   {
     slug: "mangonada-tropical",
     category: "mangonadas",
+    accent: "orange",
     art: "/menu/mangonada-tropical.webp",
-    w: 652,
-    h: 1069,
-    field: "bg-sunset-500",
+    scale: 1.18,
+    drop: 0,
+    tilt: -1.6,
     price: 8.5,
+    size: { en: "16 OZ", es: "16 OZ" },
     name: { en: "Mangonada Tropical", es: "Mangonada Tropical" },
     note: { en: "Mango, chamoy, chile, tamarindo", es: "Mango, chamoy, chile, tamarindo" },
+    flash: { en: ["THE", "ONE"], es: ["LA", "DE", "SIEMPRE"] },
   },
   {
     slug: "raspa-tropical",
     category: "raspas",
+    accent: "blue",
     art: "/menu/raspa-tropical.webp",
-    w: 587,
-    h: 984,
-    field: "bg-ocean-500",
+    scale: 0.92,
+    drop: 2.6,
+    tilt: 1.4,
     price: 8.5,
+    size: { en: "16 OZ", es: "16 OZ" },
     name: { en: "Raspa Tropical", es: "Raspa Tropical" },
     note: { en: "Shaved ice, fresh fruit, chamoy", es: "Raspa, fruta fresca, chamoy" },
   },
   {
     slug: "elote-chorreado",
     category: "antojitos",
+    accent: "lime",
     art: "/menu/elote-chorreado.webp",
-    w: 633,
-    h: 582,
-    field: "bg-lime-500",
+    scale: 1.06,
+    drop: 1.1,
+    tilt: -1,
     price: 9.5,
+    size: { en: "EACH", es: "CADA UNO" },
     name: { en: "Elote Chorreado", es: "Elote Chorreado" },
     note: { en: "Hot Cheetos, nacho cheese, crema", es: "Hot Cheetos, queso nacho, crema" },
   },
   {
     slug: "conchi-nieve",
     category: "nieves-de-garrafa",
+    accent: "magenta",
     art: "/menu/conchi-nieve.webp",
-    w: 1106,
-    h: 780,
-    field: "bg-magenta-500",
+    scale: 1,
+    drop: 3.2,
+    tilt: 1.8,
     price: 7.5,
+    size: { en: "EACH", es: "CADA UNO" },
     name: { en: "Conchi Nieve", es: "Conchi Nieve" },
     note: { en: "A concha stuffed with nieve", es: "Una concha rellena de nieve" },
   },
@@ -63,56 +91,68 @@ const PANELS = [
 
 export function FeaturePanels({ locale }: { locale: Locale }) {
   return (
-    <section aria-labelledby="favorites-heading" className="relative">
+    <MenuGround
+      labelledBy="favorites-heading"
+      corners={["tr", "bl"]}
+      surf
+      className="pb-40 pt-16 sm:pb-52 sm:pt-20"
+    >
       <h2 id="favorites-heading" className="sr-only">
-        {copy.headings.favorites.en}
+        {copy.headings.favorites[locale === "en" ? "en" : "es"]}
       </h2>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {PANELS.map((panel) => (
-          <li key={panel.slug}>
-            <Link
-              href={path(locale, "menu", panel.category)}
-              className={`group relative flex h-[64svh] min-h-[26rem] flex-col overflow-hidden ${panel.field} lg:h-[74svh]`}
-            >
-              {/* The product owns the top of the panel and runs off its edges.
-                  Nothing sits on top of it, so no scrim is needed to read the
-                  type underneath. */}
-              <div className="relative flex-1">
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-[22%] bottom-[6%] h-6 rounded-[50%] bg-ink/30 blur-xl"
-                />
-                <Image
-                  src={panel.art}
-                  alt={panel.name[locale]}
-                  width={panel.w}
-                  height={panel.h}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="absolute inset-x-[-4%] top-[4%] h-[96%] w-[108%] object-contain drop-shadow-[0_18px_24px_rgb(42_18_6/0.4)] transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:-translate-y-2 group-hover:scale-[1.04]"
-                />
-              </div>
+      <ul className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-x-4 gap-y-12 px-4 sm:px-6 lg:grid-cols-4 lg:gap-x-8 lg:px-8">
+        {PANELS.map((panel, index) => (
+          <li key={panel.slug} style={{ marginTop: `${panel.drop}rem` }}>
+            <Reveal delay={index * 0.06}>
+              <Link
+                href={path(locale, "menu", panel.category)}
+                className="group flex flex-col items-center text-center"
+              >
+                <div className="relative w-full" style={{ height: `${13 * panel.scale}rem` }}>
+                  {panel.flash ? (
+                    <BurstBadge
+                      lines={panel.flash[locale]}
+                      className="absolute -right-1 -top-3 z-10 h-20 w-20 text-[13px] sm:h-24 sm:w-24 sm:text-[16px]"
+                      fill="var(--color-chamoy-500)"
+                      ring="var(--color-mango-400)"
+                    />
+                  ) : null}
+                  <Image
+                    src={panel.art}
+                    alt={panel.name[locale]}
+                    fill
+                    sizes="(max-width: 640px) 46vw, 22vw"
+                    className="object-contain drop-shadow-[0_16px_18px_rgb(42_18_6/0.38)] transition-transform duration-[900ms] ease-[var(--ease-out-soft)] group-hover:-translate-y-2 group-hover:scale-[1.05]"
+                  />
+                </div>
 
-              <div className="relative p-7 sm:p-8">
-                <p className="display text-[clamp(1.7rem,2.8vw,2.5rem)] leading-[0.95] text-white [text-shadow:2px_2px_0_rgb(42_18_6/0.35)]">
+                <Plaque accent={panel.accent} tilt={panel.tilt} className="-mt-3">
                   {panel.name[locale]}
-                </p>
-                <p className="mt-2 font-body text-sm leading-snug text-white/85">
+                </Plaque>
+
+                <PrintedPrice
+                  prices={[{ label: panel.size, amount: panel.price }]}
+                  locale={locale}
+                  className="mt-2.5 text-[clamp(1rem,1.7vw,1.35rem)]"
+                />
+
+                <p className="mt-2 max-w-[18rem] font-body text-[14px] font-semibold leading-snug text-ink/85 [text-shadow:0_1px_0_rgb(255_255_255/0.45)]">
                   {panel.note[locale]}
                 </p>
-                <p className="label-type mt-4 text-2xl text-mango-300">{money(panel.price)}</p>
+
                 <span
                   aria-hidden="true"
-                  className="mt-5 inline-flex items-center gap-2 font-body text-[13px] font-bold uppercase tracking-widest text-white/75 transition-colors group-hover:text-white"
+                  className="mt-3 inline-flex items-center gap-2 font-body text-[12px] font-extrabold uppercase tracking-widest text-chamoy-600 transition-colors group-hover:text-chamoy-500"
                 >
                   {copy.menuSection.viewCategory[locale]}
                   <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
                 </span>
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           </li>
         ))}
       </ul>
-    </section>
+    </MenuGround>
   );
 }

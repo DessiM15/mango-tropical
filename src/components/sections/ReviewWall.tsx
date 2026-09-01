@@ -1,5 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
+import { ChamoyDrip } from "@/components/Dividers";
+import { PropScatter } from "@/components/Confetti";
 import { JsonLd } from "@/components/JsonLd";
 import { copy } from "@/lib/copy";
 import { aggregate, reviews } from "@/lib/reviews";
@@ -50,7 +52,23 @@ export function ReviewWall({ locale }: { locale: Locale }) {
       : null;
 
   return (
-    <section className="relative bg-lime-400 py-24 sm:py-28" aria-labelledby="reviews-heading">
+    <section
+      className="lit halftone relative isolate overflow-hidden bg-lime-400 pb-24 pt-28 text-lime-600 sm:pb-28 sm:pt-36"
+      aria-labelledby="reviews-heading"
+      style={{ ["--lit-strength" as string]: "0.22", ["--dot-opacity" as string]: "0.13" }}
+    >
+      {/* The green pours down over the storefront photograph above it. */}
+      {/* Below the section's own light layer, not above it: a drip painted on
+          top of that layer keeps its raw colour and reads as a darker green
+          stain rather than as the same green pouring down. */}
+      <ChamoyDrip className="absolute inset-x-0 top-0 -z-10 h-16 sm:h-24" fill="var(--color-lime-400)" />
+      <PropScatter
+        items={[
+          { name: "star", x: 2, y: 22, size: 3, rotate: -14, motion: "spin", opacity: 0.55 },
+          { name: "splat", x: 95, y: 46, size: 3.4, rotate: 10, motion: "drift", opacity: 0.4 },
+          { name: "star", x: 96, y: 12, size: 2.4, rotate: 8, motion: "bob", opacity: 0.45 },
+        ]}
+      />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           es={copy.headings.reviews.es}
@@ -73,7 +91,7 @@ export function ReviewWall({ locale }: { locale: Locale }) {
           {reviews.map((review) => (
             <li key={review.author} className="mb-6 break-inside-avoid">
               <Reveal from="scale">
-                <figure className="rounded-2xl bg-white p-7 shadow-card">
+                <figure className="paper-card p-7">
                   <blockquote className="font-body text-[17px] leading-[1.65] text-ink">
                     {review.body}
                   </blockquote>

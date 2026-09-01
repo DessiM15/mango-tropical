@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/PageHeader";
-import { FeatureItem, ItemCard, NameList } from "@/components/MenuCard";
+import { ItemCard } from "@/components/MenuCard";
+import { MenuGround } from "@/components/MenuGround";
+import { BrushBanner } from "@/components/BrushBanner";
+import { WoodSign, type HeadingTone } from "@/components/WoodSign";
 import { Reveal } from "@/components/Reveal";
+import { Sticker } from "@/components/Sticker";
 import { JsonLd } from "@/components/JsonLd";
 import { MagneticButton } from "@/components/MagneticButton";
 import { copy } from "@/lib/copy";
@@ -12,17 +16,23 @@ import { alternateHref, isLocale, locales, path, type Locale } from "@/lib/i18n"
 import { mapsUrl, site } from "@/lib/site";
 
 /**
- * Each category opens on a full-bleed colour band carrying its two-language
- * name, the way every page of the printed menu opens on a headline block. The
- * five bands are the only place on the site that still pairs the languages,
- * which is exactly what the printed menu does.
+ * Each category is a page of the printed menu.
+ *
+ * It used to be a full-bleed colour band with a list under it. The menu does
+ * not work that way: every section is one sheet of palm-printed paper with a
+ * wooden sign at the top, the products standing straight on it, and the
+ * painted ocean washing across the foot of the page before the next one
+ * begins. Five of those in a column is the menu, scrolled.
+ *
+ * The name colours and the swash behind each flavour list are the ones the
+ * printed pages use for that section.
  */
-const BANDS: Record<string, { field: string; feature: string }> = {
-  mangonadas: { field: "bg-sunset-500", feature: "bg-chamoy-500" },
-  "nieves-de-garrafa": { field: "bg-magenta-500", feature: "bg-magenta-600" },
-  raspas: { field: "bg-ocean-600", feature: "bg-ocean-700" },
-  antojitos: { field: "bg-lime-500", feature: "bg-lime-600" },
-  bebidas: { field: "bg-chamoy-500", feature: "bg-chamoy-600" },
+const PAGES: Record<string, { tone: HeadingTone; swash: string }> = {
+  mangonadas: { tone: "fruit", swash: "var(--color-chamoy-500)" },
+  "nieves-de-garrafa": { tone: "nieve", swash: "var(--color-magenta-500)" },
+  raspas: { tone: "float", swash: "var(--color-ocean-600)" },
+  antojitos: { tone: "comida", swash: "var(--color-lime-600)" },
+  bebidas: { tone: "garrafa", swash: "var(--color-sunset-600)" },
 };
 
 /** The three the shop is known for. Everything else is a list row. */
@@ -121,91 +131,119 @@ export default async function MenuPage({ params }: { params: Promise<{ locale: s
         </nav>
       </PageHeader>
 
-      <div className="relative bg-sand-50 pb-20">
-        {menu.map((category) => {
-          const band = BANDS[category.slug];
+      <>
+        {menu.map((category, page) => {
+          const look = PAGES[category.slug];
+          const last = page === menu.length - 1;
+
           return (
-            <section key={category.slug} id={category.slug} className="scroll-mt-24">
-              {/* Full-bleed headline block, not a small heading above a list. */}
-              <div className={`${band.field} px-4 py-14 sm:px-6 sm:py-16 lg:px-8`}>
-                <div className="mx-auto flex max-w-5xl flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <h2 className="display text-outline text-[clamp(2.1rem,5.5vw,3.6rem)] leading-[0.95] text-mango-300">
-                      {category.shortName.es}
-                    </h2>
-                    <p className="label-type mt-2 text-xl text-white sm:text-2xl">
-                      {category.shortName.en}
-                    </p>
-                    <p className="mt-3 max-w-xl font-body text-base text-white/85">
-                      {category.kicker[locale]}
-                    </p>
-                  </div>
+            <MenuGround
+              key={category.slug}
+              id={category.slug}
+              corners={page % 2 === 0 ? ["tl", "br"] : ["tr", "bl"]}
+              surf={!last}
+              className={`scroll-mt-24 pt-14 sm:pt-16 ${last ? "pb-16" : "pb-40 sm:pb-52"}`}
+            >
+              <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                <div className="flex flex-col items-center text-center">
+                  <WoodSign
+                    as="h2"
+                    primary={category.shortName.es}
+                    secondary={category.shortName.en}
+                    tone={look.tone}
+                    size="md"
+                    tilt={page % 2 === 0 ? -1.2 : 1}
+                  />
+                  <p className="mt-5 max-w-2xl font-body text-base font-bold text-ink/85 [text-shadow:0_1px_0_rgb(255_255_255/0.5)] sm:text-lg">
+                    {category.kicker[locale]}
+                  </p>
                   <Link
                     href={path(locale, "menu", category.slug)}
-                    className="shrink-0 rounded-full bg-white px-5 py-2.5 font-body text-[13px] font-extrabold uppercase tracking-widest text-ink shadow-card transition-transform hover:-translate-y-0.5"
+                    className="mt-5 rounded-full bg-white/90 px-5 py-2.5 font-body text-[13px] font-extrabold uppercase tracking-widest text-ink shadow-card transition-transform hover:-translate-y-0.5"
                   >
                     {copy.menuSection.viewCategory[locale]}
                   </Link>
                 </div>
-              </div>
 
-              <div className="mx-auto max-w-5xl px-4 pb-14 pt-10 sm:px-6 lg:px-8">
-                {category.sections.map((section) => {
-                  const signatures = section.items.filter((item) => SIGNATURES.has(item.slug));
-                  const rest = section.items.filter((item) => !SIGNATURES.has(item.slug));
+                {category.sections.map((section) => (
+                  <div key={section.slug} className="mt-14">
+                    {category.sections.length > 1 ? (
+                      <h3 className="display mb-8 text-center text-[clamp(1.5rem,3.4vw,2.25rem)] text-ink [text-shadow:0_2px_0_rgb(255_255_255/0.55)]">
+                        {section.title[locale]}
+                      </h3>
+                    ) : null}
 
-                  return (
-                    <div key={section.slug} className="mt-8 first:mt-0">
-                      {category.sections.length > 1 ? (
-                        <h3 className="label-type mb-4 text-2xl text-ink-soft">
-                          {section.title[locale]}
-                        </h3>
-                      ) : null}
+                    {section.flavors ? (
+                      <Reveal className="mb-12">
+                        <BrushBanner color={look.swash}>
+                          <h4 className="display text-center text-[clamp(1.1rem,2.4vw,1.6rem)] text-mango-300">
+                            {copy.menuSection.flavorsTitle[locale]}
+                          </h4>
+                          <ul className="mt-4 grid gap-x-8 text-center sm:grid-cols-2 lg:grid-cols-3">
+                            {section.flavors.map((flavor) => (
+                              <li
+                                key={flavor.en}
+                                className="display py-1 text-[clamp(0.95rem,1.9vw,1.2rem)] text-white"
+                              >
+                                {flavor[locale]}
+                              </li>
+                            ))}
+                          </ul>
+                          {section.note ? (
+                            <p className="mt-4 text-center font-body text-sm font-bold italic text-white/85">
+                              {section.note[locale]}
+                            </p>
+                          ) : null}
+                        </BrushBanner>
+                      </Reveal>
+                    ) : null}
 
-                      {signatures.map((item, index) => (
-                        <Reveal key={item.slug} className="mb-10">
-                          <FeatureItem
-                            item={item}
-                            locale={locale}
-                            field={band.feature}
-                            flip={index % 2 === 1}
-                          />
-                        </Reveal>
-                      ))}
-
-                      {section.flavors ? (
-                        <Reveal className="mb-2">
-                          <NameList
-                            title={copy.menuSection.flavorsTitle[locale]}
-                            names={section.flavors.map((flavor) => flavor[locale])}
-                            note={section.note?.[locale]}
-                          />
-                        </Reveal>
-                      ) : null}
-
-                      <div className={`grid gap-x-12 ${rest.length > 2 ? "sm:grid-cols-2" : ""} divide-y divide-ink/12`}>
-                        {rest.map((item, index) => (
-                          <Reveal key={item.slug} delay={index * 0.04}>
-                            <ItemCard item={item} locale={locale} />
+                    {/* One board, every item on it. The three the shop is
+                        known for simply take more of the page, which is what
+                        the printed menu does with them. */}
+                    <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 lg:gap-x-8">
+                      {section.items.map((item, index) => {
+                        const hero = SIGNATURES.has(item.slug);
+                        return (
+                          <Reveal
+                            key={item.slug}
+                            delay={index * 0.04}
+                            className={hero ? "col-span-2 sm:col-span-3" : ""}
+                          >
+                            <ItemCard
+                              item={item}
+                              locale={locale}
+                              accent={category.accent}
+                              index={index}
+                              feature={hero}
+                            />
                           </Reveal>
-                        ))}
-                      </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
-            </section>
+            </MenuGround>
           );
         })}
+      </>
 
+      <div className="paper relative overflow-hidden bg-sand-50 pb-20 pt-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="mt-6 rounded-3xl bg-mango-400 p-6 shadow-card sm:p-8">
+            <div
+              className="lit halftone relative mt-6 overflow-hidden rounded-3xl bg-mango-400 p-6 text-sunset-600/60 shadow-card sm:p-8"
+              style={{ ["--lit-strength" as string]: "0.3", ["--dot-opacity" as string]: "0.16" }}
+            >
               <h2 className="display text-3xl text-ink sm:text-4xl">
                 {copy.menuSection.toppingsTitle[locale]}
               </h2>
               <p className="mt-1 font-body text-base font-bold text-ink-soft">
-                {copy.menuSection.toppingsNote[locale]} {money(TOPPING_PRICE)}
+                {copy.menuSection.toppingsNote[locale]}{" "}
+                <Sticker tone="chamoy" tilt={-7} className="ml-1 align-middle text-base">
+                  {money(TOPPING_PRICE)}
+                </Sticker>
               </p>
               <ul className="mt-5 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
                 {toppings.map((topping) => (
